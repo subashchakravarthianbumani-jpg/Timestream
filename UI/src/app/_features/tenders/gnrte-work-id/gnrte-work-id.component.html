@@ -1,0 +1,211 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;">
+        <div class="col">
+            <h4>{{title}}</h4>
+        </div>
+        <div class=" col">
+            <button pButton pRipple label="Back" class="p-button-secondary" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+        </div>
+    </div>
+    <div class="grid formgrid mb-3" style="padding-bottom: 10px;margin-top: 10px;">
+        <div style="display: flex;flex-wrap: wrap;">
+            <div class="lg:col-6 md:col-12 sm:col-12">
+                <div class=" p-fluid">
+                    <div class="p-formgrid grid " style="margin-left: 0px;">
+
+                        <div class="col-12 row mb-4 indi-card">
+                            <div class="lg:col-8 md:col-8 sm:col-12 boldlabelhiegr">
+                                <span>{{tender && tender.tenderNumber ? tender.tenderNumber: ''}} </span>
+                            </div>
+                            <div class="lg:col-4 md:col-4 sm:col-12 boldlabelhiegr">
+                                <span>{{tender && tender.subcategory ? tender.subcategory: ''}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 row mb-4 indi-card">
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Work Type:</span> {{tender && tender.subcategory ? tender.workType: ''}}
+                            </div>
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Work Sub Type: </span>{{tender && tender.subWorkType ? tender.subWorkType: ''}}
+                            </div>
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Strength: </span>{{tender && tender.strength ? tender.strength: ''}}
+                            </div>
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Division: </span> {{tender && tender.divisionName? tender.divisionName: ''}}
+                            </div>
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>District: </span> {{tender && tender.districtName? tender.districtName: ''}}
+                            </div>
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>GO Number: </span> {{tender && tender.goNumber? tender.goNumber: ''}}
+                            </div>
+                        </div>
+
+                        <div class="col-12 row mb-4 indi-card ">
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Work Published date: </span> {{tender && tender.startDate? dc(tender.startDate):
+                                ''}}
+                            </div>
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Awarded Date: </span> {{tender && tender.endDate? dc(tender.endDate): ''}}
+                            </div>
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Completion Date: </span>
+                            </div>
+                        </div>
+ <!-- modified by Indu on 3/12/2025 -->
+                        <div class="col-12 row mb-4 indi-card">
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Awarded Value: </span>{{tender && tender.workValue ?
+                                tender.workValue: ''}}{{tender &&
+                                tender.workValue ? ' ('+ convertoWordsIND( tender.workValue) +')' :""
+                                }}
+                            </div>
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Work EMD Value: </span>
+                            </div>
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Work ASD Value: </span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 row mb-4 indi-card">
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Contractor: </span> {{tender && tender.contractorName? tender.contractorName: ''}}
+                            </div>
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Contractor District: </span> {{tender && tender.contractorDistrict?
+                                tender.contractorDistrict: ''}}
+                            </div>
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Contractor Company Name: </span>{{tender && tender.contractorCompanyName ?
+                                tender.contractorCompanyName: ''}}
+                            </div>
+                            <div class="lg:col-6 md:col-6 sm:col-12 boldlabelinsiderow">
+                                <span>Contractor Phone: </span>{{tender && tender.contractorMobile ?
+                                tender.contractorMobile: ''}}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+             <!-- modified by Indu on 4/1/2025 for verify button -->
+            <div class="lg:col-6 md:col-12 sm:col-12" style="padding: 25px 10px;">
+                <div style="margin-bottom: 20px;">
+                    <h5>Submit Documents</h5>
+                    
+
+                </div>
+                <div class="p-formgrid">
+                    <div *ngIf="(tender.workorder && tender.negotiation_signed_doc && tender.others_doc != 'not upload')">
+                        <h5>Uploaded documents from Tender</h5>
+                    <div class="field" style="display: flex;"
+                        *ngIf="(tender && tender.workorder && tender.workorder.toLocaleLowerCase() != 'not upload')">
+                        <a [href]="tender.workorder" target="_blank">
+                            <button pButton type="button" class="p-button-success" icon="pi pi-arrow-down"
+                                iconPos="right" label="Work Award / Choose Letter of Acceptance"></button>
+                        </a>
+                    </div>
+                    <div class="field" style="display: flex;"
+                        *ngIf="(tender && tender.negotiation_signed_doc && tender.negotiation_signed_doc.toLocaleLowerCase() != 'not upload')">
+                        <a [href]="tender.negotiation_signed_doc" target="_blank">
+                            <button pButton type="button" class="p-button-success" icon="pi pi-arrow-down"
+                                iconPos="right" label="Aggrement copy"></button></a>
+                    </div>
+                    <div class="field" style="display: flex;"
+                        *ngIf="(tender && tender.others_doc && tender.others_doc.toLocaleLowerCase() != 'not upload')">
+                        <a [href]="tender.others_doc" target="_blank">
+                            <button pButton type="button" class="p-button-success" icon="pi pi-arrow-down"
+                                iconPos="right" label="Other"></button></a>
+                    </div>
+                </div>
+                <div >
+                    <h5>Please upload the required Documents</h5>
+                    
+                    <div class="field" style="display: flex;">
+                        
+                        <p-fileUpload mode="basic"
+                            chooseLabel="Choose Work Award / Choose Letter of Acceptance (Optional)"
+                            tooltipPosition="left" [ngStyle]="{'width': '80%'}"
+                            pTooltip="Work Award / Choose Letter of Acceptance" [customUpload]="true"
+                            [files]="LetterOfAcceptancefiles" (uploadHandler)="onSend($event,'LetterOfAcceptance')"
+                            accept="image/*, .doc,.docx,.xml,application/msword, .pdf, .xls, .xlsx" [auto]="true"
+                            [maxFileSize]="2000000"></p-fileUpload>
+
+                        <button pButton pRipple type="button" *ngIf="tender && tender.letterOfAcceptanceId"
+                            icon="pi pi-check-circle" class="p-button-rounded  p-button-success ml-2"></button>
+
+                        <button pButton pRipple icon="pi pi-arrow-down" class="ml-2"
+                            *ngIf="tender && tender.letterOfAcceptanceId"
+                            (click)="download(tender.letterOfAcceptanceId,'LetterOfAcceptance')"></button>
+                    </div>
+                    <!-- <div class="field" style="display: flex;">
+                        <p-fileUpload mode="basic" chooseLabel="Choose Work Order" pTooltip="TAHDCO Issues Work Order"
+                            [ngStyle]="{'width': '80%'}" [customUpload]="true" [files]="WorkOrderfiles"
+                            tooltipPosition="left" (uploadHandler)="onSend($event,'WorkOrder')" [auto]="true"
+                            accept="image/*, .doc,.docx,.xml,application/msword, .pdf, .xls, .xlsx"
+                            [maxFileSize]="2000000"></p-fileUpload>
+                        <button pButton pRipple type="button" *ngIf="tender && tender.workOrderId"
+                            icon="pi pi-check-circle" class="p-button-rounded  p-button-success ml-2"></button>
+
+                        <button pButton pButton pRipple icon="pi pi-arrow-down" *ngIf="tender && tender.workOrderId"
+                            (click)="download(tender.workOrderId,'WorkOrder')" class="ml-2"></button>
+                    </div> -->
+
+                    <div class="field"
+                       
+                        style="display: flex;">
+                        <p-fileUpload mode="basic" chooseLabel="Choose Aggreement Copy (Optional)"
+                            pTooltip="Signed Agreement Copy" [ngStyle]="{'width': '80%'}" [customUpload]="true"
+                            [files]="AgreementCopyfiles" tooltipPosition="left"
+                            (uploadHandler)="onSend($event,'AgreementCopy')"
+                            accept="image/*, .doc,.docx,.xml,application/msword, .pdf, .xls, .xlsx" [auto]="true"
+                            [maxFileSize]="2000000"></p-fileUpload>
+                        <button pButton pRipple type="button" *ngIf="tender && tender.agreementCopyId"
+                            icon="pi pi-check-circle" class="p-button-rounded   p-button-success ml-2"></button>
+                        <button pButton pRipple icon="pi pi-arrow-down" *ngIf="tender && tender.agreementCopyId"
+                            (click)="download(tender.agreementCopyId,'AgreementCopy')" class="ml-2"></button>
+                    </div>
+                    <div class="field"
+                       
+                        style="display: flex;">
+                        <p-fileUpload mode="basic" chooseLabel="Others (Optional)" [ngStyle]="{'width': '80%'}"
+                            tooltipPosition="left" pTooltip="Other Document(s)" [customUpload]="true"
+                            [files]="Otherfiles" (uploadHandler)="onSend($event,'Other')" [auto]="true"
+                            accept="image/*, .doc,.docx,.xml,application/msword, .pdf, .xls, .xlsx"
+                            [maxFileSize]="2000000"></p-fileUpload>
+                           
+                        <button pButton pRipple type="button" *ngIf="tender && tender.otherFileId"
+                            icon="pi pi-check-circle" class="p-button-rounded   p-button-success ml-2"></button>
+                        <button pButton pRipple icon="pi pi-arrow-down" *ngIf="tender && tender.otherFileId"
+                            (click)="download(tender.otherFileId,'Other')" class="ml-2"></button>
+                            
+                        </div>
+                    </div>
+                    <div class="field" *ngIf=" ((tender.agreementCopyId || tender.letterOfAcceptanceId ||tender.otherFileId) 
+                    || (tender.others_doc!= 'not upload' || tender.negotiation_signed_doc!= 'not upload' || tender.workorder != 'not upload'))
+                     && tender.isVerified==false">
+
+                    <p-checkbox id="rememberme1" [(ngModel)]="isVerified" [binary]="true" (onChange)="verify()"
+                    styleClass="mr-2"></p-checkbox>
+                <label for="rememberme1">I have verified the above tender award and its related documents</label>
+            </div>
+            <br>
+            <div *ngIf="tender.isVerified">
+                The above tender award and its related documents have been verified
+            </div>
+                </div>
+            </div>
+            <div class="col-12" style="justify-content: end;display: flex;">
+
+                <button pButton type="button" *ngxPermissionsOnly="privlegess.TENDER_WORK_CREATE"
+                    style="margin-right: 10px;" [disabled]="!(tender)" label="Next" (click)="next()"[disabled]="requiresVerification && !this.tender.isVerified"></button>
+                <button pButton type="button" class="p-button-secondary" label="Cancel" (click)="resetform()"></button>
+            </div>
+        </div>
+    </div>
+</div>

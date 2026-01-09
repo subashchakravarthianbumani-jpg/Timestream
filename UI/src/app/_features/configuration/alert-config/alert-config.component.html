@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="">
+            <p-button icon="pi pi-plus" [ngStyle]="{'margin-right': '20px;'}"
+                *ngxPermissionsOnly="[privleges.ALERT_CONFIG_CREATE]" (onClick)="addnewRow($event)"></p-button>
+        </div>
+    </div>
+    <div class="col hedsr" style="text-align: end;">
+    </div>
+
+    <p-confirmPopup key="confirm2"></p-confirmPopup>
+
+    <app-datatable [records]="alertconfigs" [defaultSortField]="defaultSortField" [defaultSortOrder]="defaultSortOrder"
+        [cols]="cols" [fileName]="'Configuration'" [rows]="10" [total]="alertconfigs ? alertconfigs.length : 0"
+        [actions]="actions" (invokeAction)="actioInvoked($event)" [searchableColumns]="searchableColumns"
+        [defaultstatus]="!currentStatus" (changeStatus)="changeStatus($event)" [hasActiveInactive]="true">
+    </app-datatable>
+</div>
+<p-toast></p-toast>

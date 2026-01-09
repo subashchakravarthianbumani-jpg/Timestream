@@ -1,0 +1,80 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="col-12  lg:col-2">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="col-12  lg:col-4">
+            <p-dropdown [options]="departments" [(ngModel)]="department" optionLabel="text" optionValue="value"
+                placeholder="Select a Department" [showClear]="true" [ngStyle]="{'width': '100%', 'margin':'0px 20px'}"
+                ngClass="dd" (ngModelChange)="changeDepartments()"></p-dropdown>
+        </div>
+        <div class="col-12 lg:col-4  flex">
+            <p-multiSelect [options]="roles" [(ngModel)]="selectedRoles" placeholder="Select a Role" optionLabel="text"
+                optionValue="value" class="multiselect-custom" ngClass="dd"
+                [ngStyle]="{'width': '100%', 'margin':'0px 20px'}" (ngModelChange)="roleChanged($event)">
+                <ng-template let-roles pTemplate="item">
+                    <div class="flex align-items-center">
+                        <span class="ml-2">{{roles.text}}</span>
+                    </div>
+                </ng-template>
+            </p-multiSelect>
+            <div tooltip="Click to add role">
+                <p-button icon="pi pi-arrow-right" label="Generate"
+                    *ngxPermissionsOnly="[privleges.APPROVALFLOW_CREATE]"
+                    [disabled]="department && department!=='' && selectedRoles&& selectedRoles.length>0?false:true"
+                    pTooltip="Click to add role" [ngStyle]="{'margin-right': '20px;'}"
+                    (onClick)="addRoles($event)"></p-button>
+            </div>
+        </div>
+        <div class="col-12  lg:col-2">
+        </div>
+    </div>
+    <p-confirmPopup key="confirm2"></p-confirmPopup>
+    <div class="grid formgrid mb-3" style="margin-top: 20px !important;">
+        <form [formGroup]="approvalFlowForm" (ngSubmit)="submit()" class="col-12">
+            <div class="card p-fluid" style="padding-bottom: 10px;">
+                <div class="p-formgrid grid ">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Role Name</th>
+                                <th>Approval Flow</th>
+                                <th>Return Flow</th>
+                            </tr>
+                        </thead>
+                        <tbody cdkDropList (cdkDropListDropped)="drop($event)" formArrayName="roles">
+                            <tr cdkDrag cdkDragLockAxis="y" *ngFor="let itemrow of t.controls; let i=index;let l=last"
+                                [formGroupName]="i">
+                                <td cdkDragHandle style="cursor: grabbing;"> <i class="pi pi-bars mr-2"></i> {{ i+1 }}
+                                </td>
+                                <td>{{milestoneList[i].controls['roleName'].value}}
+                                </td>
+                                <td>
+                                    <p-dropdown [options]="rolesForApproval" optionLabel="text" optionValue="value"
+                                        placeholder="Select a Role" formControlName="approvalFlowId" [showClear]="
+                                    false"></p-dropdown>
+                                </td>
+                                <td>
+                                    <p-dropdown [options]="rolesForApproval" optionLabel="text" optionValue="value"
+                                        placeholder="Select a Role" formControlName="returnFlowId" [showClear]="
+                                        false"></p-dropdown>
+                                </td>
+                            </tr>
+                            <tr *ngIf="t.length==0">
+                                <td [attr.colspan]=" 4">No Records Found.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12  md:col-12  lg:col-12" style="display: flex;justify-content: end;">
+                <div class="" style="margin-right: 20px;">
+                    <button pButton type="submit" *ngxPermissionsOnly="[privleges.APPROVALFLOW_UPDATE]"
+                        [disabled]="!approvalFlowForm.valid" label="Submit"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<p-toast></p-toast>

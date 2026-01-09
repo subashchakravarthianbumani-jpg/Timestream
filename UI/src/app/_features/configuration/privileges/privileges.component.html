@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;">
+        <div class="col">
+            <h4>{{title}}</h4>
+        </div>
+
+        <div class="col" style="text-align: center;">
+            <p-dropdown [options]="roles" optionLabel="roleName" [style]="{'width': '100%'}" optionValue="id"
+                placeholder="Select a Role" (onChange)="changeRole($event)" [showClear]="false"
+                [(ngModel)]="selectedRoles"></p-dropdown>
+        </div>
+        <div class=" col">
+            <button pButton pRipple label="Back" class="p-button-secondary" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+        </div>
+    </div>
+    <div class="grid formgrid mb-3">
+        <div class="col-12">
+            <div class="card p-fluid" style="padding-bottom: 10px;margin-top: 10px;">
+                <div class="p-formgrid grid" *ngFor="let privilege of privileges; index as i;"
+                    style="margin-bottom: 10px;">
+                    <div class="col-12" style="margin-top: 20px">
+                        <h5 style="
+                        background-color: #f0eded;
+                        padding: 5px;
+                        border-radius: 5px;">{{privilege.moduleName}}</h5>
+                    </div>
+                    <div class="row col-12">
+                        <div class=" col-1">
+
+                        </div>
+                        <div class="col-11" style="display: flex;flex-wrap: wrap;">
+                            <div class="field col-6  md:col-6  lg:col-2"
+                                *ngFor="let s of privilege.privilege; index as j;">
+                                <label htmlFor="value">{{s.privilegeType}}</label>
+                                <div>
+                                    <p-inputSwitch (onChange)="changeEvent($event, s.privilegeId)"
+                                        [ngModel]="s.isSelected"></p-inputSwitch>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast></p-toast>

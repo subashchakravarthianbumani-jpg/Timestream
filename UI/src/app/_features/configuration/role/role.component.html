@@ -1,0 +1,55 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}
+            </h4>
+        </div>
+        <div class="">
+            <button pButton pRipple *ngxPermissionsOnly="[privleges.ROLE_SET_PRIVILEGE]" type="button"
+                label="Privileges" (click)="setPrivileges()" class="p-button-secondary"></button>
+        </div>
+    </div>
+    <div class="grid formgrid mb-3" *ngIf="currentStatus">
+        <form [formGroup]="roleForm" (ngSubmit)="submit()" class="col-12">
+            <div class="card p-fluid" style="padding-bottom: 10px;">
+                <div class="p-formgrid grid">
+                    <div class="field col-12  md:col-6  lg:col-3">
+                        <label htmlFor="roleName">Role Name</label>
+                        <input pInputText formControlName="roleName" type="text" />
+                        <app-error-msg [control]="roleForm.get('roleName')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-6  lg:col-3">
+                        <label htmlFor="code">Code</label>
+                        <input pInputText formControlName="code" type="text" />
+                        <app-error-msg [control]="roleForm.get('code')"></app-error-msg>
+                    </div>
+                    <div class="col-12 md:col-6 flex  lg:col-2" style="margin-top: 25px">
+                        <div class="col">
+                            <button pButton type="submit" *ngxPermissionsOnly="[privleges.ROLE_CREATE]"
+                                [disabled]="!roleForm.valid" label="Submit"></button>
+                        </div>
+                        <div class="col">
+                            <button pButton type="button" class="p-button-secondary" label="Reset"
+                                (click)="resetForm()"></button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 flex ">
+            <h4>{{this.title}} List </h4><span style="font-size: small;font-weight: 600;margin-left: 5px;"
+                [ngStyle]="{'color': currentStatus ? '#0abb0a' : '#fd7878'}">
+                {{currentStatus?'(Active)':'(In-Active)'}}</span>
+        </div>
+    </div>
+    <app-datatable [records]="configurationList" [defaultSortField]="defaultSortField"
+        [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Configuration'" [rows]="rows"
+        [total]="configurationList ? configurationList.length : 0" [actions]="actions"
+        (invokeAction)="actioInvoked($event)" [searchableColumns]="searchableColumns" [defaultstatus]="!currentStatus"
+        (changeStatus)="changeStatus($event)" [hasActiveInactive]="true">
+    </app-datatable>
+</div>

@@ -1,0 +1,21 @@
+<div class="layout-wrapper" [ngClass]="containerClass">
+    <!-- <app-topbar></app-topbar> -->
+     <app-topbar (filterClick)="openFilterPanel()"></app-topbar>
+
+   
+
+    <!-- <div class="layout-sidebar">
+        <ng-scrollbar class="scroll-event" thumbClass="white-scrollbars">
+            <app-sidebar></app-sidebar>
+        </ng-scrollbar>
+    </div> -->
+    <div class="layout-main-container">
+        <div class="layout-main">
+            <router-outlet></router-outlet>
+        </div>
+        <app-footer></app-footer>
+    </div>
+    <p-toast></p-toast>
+    <app-config></app-config>
+    <div class="layout-mask"></div>
+</div>

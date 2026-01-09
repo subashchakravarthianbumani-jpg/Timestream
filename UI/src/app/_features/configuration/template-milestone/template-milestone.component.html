@@ -1,0 +1,148 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="">
+            <button pButton pRipple label="Back" class="p-button-secondary" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+        </div>
+    </div>
+
+    <div class="grid formgrid mb-3">
+        <div class="col-12">
+            <div class="card p-fluid" style="padding-bottom: 10px;background-color: #e6e7ff;">
+                <div class="p-formgrid grid " style="text-align: center;">
+                    <div class="col boldlabel">
+                        <span>Name: </span> {{templateWithMilestone?.name|| ''}}
+                    </div>
+                    <div class="col boldlabel">
+                        <span>Code: </span> {{templateWithMilestone?.templateCode|| ''}}
+                    </div>
+                    <div class="col boldlabel">
+                        <span>Duration: </span> {{templateWithMilestone?.durationInDays || 0}} - Days
+                    </div>
+                    <div class="col boldlabel">
+                        <span>Strength: </span> {{templateWithMilestone?.strength|| ''}}
+                    </div>
+                    <div class="col boldlabel">
+                        <span>Work: </span> {{templateWithMilestone?.workType|| ''}}
+                    </div>
+                    <div class="col boldlabel">
+                        <span>Sub Work: </span> {{templateWithMilestone?.subWorkType|| ''}}
+                    </div>
+                     <div class="col boldlabel">
+                        <span>Service Type: </span> {{templateWithMilestone?.serviceType|| ''}}
+                    </div>
+                     <div class="col boldlabel">
+                        <span>Category Type: </span> {{templateWithMilestone?.categoryType|| ''}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col hedsr" style="display: flex;text-align: end;justify-content: end;">
+        <div *ngIf="!defaultstatus">
+            <p-button icon="pi pi-plus" *ngxPermissionsOnly="[privleges.TEMPLATE_SET_MILESTONE]"
+                [ngStyle]="{'margin-right': '20px;'}" (onClick)="addnewRow($event)"></p-button>
+
+        </div>
+        <div>
+            <p-toggleButton [(ngModel)]="defaultstatus" [onLabel]="onLabel" [offLabel]="offLabel"
+                [style]="{'width': '10em'}" (onChange)="changeEvent($event)"></p-toggleButton>
+        </div>
+    </div>
+
+    <p-confirmPopup key="confirm2"></p-confirmPopup>
+    <div class="grid formgrid mb-3" style="margin-bottom: 40px !important;">
+        <form [formGroup]="milestoneForm" (ngSubmit)="submit()" class="col-12">
+            <div class="card p-fluid" style="padding-bottom: 10px;">
+                <div class="p-formgrid grid " style="overflow-x: auto;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th style="min-width: 300px">Milestone Name <br>
+                                    <span *ngIf="milestoneNameErrorMsg"
+                                        class="tableheadererrormsg">{{milestoneNameErrorMsg}}</span>
+                                </th>
+                                <th style="min-width: 100px">Milestone Code <br>
+                                    <span *ngIf="milestoneCodeErrorMsg"
+                                        class="tableheadererrormsg">{{milestoneCodeErrorMsg}}</span>
+                                </th>
+                                <th>Duration In Days <span style="font-weight: 300;">({{totaldays}})</span> <br>
+                                    <span class="tableheadererrormsg">{{durationErrorMsg}}</span>
+                                </th>
+                                <th>is Payment Required</th>
+                                <th>Payment Percentage <span style="font-weight: 300;">({{totalpercenatge}})</span>
+                                    <br><span class="tableheadererrormsg">{{paymentreqErrorMsg}}</span>
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody cdkDropList (cdkDropListDropped)="drop($event)" formArrayName="milestones">
+                            <tr cdkDrag cdkDragLockAxis="y" *ngFor="let itemrow of t.controls; let i=index;let l=last"
+                                [formGroupName]="i">
+                                <td cdkDragHandle style="cursor: grabbing;"> <i class="pi pi-bars mr-2"></i> {{ i+1 }}
+                                </td>
+                                <td>
+                                    <input pInputText [maxlength]="250" formControlName="milestoneName" type="text" />
+                                </td>
+                                <td>
+                                    <input pInputText [maxlength]="10" formControlName="milestoneCode" type="text" />
+                                </td>
+                                <td>
+                                    <p-inputNumber inputId="inputnumber" [max]="73000"
+                                        formControlName="durationInDays"></p-inputNumber>
+
+                                </td>
+                                <td style="
+                                text-align: center;"><p-inputSwitch
+                                        (onChange)="isPaymentRequired($event);milestoneList[i].controls['paymentPercentage'].setValue(0)"
+                                        formControlName="isPaymentRequired"></p-inputSwitch>
+                                </td>
+                                <td>
+                                    <p-inputNumber inputId="inputnumber" [max]=100
+                                        [readonly]="!milestoneList[i].controls['isPaymentRequired'].value"
+                                        formControlName="paymentPercentage"></p-inputNumber>
+
+                                </td>
+                                <td>
+                                    <ng-container *ngFor="let action of actions">
+                                        <div *ngIf="(!defaultstatus && !milestoneList[i].controls['id'].value && action.type =='DELETE')||
+                                                    (!defaultstatus &&milestoneList[i].controls['id'].value && action.type =='INACTIVATE') || 
+                                                    (defaultstatus && action.type =='ACTIVATE')">
+
+                                            <button type="button" pButton pRipple [icon]="action.icon"
+                                                *ngxPermissionsOnly="[privleges.TEMPLATE_SET_MILESTONE]"
+                                                (click)="actioInvoked(action.type,i,$event )" class="p-button-text mr-2"
+                                                [title]="action.title" styleClass="p-button-text"></button>
+                                        </div>
+                                    </ng-container>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 md:col-12 lg:col-12" *ngIf="!defaultstatus" style="display: flex;justify-content: end;">
+                <div class="" style="margin-right: 20px;">
+                    <button pButton type="button" *ngxPermissionsOnly="[privleges.TEMPLATE_SET_MILESTONE]"
+                        [disabled]="!milestoneForm.valid || durationErrorMsg || milestoneNameErrorMsg || paymentreqErrorMsg"
+                        label="Publish" (click)="publish($event)" class="p-button-success"></button>
+                </div>
+                <div class="" style="margin-right: 20px;">
+                    <button pButton type="submit" *ngxPermissionsOnly="[privleges.TEMPLATE_SET_MILESTONE]"
+                        [disabled]="!milestoneForm.valid || durationErrorMsg || milestoneNameErrorMsg || paymentreqErrorMsg"
+                        label="Save"></button>
+                </div>
+                <div class="">
+                    <button pButton type="button" class="p-button-secondary" label="Cancel"
+                        (click)="resetForm()"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p-toast></p-toast>

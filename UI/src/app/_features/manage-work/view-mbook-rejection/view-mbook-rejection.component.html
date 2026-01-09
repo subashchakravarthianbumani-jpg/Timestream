@@ -1,0 +1,31 @@
+<table class="table" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>S No</th>
+            <th>M-Book Number</th>
+            <th>Milestone Code</th>
+            <th>Planned Value</th>
+            <th>Actual Value</th>
+            <th>Status</th>
+            <th>Comments</th>
+            <th>Last updated by</th>
+            <th>Last updated date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of rejectedMbooks; index as i;">
+            <td>{{i+1}}</td>
+            <td>{{item.mBookNumber}}</td>
+            <td>{{item.milestoneCode}}</td>
+            <td>{{item.milestoneAmount}}</td>
+            <td>{{item.actualAmount}}</td>
+            <td>{{item.statusName}}</td>
+            <td>{{item.statusName}} </td>
+            <td>{{item.lastUpdatedUserName}}</td>
+            <td>{{ dc(item.lastUpdatedDate)}}</td>
+        </tr>
+        <tr *ngIf="!rejectedMbooks">
+            <td [colSpan]="9">No Records Found.</td>
+        </tr>
+    </tbody>
+</table>

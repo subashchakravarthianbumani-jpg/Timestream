@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}} <span style="
+                font-size: small;
+                font-weight: 600;" [ngStyle]="{'color': currentStatus ? '#0abb0a' : '#fd7878'}">
+                    {{currentStatus?'(Active)':'(In-Active)'}}</span>
+            </h4>
+        </div>
+        <div class="">
+            <p-button icon="pi pi-plus" *ngxPermissionsOnly="[privleges.USER_CREATE]"
+                (onClick)="usercreate()"></p-button>
+        </div>
+    </div>
+    <app-datatable-pagination [records]="configurationList" [defaultSortField]="defaultSortField"
+        [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'User'" [rows]="rows" [total]="total"
+        [actions]="actions" (invokeAction)="actioInvoked($event)" [defaultstatus]="!currentStatus"
+        (changeStatus)="changeStatus($event)" [searchableColumns]="searchableColumns" [hasActiveInactive]="true"
+        (changefilter)="changefilter($event)">
+    </app-datatable-pagination>
+</div>

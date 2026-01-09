@@ -1,0 +1,211 @@
+<!-- Modified by Indu on  3/12/2025 for adding division,district,scheme-->
+<div class="card">
+  <div
+    class="grid formgrid"
+    style="
+      justify-content: space-between;
+      padding: 0rem 1rem;
+      margin-bottom: 10px;
+    "
+  >
+    <div class="col-12 md:col-6 lg:col-12">
+      <h4>{{ title }}</h4>
+    </div>
+    <div class="col-12" style="display: flex; flex-wrap: wrap">
+      <div class="col-2 md:col-3 lg:col-2">
+        <p-dropdown
+          [ngStyle]="{ width: '100%', margin: '0px 20px' }"
+          ngClass="dd"
+          [options]="types"
+          placeholder="Select a Type"
+          (ngModelChange)="typeChanged($event)"
+          optionLabel="text"
+          optionValue="value"
+          [(ngModel)]="selectedtype"
+        ></p-dropdown>
+      </div>
+      <div class="col-2 md:col-3 lg:col-2" *ngIf="selectedtype != 'GO'">
+        <p-multiSelect
+          [options]="statusList"
+          [(ngModel)]="selectedStatuses"
+          placeholder="Select a Status"
+          optionLabel="text"
+          optionValue="value"
+          class="multiselect-custom"
+          ngClass="dd"
+          [showClear]="true"
+          [ngStyle]="{ width: '100%', margin: '0px 20px' }"
+          (ngModelChange)="sttausChanged($event)"
+        >
+          <ng-template let-roles pTemplate="item">
+            <div class="flex align-items-center">
+              <span class="ml-2">{{ roles.text }}</span>
+            </div>
+          </ng-template>
+        </p-multiSelect>
+      </div>
+
+      <div class="col-2 md:col-3 lg:col-2" *ngIf="showscheme">
+        <p-dropdown
+          [ngStyle]="{ width: '100%', margin: '0px 20px' }"
+          ngClass="dd"
+          [options]="daysRange"
+          placeholder="Select delay in days"
+          (onChange)="dayschanged($event.value)"
+          optionLabel="label"
+          optionValue="value"
+          [showClear]="true"
+          [(ngModel)]="selectedDays"
+        >
+        </p-dropdown>
+      </div>
+
+      <div class="col-2 md:col-3 lg:col-2">
+        <p-multiSelect
+          [options]="divisions"
+          [(ngModel)]="selecteddivisions"
+          placeholder="Select a Division"
+          optionLabel="text"
+          optionValue="value"
+          class="multiselect-custom"
+          ngClass="dd"
+          [showClear]="true"
+          [ngStyle]="{ width: '100%', margin: '0px 20px' }"
+          (ngModelChange)="divisionChanged($event)"
+        >
+          <ng-template let-roles pTemplate="item">
+            <div class="flex align-items-center">
+              <span class="ml-2">{{ roles.text }}</span>
+            </div>
+          </ng-template>
+        </p-multiSelect>
+      </div>
+
+      <div class="col-2 md:col-3 lg:col-2">
+        <p-multiSelect
+          [options]="dtistrictsList"
+          [(ngModel)]="selectedDistricts"
+          placeholder="Select a District"
+          optionLabel="text"
+          optionValue="value"
+          class="multiselect-custom"
+          ngClass="dd"
+          [showClear]="true"
+          [ngStyle]="{ width: '100%', margin: '0px 20px' }"
+          (ngModelChange)="districtChanged($event)"
+        >
+          <ng-template let-roles pTemplate="item">
+            <div class="flex align-items-center">
+              <span class="ml-2">{{ roles.text }}</span>
+            </div>
+          </ng-template>
+        </p-multiSelect>
+      </div>
+      <div class="col-2 md:col-3 lg:col-2" *ngIf="showscheme">
+        <p-multiSelect
+          [options]="departments"
+          [(ngModel)]="selecteddepartments"
+          placeholder="Select a Department"
+          optionLabel="text"
+          optionValue="value"
+          class="multiselect-custom"
+          ngClass="dd"
+          [ngStyle]="{ width: '100%', margin: '0px 20px' }"
+          [showClear]="true"
+          (ngModelChange)="departmentChanged($event)"
+        >
+          <ng-template let-roles pTemplate="item">
+            <div class="flex align-items-center">
+              <span class="ml-2">{{ roles.text }}</span>
+            </div>
+          </ng-template>
+        </p-multiSelect>
+      </div>
+
+      <div class="col-2 md:col-3 lg:col-2" *ngIf="showscheme">
+        <p-multiSelect
+          [options]="schemes"
+          [(ngModel)]="selectedscheme"
+          placeholder="Select a Scheme"
+          optionLabel="text"
+          optionValue="value"
+          class="multiselect-custom"
+          ngClass="dd"
+          [showClear]="true"
+          [ngStyle]="{ width: '100%', margin: '0px 20px', top: '10px' }"
+          (ngModelChange)="schemechanged($event)"
+        >
+          <ng-template let-roles pTemplate="item">
+            <div class="flex align-items-center">
+              <span class="ml-2">{{ roles.text }}</span>
+            </div>
+          </ng-template>
+        </p-multiSelect>
+      </div>
+
+      <div class="col-2 md:col-3 lg:col-2" *ngIf="showscheme">
+        <p-multiSelect
+          [options]="goPackageNo"
+          [(ngModel)]="selectedPacakges"
+          placeholder="Select Package"
+          optionLabel="text"
+          optionValue="value"
+          class="multiselect-custom"
+          ngClass="dd"
+          [showClear]="true"
+          [ngStyle]="{ width: '100%', margin: '0px 20px', top: '10px' }"
+          (ngModelChange)="packagechanged($event)"
+        >
+          <ng-template let-roles pTemplate="item">
+            <div class="flex align-items-center">
+              <span class="ml-2">{{ roles.text }}</span>
+            </div>
+          </ng-template>
+        </p-multiSelect>
+      </div>
+
+      <div class="col-2 md:col-3 lg:col-2">
+        <p-calendar
+          [(ngModel)]="rangeDates"
+          selectionMode="range"
+          placeholder="Select from - to Date"
+          view="month"
+          dateFormat="mm/yy"
+          [ngStyle]="{
+            width: '100%',
+            margin: '0px 20px',
+            top: selectedtype == 'TENDER' ? '10px' : null
+          }"
+          [showClear]="true"
+          (ngModelChange)="changeyear($event)"
+          [readonlyInput]="true"
+        ></p-calendar>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 10px">
+    <p-breadcrumb
+      [model]="breadcrumbItems"
+      (onItemClick)="onbreadCrumbClick($event)"
+      [home]="{ icon: 'pi pi-home' }"
+    ></p-breadcrumb>
+  </div>
+
+  <app-report-milestone
+    [actions]="actions"
+    [canShowAction]="canShowAction"
+    [cols]="cols"
+    [canShowAction]="false"
+    (changecolFilter)="changecolFilter($event)"
+    fileName="Report"
+    [filterModel]="tableFilterModel"
+    (changefilter)="changefilter($event)"
+    [defaultSortField]="defaultSortField"
+    [filterColumns]="filterColumns"
+    [defaultSortOrder]="defaultSortOrder"
+    [rows]="25"
+    [total]="total"
+    [records]="gridList"
+  >
+  </app-report-milestone>
+</div>

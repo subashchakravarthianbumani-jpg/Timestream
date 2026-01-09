@@ -1,0 +1,144 @@
+.boldlabel > span {
+    font-weight: 700;
+  }
+  .boldlabelinsiderow{
+      padding: 10px !important;
+      span {
+          font-weight: 700;
+        }
+  }
+  .boldlabelhiegr {
+      padding: 0px !important;
+    span {
+      font-weight: 650;
+      font-size: 13px;
+    }
+  }
+  .sssdt{
+  th, td{    
+    background-color: #e6e7ff;
+    padding: 10px;
+  }
+}
+  .stablediv{
+    
+    padding: 15px;
+    background-color: #f7f7fa;
+    border-radius: 10px;
+  }
+  .iconstyling{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #aaaaff;
+  }
+    ::ng-deep .p-card .p-card-content{
+      padding: 0.25rem 0;
+    }
+    ::ng-deep .p-card .p-card-title{      
+    font-size: 1 rem;
+    }
+    ::ng-deep .setheight{
+      
+      min-height: 599px;
+      max-height: 600px;
+      overflow: auto;
+    }
+    ::ng-deep .sddd{
+      min-height: 599px;
+      max-height: 600px;
+
+    }.control-error-msg{    
+      margin-top: 5px;
+      color: #e24c4c;
+  }
+/* Dialog styling */
+::ng-deep .file-preview-popup.p-dialog {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Header styling */
+::ng-deep .file-preview-popup .p-dialog-header {
+  background-color: #f4f6f8;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header-title {
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+/* Icon buttons */
+.icon-download-btn {
+  background-color: transparent !important;
+  border: none !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.icon-download-btn:hover {
+  background-color: rgba(0, 150, 0, 0.08) !important;
+}
+
+.icon-download-btn .pi {
+  font-size: 1.2rem;
+  color: #0d6efd;
+}
+
+/* Centered viewer container */
+.viewer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(90vh - 70px);
+  background-color: #fff;
+}
+
+.viewer-container iframe,
+.viewer-container img,
+.viewer-container video {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border: none;
+}
+
+/* Fade-in effect */
+::ng-deep .file-preview-popup .p-dialog-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* Make the timeline connector line black */
+::ng-deep .customized-timeline .p-timeline-event-connector {
+  background-color: #000 !important; /* dark black */
+  width: 2px !important; /* adjust thickness */
+}

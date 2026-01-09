@@ -1,0 +1,463 @@
+﻿CREATE DATABASE  IF NOT EXISTS `tahdco_time` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `tahdco_time`;
+-- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: tahdco_time
+-- ------------------------------------------------------
+-- Server version	8.0.30
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `account_login`
+--
+
+DROP TABLE IF EXISTS `account_login`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `account_login` (
+  `LoginId` varchar(50) NOT NULL,
+  `UserId` varchar(50) NOT NULL,
+  `UserName` varchar(150) NOT NULL,
+  `Password` varchar(250) NOT NULL,
+  `Email` varchar(150) NOT NULL,
+  `AccessToken` varchar(250) DEFAULT NULL,
+  `IsActive` bit(1) NOT NULL,
+  `LastLoginDate` datetime DEFAULT NULL,
+  `CreatedBy` varchar(50) DEFAULT NULL,
+  `CreatedByUserName` varchar(250) DEFAULT NULL,
+  `CreatedDate` datetime DEFAULT NULL,
+  `ModifiedBy` varchar(50) DEFAULT NULL,
+  `ModifiedByUserName` varchar(250) DEFAULT NULL,
+  `ModifiedDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`LoginId`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `account_login`
+--
+
+LOCK TABLES `account_login` WRITE;
+/*!40000 ALTER TABLE `account_login` DISABLE KEYS */;
+INSERT INTO `account_login` VALUES ('3ac83a73-4a8c-11ee-b818-00090ffe0001','20594ae7-4a8c-11ee-b818-00090ffe0001','Admin','A4QnwYdtZ94Caroa1C0/ag==','Admin@testmail.com',NULL,_binary '',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `account_login` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `account_user`
+--
+
+DROP TABLE IF EXISTS `account_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `account_user` (
+  `UserId` varchar(50) NOT NULL,
+  `UserNumber` varchar(100) NOT NULL,
+  `FirstName` varchar(150) NOT NULL,
+  `LastName` varchar(150) NOT NULL,
+  `Email` varchar(150) NOT NULL,
+  `IsActive` bit(1) NOT NULL,
+  `CreatedBy` varchar(50) DEFAULT NULL,
+  `CreatedByUserName` varchar(250) DEFAULT NULL,
+  `CreatedDate` datetime DEFAULT NULL,
+  `ModifiedBy` varchar(50) DEFAULT NULL,
+  `ModifiedByUserName` varchar(250) DEFAULT NULL,
+  `ModifiedDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`UserId`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `account_user`
+--
+
+LOCK TABLES `account_user` WRITE;
+/*!40000 ALTER TABLE `account_user` DISABLE KEYS */;
+INSERT INTO `account_user` VALUES ('20594ae7-4a8c-11ee-b818-00090ffe0001','ADMIN','Admin','Admin','Admin@testmail.com',_binary '',NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `account_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `two_column_configuration_category`
+--
+
+DROP TABLE IF EXISTS `two_column_configuration_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `two_column_configuration_category` (
+  `Id` varchar(50) NOT NULL,
+  `Category` text NOT NULL,
+  `IsVisible` bit(1) NOT NULL,
+  `IsChild` bit(1) NOT NULL,
+  `ParentId` varchar(50) DEFAULT NULL,
+  `Category_Ta` text,
+  `IsDependent` bit(1) NOT NULL DEFAULT b'0',
+  `CategoryCode` text,
+  `IsGeneralCategory` bit(1) NOT NULL DEFAULT b'1',
+  `HasCode` bit(1) NOT NULL DEFAULT b'0',
+  `CreatedBy` varchar(50) DEFAULT NULL,
+  `CreatedByUserName` varchar(250) DEFAULT NULL,
+  `CreatedDate` datetime DEFAULT NULL,
+  `ModifiedBy` varchar(50) DEFAULT NULL,
+  `ModifiedByUserName` varchar(250) DEFAULT NULL,
+  `ModifiedDate` datetime DEFAULT NULL,
+  `DeletedBy` varchar(50) DEFAULT NULL,
+  `DeletedByUserName` varchar(250) DEFAULT NULL,
+  `DeletedDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `two_column_configuration_category`
+--
+
+LOCK TABLES `two_column_configuration_category` WRITE;
+/*!40000 ALTER TABLE `two_column_configuration_category` DISABLE KEYS */;
+INSERT INTO `two_column_configuration_category` VALUES ('7ae6b340-4a8d-11ee-b818-00090ffe0001','Gender',_binary '',_binary '\0',NULL,'பாலினம்',_binary '\0','GENDER',_binary '',_binary '\0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('7ae6bb85-4a8d-11ee-b818-00090ffe0001','District',_binary '',_binary '\0',NULL,'மாவட்டம்',_binary '\0','DISTRICT',_binary '',_binary '',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('852d0248-4a8d-11ee-b818-00090ffe0001','Taluk',_binary '',_binary '','7ae6bb85-4a8d-11ee-b818-00090ffe0001','தாலுகா',_binary '\0','TALUK',_binary '',_binary '\0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `two_column_configuration_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `two_column_configuration_dependent_values`
+--
+
+DROP TABLE IF EXISTS `two_column_configuration_dependent_values`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `two_column_configuration_dependent_values` (
+  `Id` varchar(50) NOT NULL,
+  `CategoryId` varchar(50) NOT NULL,
+  `ConfigurationId` varchar(50) NOT NULL,
+  `IsGeneral` bit(1) NOT NULL,
+  `SchemeId` varchar(50) DEFAULT NULL,
+  `Value` text NOT NULL,
+  `Value_Ta` text,
+  `Code` varchar(100) DEFAULT NULL,
+  `CreatedBy` varchar(50) DEFAULT NULL,
+  `CreatedByUserName` varchar(250) DEFAULT NULL,
+  `CreatedDate` datetime DEFAULT NULL,
+  `ModifiedBy` varchar(50) DEFAULT NULL,
+  `ModifiedByUserName` varchar(250) DEFAULT NULL,
+  `ModifiedDate` datetime DEFAULT NULL,
+  `DeletedBy` varchar(50) DEFAULT NULL,
+  `DeletedByUserName` varchar(250) DEFAULT NULL,
+  `DeletedDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `two_column_configuration_dependent_values`
+--
+
+LOCK TABLES `two_column_configuration_dependent_values` WRITE;
+/*!40000 ALTER TABLE `two_column_configuration_dependent_values` DISABLE KEYS */;
+/*!40000 ALTER TABLE `two_column_configuration_dependent_values` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `two_column_configuration_values`
+--
+
+DROP TABLE IF EXISTS `two_column_configuration_values`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `two_column_configuration_values` (
+  `Id` varchar(50) NOT NULL,
+  `CategoryId` varchar(50) NOT NULL,
+  `Value` text NOT NULL,
+  `IsGeneral` bit(1) NOT NULL,
+  `SchemeId` varchar(50) DEFAULT NULL,
+  `Value_Ta` text NOT NULL,
+  `Code` varchar(100) DEFAULT NULL,
+  `CreatedBy` varchar(50) DEFAULT NULL,
+  `CreatedByUserName` varchar(250) DEFAULT NULL,
+  `CreatedDate` datetime DEFAULT NULL,
+  `ModifiedBy` varchar(50) DEFAULT NULL,
+  `ModifiedByUserName` varchar(250) DEFAULT NULL,
+  `ModifiedDate` datetime DEFAULT NULL,
+  `DeletedBy` varchar(50) DEFAULT NULL,
+  `DeletedByUserName` varchar(250) DEFAULT NULL,
+  `DeletedDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `two_column_configuration_values`
+--
+
+LOCK TABLES `two_column_configuration_values` WRITE;
+/*!40000 ALTER TABLE `two_column_configuration_values` DISABLE KEYS */;
+/*!40000 ALTER TABLE `two_column_configuration_values` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'tahdco_time'
+--
+
+--
+-- Dumping routines for database 'tahdco_time'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `Account_LoginGet` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE PROCEDURE `Account_LoginGet`(pUserName VARCHAR(100), pPassword VARCHAR(150), pEmail VARCHAR(100))
+BEGIN
+	SELECT LoginId, UserId, UserName, Password, Email, AccessToken, IsActive, LastLoginDate, CreatedBy, CreatedDate, ModifiedDate
+    FROM Account_Login WHERE (UserName=pUserName OR  Email=pEmail) AND Password=pPassword AND IsActive = 1;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Account_LoginSave` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE PROCEDURE `Account_LoginSave`(
+pLoginId VARCHAR(50), 
+pUserId VARCHAR(50), 
+pUserName VARCHAR(150), 
+pPassword VARCHAR(250), 
+pEmail VARCHAR(250),
+pAccessToken VARCHAR(250),
+pIsActive BIT,
+pSavedBy INT,
+pSavedByUserName VARCHAR(250),
+pSavedDate DATETIME
+)
+BEGIN
+	IF(pLoginId = '')
+    THEN 
+		BEGIN
+			UPDATE Account_Login SET 
+            UserId = pUserId, UserName = pUserName, Password = pPassword, Email = pEmail, AccessToken = pAccessToken,
+            IsActive = pIsActive, ModifiedBy = pSavedBy, ModifiedByUserName = pSavedByUserName,  
+            ModifiedDate = pSavedDate, LastLoginDate = pSavedDate WHERE LoginId = pLoginId;
+            SELECT pLoginId;
+        END;
+	ELSE
+		BEGIN
+			INSERT INTO Account_Login(LoginId,UserId,UserName,Password,Email,AccessToken,IsActive,CreatedBy,CreatedByUserName,CreatedDate) VALUES
+            (pLoginId,pUserId,pUserName,pPassword,pEmail,pAccessToken,pIsActive,pSavedBy,pSavedByUserName,pSavedDate);
+			SELECT LAST_INSERT_ID();
+        END;
+	END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Account_UserGet` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE PROCEDURE `Account_UserGet`(pUserId VARCHAR(50))
+BEGIN
+	SELECT UserId, FirstName, LastName, Email, IsActive, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
+    FROM Account_User WHERE UserId = pUserId AND IsActive = 1;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Two_Column_Configuration_Dependent_SaveUpdate` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE PROCEDURE `Two_Column_Configuration_Dependent_SaveUpdate`(IN 
+`pId` VARCHAR(50), 
+`pCategoryId` VARCHAR(50), 
+`pConfigurationId` VARCHAR(50), 
+`pValue` VARCHAR(200), 
+`pValue_Ta` VARCHAR(200), 
+`pIsGeneral` INT, `pSchemeId` VARCHAR(50), `pSavedBy` INT, `pSavedByUserName` INT, `pSavedDate` DATETIME, `pCode` VARCHAR(200))
+BEGIN
+	IF(pId = '') THEN
+		BEGIN
+			
+			INSERT INTO master_configuration_dependent_values(
+				`Id`,
+				`CategoryId`,
+                `ConfigurationId`,
+				`Value`,
+                `Value_Ta`,
+				`IsGeneral`,
+				`SchemeId`,
+				`CreatedBy`,
+                `CreatedByUserName`,
+				`CreatedDate`,
+                `Code`)
+				VALUES(
+                pId,
+				pCategoryId,
+                pConfigurationId,
+				pValue,
+                pValue_Ta,
+				pIsGeneral,
+				pSchemeId,
+				pSavedBy,
+                pSavedByUserName,
+				pSavedDate,
+                pCode
+                );
+                
+                SELECT LAST_INSERT_ID();
+			
+		END;
+	ELSE
+		BEGIN
+			
+			 UPDATE master_configuration_dependent_values
+				SET
+				`CategoryId` = pCategoryId,
+                `ConfigurationId` = pConfigurationId,
+				`Value` = pValue ,
+                `Value_Ta` = pValue_Ta ,
+				`IsGeneral` = pIsGeneral ,
+				`SchemeId` = pSchemeId ,
+				`ModifiedBy` = pSavedBy ,
+                `ModifiedByUserName` = pSavedByUserName ,
+				`ModifiedDate` = pSavedDate,
+                `Code` = pCode
+				WHERE `Id` = pId;
+                
+                SELECT pId;
+			
+		END;
+	END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Two_Column_Configuration_SaveUpdate` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE PROCEDURE `Two_Column_Configuration_SaveUpdate`(IN 
+pId VARCHAR(50), 
+pCategoryId VARCHAR(50), 
+pValue VARCHAR(200), 
+pValue_Ta VARCHAR(200), 
+pIsGeneral INT, 
+pSchemeId VARCHAR(50), 
+pSavedBy INT, 
+pSavedByUserName VARCHAR(250), 
+pSavedDate INT, 
+pCode VARCHAR(200))
+BEGIN
+	IF(pId = '') THEN
+		BEGIN
+			
+			INSERT INTO two_column_configuration_values(
+				`Id`,
+				`CategoryId`,
+				`Value`,
+                `Value_Ta`,
+				`IsGeneral`,
+				`SchemeId`,
+				`CreatedBy`,
+                `CreatedByUserName`,
+				`CreatedDate`,
+                `Code`)
+				VALUES(
+                pId,
+				pCategoryId,
+				pValue,
+                pValue_Ta,
+				pIsGeneral,
+				pSchemeId,
+				pSavedBy,
+                pSavedByUserName,
+				pSavedDate,
+                pCode
+                );
+                
+                SELECT LAST_INSERT_ID();
+			
+		END;
+	ELSE
+		BEGIN
+			
+			 UPDATE two_column_configuration_values
+				SET
+				`CategoryId` = pCategoryId,
+				`Value` = pValue ,
+                `Value_Ta` = pValue_Ta ,
+				`IsGeneral` = pIsGeneral ,
+				`SchemeId` = pSchemeId ,
+				`ModifiedBy` = pSavedBy ,
+                `ModifiedByUserName` = pSavedByUserName ,
+				`ModifiedDate` = pSavedDate,
+                `Code` = pCode
+				WHERE `Id` = pId;
+                
+                SELECT pId;
+			
+		END;
+	END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-09-04  1:35:58

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\PixousProjects\Deployements</_PublishTargetUrl>
+    <History>True|2025-11-19T10:54:21.4687516Z||;True|2025-11-19T14:43:20.7262774+05:30||;True|2025-11-10T16:50:15.3632741+05:30||;True|2025-11-10T16:42:11.7659234+05:30||;True|2025-11-07T15:59:26.0807730+05:30||;True|2025-10-27T15:39:37.1484063+05:30||;True|2025-10-25T16:18:39.0894902+05:30||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

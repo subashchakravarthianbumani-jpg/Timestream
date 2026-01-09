@@ -1,0 +1,8 @@
+<app-filter-panel
+   [filters]="filters"
+   (filtersChanged)="updateFilters($event)">
+</app-filter-panel>
+
+<app-camera-grid
+   [filters]="filters">
+</app-camera-grid>

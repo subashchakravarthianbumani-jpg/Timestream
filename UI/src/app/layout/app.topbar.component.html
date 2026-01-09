@@ -1,0 +1,125 @@
+<!-- <div class="layout-topbar">
+    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </button>
+    <img src="assets/LogoImages/High/Dark with White patch/Logo.png" height="50" alt="logo">
+    <img src="assets/LogoImages/High/Dark with White patch/Text.png" height="60" alt="logo">
+
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button"
+        (click)="layoutService.showProfileSidebar()">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+
+    <div #topbarmenu class="layout-topbar-menu" style="margin-top: 10px;"
+        [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+        <h4 style="font-weight: bold;color: #0505a8;">Tender Integrated Monitoring and Evaluation</h4>
+    </div>
+    <div #topbarmenu class="layout-topbar-menu"
+        [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+        <button class="p-link layout-topbar-button">
+            <i class="pi pi-bell notificationBadge" pBadge value="2"></i>
+            <span>Notifications</span>
+        </button>
+        <button class="p-link layout-topbar-button" (click)="log($event)">
+            <i class="pi pi-sign-out " pTooltip="Sign Out"></i>
+            <span>Logout</span>
+        </button>
+    </div>
+    <div style="order: 4;margin-left: 10px; cursor: pointer;">
+        <p class="username-p" style="margin-bottom: 0px; font-weight: bold;">{{user.firstName }}
+            {{user.lastName}}</p>
+        <p style="font-size: 10px;">{{user.userDetails.roleName}}</p>
+    </div>
+    <p-menu #op1 [popup]="true" [model]="items">
+    </p-menu>
+  
+</div> -->
+
+
+<div class="layout-topbar custom-topbar">
+
+    <!-- Left Logo Group -->
+    <div class="topbar-left">
+        <img src="assets/LogoImages/High/Dark with White patch/Logo.png" class="logo-img" />
+        <img src="assets/LogoImages/High/Dark/Text.png" class="logo-text" />
+    </div>
+
+    <!-- Center Menu Buttons (Dashboard + Filter) -->
+    <div class="topbar-center">
+        <button pButton label="Dashboard" class="top-btn" (click)="goToDashboard()">Dashboard</button>
+        <button 
+    pButton 
+    label="Filter" 
+    class="top-btn"
+    (click)="openFilter()">
+    Filter
+</button>
+
+    </div>
+
+    <!-- Right Side Icons + User -->
+    <div class="topbar-right">
+
+        <div class="topbar-bell" (click)="Alert()">
+  <i class="pi pi-bell"></i>
+
+  <span class="notification-badge" *ngIf="alertCount > 0">
+    {{ alertCount }}
+  </span>
+</div>
+
+
+    <!-- Settings -->
+<div class="settings-wrapper">
+
+    <button 
+        class="p-link layout-topbar-button"
+        (click)="toggleSettingsDropdown()"
+        pTooltip="Settings"
+        tooltipPosition="bottom"
+    >
+        <i class="pi pi-cog"></i>
+    </button>
+
+    <!-- DROPDOWN -->
+    <div class="settings-dropdown" *ngIf="showSettings">
+        <div class="dropdown-item" (click)="navigateToUserCreate()">
+            <i class="pi pi-user-plus"></i>
+            User Manage
+        </div>
+    </div>
+
+</div>
+
+
+          <button
+      class="p-link layout-topbar-button"
+      pTooltip="Toggle Theme"
+      tooltipPosition="bottom"
+      (click)="toggleTheme()">
+
+      <i 
+        class="bi"
+        [ngClass]="{
+          'bi-brightness-high-fill': isDark(),
+          'bi-moon-stars-fill': !isDark()
+        }">
+      </i>
+    </button>
+    
+        <button class="p-link layout-topbar-button" (click)="log($event)">
+            <i class="pi pi-sign-out"></i>
+            
+        </button>
+            <div style="order: 4;margin-left: 10px; cursor: pointer;">
+        <p class="username-p" style="margin-bottom: 0px; font-weight: bold;">{{user.firstName }}
+            {{user.lastName}}</p>
+        <p style="font-size: 10px;">{{user.userDetails.roleName}}</p>
+    </div>
+
+        <!-- <img [src]="user?.profileUrl || 'assets/user.jpg'" class="profile-img" pTooltip="{{user?.firstName}} {{user?.lastName}}"> -->
+    </div>
+
+</div>
+
+

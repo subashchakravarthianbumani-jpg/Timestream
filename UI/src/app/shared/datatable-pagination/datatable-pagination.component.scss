@@ -1,0 +1,142 @@
+// ::ng-deep  p-columnfilter{
+//     input{
+//         min-width: 100px;
+//     }
+// }
+// ::ng-deep .p-datatable-header{
+//     display: flex;
+// }
+// /* Increase space for Progress column (2nd column) */
+// :host ::ng-deep .p-datatable tbody tr td:nth-child(2),
+// :host ::ng-deep .p-datatable thead tr th:nth-child(2) {
+//     min-width: 150px;  /* Adjust as needed */
+// }
+
+// /* Increase space for Payment Percentage column (3rd column) */
+// :host ::ng-deep .p-datatable tbody tr td:nth-child(3),
+// :host ::ng-deep .p-datatable thead tr th:nth-child(3) {
+//     min-width: 180px;  /* Adjust as needed */
+// }
+
+
+/* --------------------------------------------- */
+/* COLUMN FILTER INPUT MIN WIDTH                 */
+/* --------------------------------------------- */
+::ng-deep p-columnfilter input {
+  min-width: 100px;
+}
+
+/* --------------------------------------------- */
+/* DATATABLE HEADER FLEX                         */
+/* --------------------------------------------- */
+::ng-deep .p-datatable-header {
+  display: flex;
+}
+
+/* --------------------------------------------- */
+/* MAKE THE ENTIRE ROW DARK (BEST FIX)           */
+/* --------------------------------------------- */
+:host ::ng-deep .p-datatable tbody tr {
+  background: var(--card-bg);
+  border-color: #1f2d40 !important;
+}
+
+/* --------------------------------------------- */
+/* REMOVE BACKGROUND FROM ANY ELEMENT INSIDE TD  */
+/* --------------------------------------------- */
+:host ::ng-deep .p-datatable tbody tr td * {
+  background: transparent !important;
+}
+
+/* --------------------------------------------- */
+/* FIX SPACER / GHOST / EMPTY ROWS               */
+/* --------------------------------------------- */
+:host ::ng-deep .p-datatable .p-datatable-wrapper,
+:host ::ng-deep .p-datatable table,
+:host ::ng-deep .p-datatable tbody tr.p-datatable-emptymessage td,
+:host ::ng-deep .p-datatable .p-datatable-virtual-scroll-spacer,
+:host ::ng-deep .p-datatable .p-datatable-virtual-scroll-spacer td {
+  background: var(--card-bg);
+  padding: 0 !important;
+  margin: 0 !important;
+  height: auto !important;
+}
+
+/* --------------------------------------------- */
+/* ACTION BUTTON CONTAINER FIX                   */
+/* --------------------------------------------- */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ====================================================
+   ✅ PRIME DATATABLE – DARK MODE COLOR FIX ONLY
+   ==================================================== */
+
+body.theme-dark
+:host ::ng-deep .p-datatable tbody > tr {
+  background: var(--card-bg) !important;
+  border-bottom: 1px solid #1f2d40 !important;
+  color: #ffffff !important;
+}
+
+/* Remove zebra striping ONLY in dark theme */
+body.theme-dark
+:host ::ng-deep 
+.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd),
+body.theme-dark
+:host ::ng-deep 
+.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+  background: var(--card-bg) !important;
+}
+
+/* Dark hover */
+body.theme-dark
+:host ::ng-deep .p-datatable-tbody > tr:hover {
+  background: #0b1f3d !important;
+}
+
+/* Dark selected row */
+body.theme-dark
+:host ::ng-deep .p-datatable-tbody > tr.p-highlight {
+  background: #0b2550 !important;
+  color: #ffffff !important;
+}
+
+/* Force all cells to stay transparent and bright */
+body.theme-dark
+:host ::ng-deep .p-datatable td {
+  background: transparent !important;
+  color: #ffffff !important;
+}
+
+/* Remove accidental backgrounds inside cells */
+body.theme-dark
+:host ::ng-deep .p-datatable td *,
+body.theme-dark
+:host ::ng-deep .p-datatable th * {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+/* Fix empty + virtual spacer rows (dark theme only) */
+body.theme-dark
+:host ::ng-deep 
+.p-datatable-tbody tr.p-datatable-emptymessage td,
+body.theme-dark
+:host ::ng-deep 
+.p-datatable-virtual-scroll-spacer td {
+  background: var(--card-bg) !important;
+}
+
+/* Table wrapper dark background */
+body.theme-dark
+:host ::ng-deep 
+.p-datatable-wrapper,
+body.theme-dark
+:host ::ng-deep 
+.p-datatable table {
+  background: var(--card-bg) !important;
+}

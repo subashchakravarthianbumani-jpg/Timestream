@@ -1,0 +1,585 @@
+<!-- modified by Indu on 3/12/2025 for summary by division /district and scheme records and excel for exporting -->
+<div [ngClass]="getStyleClass()">
+  <div class="card" style="height: 100%">
+    <div class="row">
+      <!-- Role Dropdown (Always Visible) -->
+      <div class="col filtertab" style="padding-top: 0px; margin-top: -10px">
+        <p-dropdown
+          [options]="types"
+          optionLabel="Name"
+          optionValue="id"
+          placeholder="Select a Role"
+          (onChange)="changeType($event)"
+          [showClear]="false"
+          [(ngModel)]="selectedtype"
+          [style]="{ border: 'none', width: 'fit-content' }"
+        >
+        </p-dropdown>
+      </div>
+
+      <!-- Additional Filters in One Row -->
+
+      <!-- 🔹 Compact layout for Division/District -->
+      <div
+        *ngIf="selectedtype === 'SUMMARY_BY_DIVISION/DISTRICT'"
+        style="position: relative"
+      >
+        <!-- 🔸 Toggle Icon (Top-Right Corner) -->
+        <div
+          class="d-flex justify-content-end align-items-center"
+          style="position: absolute; top: -35px; right: 10px; z-index: 10"
+        >
+          <span *ngIf="isMimimizedoftenders">
+            <i
+              class="pi pi-window-maximize text-purple-500 text-xl cursor-pointer"
+              (click)="toggletable()"
+              title="Maximize"
+            ></i>
+          </span>
+          <span *ngIf="!isMimimizedoftenders">
+            <i
+              class="pi pi-window-minimize text-purple-500 text-xl cursor-pointer"
+              (click)="toggletable()"
+              title="Minimize"
+            ></i>
+          </span>
+        </div>
+
+        <!-- 🔸 Division / District dropdowns + export buttons (same line) -->
+        <div
+          class="d-flex align-items-center flex-wrap"
+          style="
+            gap: 0.6rem;
+            margin-top: -6px;
+            margin-bottom: 0;
+            padding-left: 12px;
+            padding-right: 8px;
+          "
+        >
+          <!-- Division dropdown -->
+          <div style="min-width: 220px; max-width: 30%">
+            <p-multiSelect
+              [options]="divisions"
+              [(ngModel)]="selecteddivisions"
+              placeholder="Select a Division"
+              optionLabel="text"
+              optionValue="value"
+              class="w-100"
+              [showClear]="true"
+              (ngModelChange)="divisionChanged($event)"
+            >
+              <ng-template let-roles pTemplate="item">
+                <div class="flex align-items-center">
+                  <span class="ml-2">{{ roles.text }}</span>
+                </div>
+              </ng-template>
+            </p-multiSelect>
+          </div>
+
+          <!-- District dropdown -->
+          <div style="min-width: 220px; max-width: 30%">
+            <p-multiSelect
+              [options]="dtistrictsList"
+              [(ngModel)]="filtermodel.dtistrictsList"
+              placeholder="Select a District"
+              optionLabel="text"
+              optionValue="value"
+              class="w-100"
+              [showClear]="true"
+              (ngModelChange)="districtChanged($event)"
+            >
+              <ng-template let-roles pTemplate="item">
+                <div class="flex align-items-center">
+                  <span class="ml-2">{{ roles.text }}</span>
+                </div>
+              </ng-template>
+            </p-multiSelect>
+          </div>
+
+          <!-- Push to right -->
+          <div style="flex: 1 1 auto"></div>
+
+          <!-- Export buttons -->
+          <div *ngIf="!isMimimizedoftenders" style="display: flex; gap: 0.3rem">
+            <button
+              type="button"
+              pButton
+              pRipple
+              icon="pi pi-file"
+              (click)="exportToExcel('csv')"
+              class="p-button-sm"
+              pTooltip="CSV"
+              tooltipPosition="bottom"
+            ></button>
+            <button
+              type="button"
+              pButton
+              pRipple
+              icon="pi pi-file-excel"
+              (click)="exportToExcel('xlsx')"
+              class="p-button-sm p-button-success"
+              pTooltip="XLS"
+              tooltipPosition="bottom"
+            ></button>
+            <button
+              type="button"
+              pButton
+              pRipple
+              icon="pi pi-file-pdf"
+              (click)="exportToExcel('pdf')"
+              class="p-button-sm p-button-warning"
+              pTooltip="PDF"
+              tooltipPosition="bottom"
+            ></button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="col"
+        style="padding-top: 0px; margin-top: -10px"
+        *ngIf="selectedtype != 'SUMMARY_BY_DIVISION/DISTRICT'"
+      >
+        <input
+          class="p-inputtext p-component p-element w-full"
+          [(ngModel)]="tenderSearchString"
+          (change)="onGlobalFilter($event)"
+          placeholder="Search Keyword and Click Enter"
+        />
+      </div>
+
+      <!-- Minimizer (keeps existing toggler behavior) -->
+      <!-- <div style="display:flex; align-items:center; margin-right:8px;">
+    <span *ngIf="isMimimizedoftenders">
+      <i class="pi pi-window-maximize text-purple-500 text-xl cursor-pointer" (click)="toggletable()"></i>
+    </span>
+    <span *ngIf="!isMimimizedoftenders">
+      <i class="pi pi-window-minimize text-purple-500 text-xl cursor-pointer" (click)="toggletable()"></i>
+    </span>
+  </div> -->
+
+      <div
+        *ngIf="selectedtype != 'SUMMARY_BY_DIVISION/DISTRICT'; col"
+        style="padding-top: 0px; display: contents"
+      >
+        <span *ngIf="isMimimizedoftenders"
+          ><i
+            class="pi pi-window-maximize text-purple-500 text-xl"
+            (click)="toggletable()"
+          ></i
+        ></span>
+        <span *ngIf="!isMimimizedoftenders"
+          ><i
+            (click)="toggletable()"
+            class="pi pi-window-minimize text-purple-500 text-xl"
+          ></i
+        ></span>
+      </div>
+    </div>
+
+    <!-- 🔹 Compact, gap-free export buttons (for all non-Division/District views) -->
+    <div
+      *ngIf="
+        selectedtype != 'SUMMARY_BY_DIVISION/DISTRICT' && !isMimimizedoftenders
+      "
+      class="d-flex justify-content-end align-items-center"
+      style="gap: 0.35rem; margin-top: -8px; margin-bottom: 4px; padding: 0"
+    >
+      <button
+        type="button"
+        pButton
+        pRipple
+        icon="pi pi-file"
+        (click)="exportToExcel('csv')"
+        class="p-button-sm"
+        pTooltip="CSV"
+        tooltipPosition="bottom"
+      ></button>
+
+      <button
+        type="button"
+        pButton
+        pRipple
+        icon="pi pi-file-excel"
+        (click)="exportToExcel('xlsx')"
+        class="p-button-sm p-button-success"
+        pTooltip="XLS"
+        tooltipPosition="bottom"
+      ></button>
+
+      <button
+        type="button"
+        pButton
+        pRipple
+        icon="pi pi-file-pdf"
+        (click)="exportToExcel('pdf')"
+        class="p-button-sm p-button-warning"
+        pTooltip="PDF"
+        tooltipPosition="bottom"
+      ></button>
+    </div>
+
+    <div *ngIf="selectedtype == 'WORK_TYPE' || selectedtype == 'DIVISION'">
+      <p-table
+        [value]="tenders"
+        [customSort]="true"
+        [paginator]="false"
+        [lazy]="true"
+        [sortOrder]="1"
+        (onLazyLoad)="lazyload($event)"
+        ngClass="dfd"
+        [totalRecords]="total"
+        [loading]="false"
+        [rows]="rows"
+        responsiveLayout="scroll"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>S. No</th>
+            <th
+              pSortableColumn="workType"
+              *ngIf="!isMimimizedoftenders || selectedtype != 'DIVISION'"
+            >
+              Work Type
+              <p-sortIcon field="workType"></p-sortIcon>
+            </th>
+            <th
+              pSortableColumn="divisionName"
+              *ngIf="!isMimimizedoftenders || selectedtype == 'DIVISION'"
+            >
+              Division <p-sortIcon field="divisionName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="districtName" *ngIf="!isMimimizedoftenders">
+              District <p-sortIcon field="districtName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="startDate" *ngIf="!isMimimizedoftenders">
+              Initiated On <p-sortIcon field="startDate"></p-sortIcon>
+            </th>
+
+            <th pSortableColumn="name" *ngIf="!isMimimizedoftenders">
+              Awarded Date <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="goNumber" *ngIf="!isMimimizedoftenders">
+              GO <p-sortIcon field="goNumber"></p-sortIcon>
+            </th>
+            <th pSortableColumn="schemeName" *ngIf="!isMimimizedoftenders">
+              Scheme Name <p-sortIcon field="schemeName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="tenderNumber">
+              Work Id <p-sortIcon field="tenderNumber"></p-sortIcon>
+            </th>
+            <th pSortableColumn="workStatus">
+              Status <p-sortIcon field="workStatus"></p-sortIcon>
+            </th>
+            <th>Action</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+          <tr>
+            <td>{{ first + rowIndex + 1 }}</td>
+            <td *ngIf="!isMimimizedoftenders || selectedtype != 'DIVISION'">
+              {{ product.workType }}
+            </td>
+            <td *ngIf="!isMimimizedoftenders || selectedtype == 'DIVISION'">
+              {{ product.divisionName }}
+            </td>
+            <td *ngIf="!isMimimizedoftenders">{{ product.districtName }}</td>
+            <!-- <td *ngIf="!isMimimizedoftenders">{{ product.startDate }}</td>
+            <td *ngIf="!isMimimizedoftenders">{{ product.endDate }}</td> -->
+
+            <!--Modified by vijay 25-10-25-->
+            <td *ngIf="!isMimimizedoftenders">
+              {{ product.startDate | date : "dd-MMM-yyyy hh:mm a" }}
+            </td>
+            <td *ngIf="!isMimimizedoftenders">
+              {{ product.endDate | date : "dd-MMM-yyyy hh:mm a" }}
+            </td>
+
+            <td *ngIf="!isMimimizedoftenders">{{ product.goNumber }}</td>
+            <td *ngIf="!isMimimizedoftenders">{{ product.schemeName }}</td>
+            <td>{{ product.tenderNumber }}</td>
+            <td>
+              <p-tag
+                [ngClass]="getBtnSeverity(product.workStatus)"
+                [value]="product.workStatus"
+              ></p-tag>
+            </td>
+            <td>
+              <ng-template [ngxPermissionsOnly]="privlegess.TENDER_VIEW">
+                <button
+                  type="button"
+                  pButton
+                  pRipple
+                  icon="pi pi-info"
+                  (click)="actioInvoked(product)"
+                  class="p-button-outlined mr-2"
+                  title="Info"
+                  styleClass="p-button"
+                ></button>
+              </ng-template>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <p-paginator
+        (onPageChange)="onPageChange($event)"
+        [showCurrentPageReport]="true"
+        [first]="first"
+        [rows]="rows"
+        [totalRecords]="total"
+        [rowsPerPageOptions]="[5, 10, 25, 50, total]"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      ></p-paginator>
+    </div>
+    <div
+      *ngIf="
+        selectedtype === 'SUMMARY_BY_DIVISION' ||
+        selectedtype === 'SUMMARY_BY_DIVISION/DISTRICT' ||
+        selectedtype === 'SUMMARY_BY_SCHEME'
+      "
+    >
+      <p-table
+        [value]="divisionCount"
+        [paginator]="selectedtype === 'SUMMARY_BY_DIVISION/DISTRICT'"
+        [rows]="rows"
+        [totalRecords]="total"
+        [rowsPerPageOptions]="[5, 10, 25, 50, 100]"
+        [lazy]="false"
+        responsiveLayout="scroll"
+        [sortOrder]="1"
+        [loading]="false"
+        [customSort]="false"
+        (onLazyLoad)="lazyload($event)"
+      >
+        <!-- Table Header -->
+        <ng-template pTemplate="header">
+          <tr>
+            <th>S. No</th>
+            <th
+              *ngIf="selectedtype !== 'SUMMARY_BY_SCHEME'"
+              pSortableColumn="divisionName"
+            >
+              Division <p-sortIcon field="divisionName"></p-sortIcon>
+            </th>
+            <th
+              *ngIf="selectedtype === 'SUMMARY_BY_DIVISION/DISTRICT'"
+              pSortableColumn="districtName"
+            >
+              District <p-sortIcon field="districtName"></p-sortIcon>
+            </th>
+            <th
+              *ngIf="selectedtype === 'SUMMARY_BY_SCHEME'"
+              pSortableColumn="schemeName"
+            >
+              Scheme Name <p-sortIcon field="schemeName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="totalDivisionCount">
+              Total Works <p-sortIcon field="totalDivisionCount"></p-sortIcon>
+            </th>
+            <th pSortableColumn="totalWorkValue">
+              Total Value <p-sortIcon field="totalWorkValue"></p-sortIcon>
+            </th>
+            <th *ngIf="!isMimimizedoftenders" pSortableColumn="completed">
+              Completed <p-sortIcon field="completed"></p-sortIcon>
+            </th>
+            <th *ngIf="!isMimimizedoftenders" pSortableColumn="inProgress">
+              Ongoing <p-sortIcon field="inProgress"></p-sortIcon>
+            </th>
+            <th *ngIf="!isMimimizedoftenders" pSortableColumn="slowProgress">
+              Slow Progress <p-sortIcon field="slowProgress"></p-sortIcon>
+            </th>
+            <th *ngIf="!isMimimizedoftenders" pSortableColumn="onHold">
+              On Hold <p-sortIcon field="onHold"></p-sortIcon>
+            </th>
+            <th pSortableColumn="notStarted">
+              Not Started <p-sortIcon field="notStarted"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+
+        <!-- Table Body -->
+        <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+          <tr>
+            <td>{{ first + rowIndex + 1 }}</td>
+
+            <!-- Division / District -->
+            <td *ngIf="selectedtype !== 'SUMMARY_BY_SCHEME'">
+              {{ product.divisionName }}
+            </td>
+            <td *ngIf="selectedtype === 'SUMMARY_BY_DIVISION/DISTRICT'">
+              {{ product.districtName }}
+            </td>
+
+            <!-- Scheme -->
+            <td *ngIf="selectedtype === 'SUMMARY_BY_SCHEME'">
+              {{ product.schemeName }}
+            </td>
+
+            <!-- Total Works -->
+            <td
+              class="clickable-td"
+              (click)="
+                selectedtype === 'SUMMARY_BY_SCHEME'
+                  ? totalworksScheme(product.schemeId || '-1')
+                  : selectedtype === 'SUMMARY_BY_DIVISION'
+                  ? totalworks(product.division)
+                  : districttotal(product.district)
+              "
+            >
+              {{ product.totalDivisionCount }}
+            </td>
+
+            <!-- Total Value -->
+            <td>
+              {{ product.totalWorkValue / 10000000 | number : "1.2-2" }} Cr
+            </td>
+
+            <!-- Completed -->
+            <td
+              *ngIf="!isMimimizedoftenders"
+              class="clickable-td"
+              (click)="
+                selectedtype === 'SUMMARY_BY_SCHEME'
+                  ? SchemeCompleted(
+                      product.schemeId || '-1',
+                      '8e6b304b-7b20-11ee-b363-fa163e14116e'
+                    )
+                  : selectedtype === 'SUMMARY_BY_DIVISION'
+                  ? goToReports(
+                      product.division,
+                      '8e6b304b-7b20-11ee-b363-fa163e14116e'
+                    )
+                  : districtreport(
+                      product.district,
+                      '8e6b304b-7b20-11ee-b363-fa163e14116e'
+                    )
+              "
+            >
+              {{ product.completed }}
+            </td>
+
+            <!-- In Progress -->
+            <td
+              *ngIf="!isMimimizedoftenders"
+              class="clickable-td"
+              (click)="
+                selectedtype === 'SUMMARY_BY_SCHEME'
+                  ? SchemeCompleted(
+                      product.schemeId || '-1',
+                      '198ccf78-8de2-11ee-aa46-fa163e14116e'
+                    )
+                  : selectedtype === 'SUMMARY_BY_DIVISION'
+                  ? goToReports(
+                      product.division,
+                      '198ccf78-8de2-11ee-aa46-fa163e14116e'
+                    )
+                  : districtreport(
+                      product.district,
+                      '198ccf78-8de2-11ee-aa46-fa163e14116e'
+                    )
+              "
+            >
+              {{ product.inProgress }}
+            </td>
+
+            <!-- Slow Progress -->
+            <td
+              *ngIf="!isMimimizedoftenders"
+              class="clickable-td"
+              (click)="
+                selectedtype === 'SUMMARY_BY_SCHEME'
+                  ? SchemeCompleted(
+                      product.schemeId || '-1',
+                      '40625423-7b36-11ee-b363-fa163e14116b'
+                    )
+                  : selectedtype === 'SUMMARY_BY_DIVISION'
+                  ? goToReports(
+                      product.division,
+                      '40625423-7b36-11ee-b363-fa163e14116b'
+                    )
+                  : districtreport(
+                      product.district,
+                      '40625423-7b36-11ee-b363-fa163e14116b'
+                    )
+              "
+            >
+              {{ product.slowProgress }}
+            </td>
+
+            <!-- On Hold -->
+            <td
+              *ngIf="!isMimimizedoftenders"
+              class="clickable-td"
+              (click)="
+                selectedtype === 'SUMMARY_BY_SCHEME'
+                  ? SchemeCompleted(
+                      product.schemeId || '-1',
+                      '40625423-7b36-11ee-b363-fa163e14116c'
+                    )
+                  : selectedtype === 'SUMMARY_BY_DIVISION'
+                  ? goToReports(
+                      product.division,
+                      '40625423-7b36-11ee-b363-fa163e14116c'
+                    )
+                  : districtreport(
+                      product.district,
+                      '40625423-7b36-11ee-b363-fa163e14116c'
+                    )
+              "
+            >
+              {{ product.onHold }}
+            </td>
+
+            <!-- Not Started -->
+            <td
+              class="clickable-td"
+              (click)="
+                selectedtype === 'SUMMARY_BY_SCHEME'
+                  ? SchemeCompleted(product.schemeId || '-1', [
+                      '40625423-7b36-11ee-b363-fa163e14116a',
+                      '3e9e2926-7afb-11ee-b363-fa163e14116e'
+                    ])
+                  : selectedtype === 'SUMMARY_BY_DIVISION'
+                  ? goToReports(product.division, [
+                      '40625423-7b36-11ee-b363-fa163e14116a',
+                      '3e9e2926-7afb-11ee-b363-fa163e14116e'
+                    ])
+                  : districtreport(product.district, [
+                      '40625423-7b36-11ee-b363-fa163e14116a',
+                      '3e9e2926-7afb-11ee-b363-fa163e14116e'
+                    ])
+              "
+            >
+              {{ product.notStarted }}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="getStyleClass()">
+  <div class="card" style="height: 100%">
+    <div class="row">
+      <div class="col" style="padding-top: 0px">
+        <h5>{{ selectedLabel }}</h5>
+      </div>
+      <div class="col" style="padding-top: 0px; display: contents">
+        <span style="margin-right: 5px">Count</span>
+        <p-inputSwitch
+          [(ngModel)]="chartType"
+          (ngModelChange)="changetype()"
+        ></p-inputSwitch>
+        <span style="margin-left: 5px">Cost</span>
+      </div>
+    </div>
+    <p-chart
+      type="bar"
+      [data]="chartData"
+      [responsive]="true"
+      [options]="chartOptions"
+    ></p-chart>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+.boldlabel > span {
+    font-weight: 700;
+  }
+  .boldlabelinsiderow{
+      padding: 10px !important;
+      span {
+          font-weight: 700;
+        }
+  }
+  .boldlabelhiegr {
+      padding: 0px !important;
+    span {
+      font-weight: 650;
+      font-size: 13px;
+    }
+  }
+  .sssdt{
+  th, td{    
+    background-color: #e6e7ff;
+    padding: 10px;
+  }
+}
+  .stablediv{
+    
+    padding: 15px;
+    background-color: #e6e7ff;
+    border-radius: 10px;
+  }
+  .iconstyling{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #aaaaff;
+  }
+    ::ng-deep .p-card .p-card-content{
+      padding: 0.25rem 0;
+    }
+    ::ng-deep .p-card .p-card-title{      
+    font-size: 1 rem;
+    }
+    ::ng-deep .setheight{
+      
+      min-height: 599px;
+      max-height: 600px;
+      overflow: auto;
+    }
+    ::ng-deep .sddd{
+      min-height: 599px;
+      max-height: 600px;
+
+    }.control-error-msg{    
+      margin-top: 5px;
+      color: #e24c4c;
+  }
+  .wd {
+
+    .dttable,
+    .p-datatable {
+            padding: 5px 1rem !important;
+    }
+
+    ::ng-deep .p-datatable-header {
+            padding: 5px 1rem !important;
+    }
+    .extradttable{
+            padding: 15px 1rem !important;
+
+    }
+}
+::ng-deep .p-datatable-header{
+display: flex;
+}

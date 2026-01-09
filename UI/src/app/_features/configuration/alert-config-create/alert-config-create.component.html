@@ -1,0 +1,164 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="">
+            <p-button icon="pi pi-arrow-left" (onClick)="back()"></p-button>
+        </div>
+    </div>
+    <form [formGroup]="alertconfigForm" (ngSubmit)="submit()" class="col-12">
+
+        <div class=" p-fluid">
+            <div class="flex grid formgrid">
+                <div class="field  col-12  md:col-6  lg:col-6">
+                    <label htmlFor="department">Department </label><p-dropdown [options]="departmentList"
+                        optionLabel="text" optionValue="value" placeholder="Select a Role" formControlName="department"
+                        [showClear]="
+                            true"></p-dropdown>
+                    <app-error-msg [control]="alertconfigForm.get('department')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-6">
+                    <label htmlFor="type">Type</label><p-dropdown [options]="typeList" optionLabel="text"
+                        optionValue="value" placeholder="Select a Role" formControlName="type" [showClear]="
+                            true"></p-dropdown>
+                    <app-error-msg [control]="alertconfigForm.get('type')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-6">
+                    <label htmlFor="object">Object</label><p-dropdown [options]="objectList" optionLabel="text"
+                        optionValue="value" placeholder="Select a Role" formControlName="object" [showClear]="
+                            true"></p-dropdown>
+                    <app-error-msg [control]="alertconfigForm.get('object')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-6">
+                    <label htmlFor="name">Name</label>
+                    <input pInputText formControlName="name" type="text" />
+                    <app-error-msg [control]="alertconfigForm.get('name')"></app-error-msg>
+                </div>
+
+                <div class=" col-12">
+                    <h5>Severities</h5>
+                    <div class="card p-fluid" style="padding-bottom: 10px;">
+                        <div class="p-formgrid grid ">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th style="min-width: 100px">Severity
+                                        </th>
+                                        <th style="min-width: 100px">Field
+                                        </th>
+                                        <th>Base Field
+                                        </th>
+                                        <th>Calucation No (Days/Cost) </th>
+                                        <th>Calculation Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody formArrayName="alertConfigurationSecondary">
+                                    <tr *ngFor="let itemrow of et.controls; let i=index;let l=last" [formGroupName]="i">
+                                        <td>{{ i+1}} </td>
+                                        <td>{{severityBasedList[i].controls['severity'].value}} </td>
+
+                                        <td>
+                                            <p-dropdown [options]="fieldList" optionLabel="text" optionValue="value"
+                                                placeholder="Select a Field" formControlName="field"
+                                                [showClear]=" true"></p-dropdown>
+                                        </td>
+                                        <td>
+                                            <p-dropdown [options]="baseList" optionLabel="text" optionValue="value"
+                                                placeholder="Select a Base field" formControlName="baseField"
+                                                [showClear]="true"></p-dropdown>
+                                        </td>
+                                        <td>
+                                            <p-inputNumber inputId="inputnumber" [max]="73000"
+                                                formControlName="calculationNo"></p-inputNumber>
+                                        </td>
+                                        <td><p-dropdown [options]="calculationList" optionLabel="text"
+                                                optionValue="value" placeholder="Select a Type"
+                                                formControlName="calculationType" [showClear]="
+                                                true"></p-dropdown>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" col-12 mt-4">
+                    <h5>Email</h5>
+                    <div class=" p-fluid">
+                        <div class="flex grid formgrid">
+                            <div class="field  col-12  md:col-6  lg:col-4">
+                                <label htmlFor="emailfrequency">Frequency<span class="optioanlcls"> (Optional)</span>
+                                </label>
+                                <p-dropdown [options]="frequencyTypeList" optionLabel="text" optionValue="value"
+                                    placeholder="Select a Frequency" formControlName="emailfrequency" [showClear]="
+                                        true"></p-dropdown>
+                                <app-error-msg [control]="alertconfigForm.get('emailfrequency')"></app-error-msg>
+                            </div>
+                            <div class="field  col-12  md:col-6  lg:col-4">
+                                <label htmlFor="type">User Groups<span class="optioanlcls"> (Optional)</span></label>
+                                <p-multiSelect [options]="usergroupList" formControlName="emailuserGroupList"
+                                    placeholder="Select a User Group" optionLabel="text" optionValue="value"
+                                    class="multiselect-custom" ngClass="dd"
+                                    [ngStyle]="{'width': '100%', 'margin':'0px 20px'}">
+                                    <ng-template let-roles pTemplate="item">
+                                        <div class="flex align-items-center">
+                                            <span class="ml-2">{{roles.text}}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-multiSelect>
+                                <app-error-msg [control]="alertconfigForm.get('emailuserGroupList')"></app-error-msg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-12">
+                    <h5>SMS</h5>
+                    <div class=" p-fluid">
+                        <div class="flex grid formgrid">
+                            <div class="field  col-12  md:col-6  lg:col-4">
+                                <label htmlFor="smsfrequency">Frequency<span class="optioanlcls">
+                                        (Optional)</span></label>
+                                <p-dropdown [options]="frequencyTypeList" optionLabel="text" optionValue="value"
+                                    placeholder="Select a Frequency" formControlName="smsfrequency" [showClear]="
+                                        true"></p-dropdown>
+                                <app-error-msg [control]="alertconfigForm.get('smsfrequency')"></app-error-msg>
+                            </div>
+                            <div class="field  col-12  md:col-6  lg:col-4">
+                                <label htmlFor="smsuserGroupsList">User Groups<span class="optioanlcls">
+                                        (Optional)</span></label>
+                                <p-multiSelect [options]="usergroupList" formControlName="smsuserGroupsList"
+                                    placeholder="Select a User Group" optionLabel="text" optionValue="value"
+                                    class="multiselect-custom" ngClass="dd"
+                                    [ngStyle]="{'width': '100%', 'margin':'0px 20px'}">
+                                    <ng-template let-roles pTemplate="item">
+                                        <div class="flex align-items-center">
+                                            <span class="ml-2">{{roles.text}}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-multiSelect>
+                                <app-error-msg [control]="alertconfigForm.get('smsuserGroupsList')"></app-error-msg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12  flex " style="margin-top: 25px;justify-content: end;flex-wrap: wrap;">
+                    <div class="col-12  md:col-2  lg:col-1">
+                        <button pButton type="submit"
+                            *ngxPermissionsOnly="[privleges.ALERT_CONFIG_CREATE,privleges.ALERT_CONFIG_UPDATE ]"
+                            [disabled]="!alertconfigForm.valid" label="Submit"></button>
+                    </div>
+                    <div class="col-12  md:col-2  lg:col-1">
+                        <button pButton type="button" class="p-button-secondary" label="Cancel"
+                            (click)="resetForm()"></button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<p-toast></p-toast>

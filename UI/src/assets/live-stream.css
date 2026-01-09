@@ -1,0 +1,185 @@
+/* ===== GLOBALS ===== */
+.cam-header, .pb-container, .cam-footer {
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== Playback Modal Overlay ===== */
+.pb-modal {
+  position: fixed;
+  inset: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+  animation: fadeIn 0.3s ease;
+}
+
+.pb-modal.hide { display: none; }
+
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+/* ===== Modal Container ===== */
+.pb-container {
+  background: #fff;
+  width: 480px;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0px 12px 30px rgba(0,0,0,0.25);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.pb-container h3 {
+  margin: 0 0 20px 0;
+  font-size: 22px; font-weight: 700; color: #333;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.pb-container h3::before {
+  content: "⏪";
+  font-size: 22px;
+  color: #1976d2;
+}
+
+/* ===== Field Labels & Inputs ===== */
+.pb-container label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #555;
+}
+
+.pb-container input {
+  width: 100%; padding: 10px 12px;
+  border-radius: 10px; border: 1px solid #ccc;
+  font-size: 15px; background: #f9f9f9;
+  transition: .2s;
+}
+
+.pb-container input:focus {
+  background:#fff; border-color:#1976d2;
+  box-shadow: 0 0 3px #1976d2; outline:none;
+}
+
+/* ===== Modal Buttons ===== */
+.pb-actions {
+  display: flex; justify-content: flex-end; gap: 15px;
+  margin-top: 25px;
+}
+
+.pb-actions button {
+  padding: 10px 24px;
+  border-radius: 10px; border:none;
+  font-size: 15px; font-weight: 600;
+  cursor: pointer; transition: 0.2s;
+}
+
+.btn-cancel {
+  background: #f0f0f0; color: #333;
+}
+
+.btn-cancel:hover { background: #d6d6d6; }
+
+.btn-ok {
+  background: #1976d2; color: #fff;
+}
+
+.btn-ok:hover { background:#0f63b3; }
+
+/* ===== Header Bar ===== */
+.cam-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 25px;
+  background: #fff; border-bottom: 1px solid #eee;
+  gap: 12px;
+}
+
+.cam-header h2 { margin:0; font-size:18px; font-weight:600; }
+
+/* ===== Close Button ===== */
+.close-btn {
+  background: #777; color:#fff;
+  padding: 6px 12px;
+  border-radius: 6px; border:none;
+  cursor: pointer; transition:.2s;
+}
+
+.close-btn:hover { background:#444; }
+
+/* ===== Header Right Section ===== */
+.header-right { display:flex; align-items:center; gap:10px; }
+
+.live-dot {
+  width: 10px; height: 10px;
+  background: #e11; border-radius: 50%;
+  display:inline-block; margin-right:6px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {opacity:1;transform:scale(1);}
+  50% {opacity:.4;transform:scale(1.25);}
+  100% {opacity:1;transform:scale(1);}
+}
+
+/* ===== Resolution Buttons & Icons ===== */
+.res-btn, .icon-btn {
+  padding: 6px 10px; border-radius: 6px;
+  border: 1px solid #ccc; background:#fff;
+  cursor:pointer; transition:.2s;
+}
+
+.res-btn.active { background:#007bff; color:#fff; border-color:#007bff; }
+
+/* ===== Camera Layout Area ===== */
+.camera-area {
+  width:100%; height:calc(100vh - 140px);
+  display:flex; justify-content:center;
+  align-items:center; background:#f4f6f8;
+  padding:18px 0; box-sizing:border-box;
+}
+
+#cameraGrid {
+  width:95%; height:100%;
+  display:grid; gap:14px; grid-auto-rows:1fr;
+}
+
+.cam-box {
+  background:#000; border-radius:12px;
+  overflow:hidden; position:relative;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+.cam-box img { width:100%; height:100%; object-fit:cover; }
+
+/* ===== Grid Layout Styling ===== */
+.grid.grid-4 {
+  grid-template-columns:repeat(2,1fr);
+  grid-template-rows:repeat(2,1fr);
+}
+
+.grid.grid-1 { grid-template-columns:1fr!important; grid-template-rows:1fr!important; }
+
+.grid.grid-1 .cam-box:nth-child(n+2) { display:none !important; }
+
+/* ===== Footer ===== */
+.cam-footer {
+  padding: 10px; text-align:center;
+  font-size:14px; background:#fff; border-top:1px solid #eee;
+}
+
+/* ===== Responsive Fix ===== */
+@media (max-width:900px) {
+  .cam-header { padding:10px; }
+  #cameraGrid { width:98%; gap:8px; }
+}

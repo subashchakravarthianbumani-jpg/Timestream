@@ -1,0 +1,140 @@
+<div class="grid">
+  <app-tender-stats
+    *ngIf="getPerm(privleges.DASHBOARD_TENDER_COUNT)"
+    ngClass="fulsc"
+    [year]="yearList"
+    [recordCount]="recordCount"
+  ></app-tender-stats>
+
+<app-filter-panel
+  (filtersChanged)="updateFilters($event)">
+</app-filter-panel>
+
+<!-- CAMERA GRID -->
+<app-camera-grid
+  [filters]="filters">
+</app-camera-grid>
+
+  
+
+<!-- FILTER SIDE PANEL -->
+<!-- <div class="filter-overlay" *ngIf="showFilter" (click)="closeFilter()">
+
+  <div class="filter-panel" (click)="$event.stopPropagation()"  >
+
+
+    <span class="filter-title" style="padding: 10px;">Apply filter</span>
+
+
+    <div class="filter-header">
+      <button class="close-btn" (click)="closeFilter()">
+    <i class="bi bi-arrow-left" style="color:black;"></i>
+  </button>
+    <div class="search-wrapper">
+  <i class="pi pi-search search-icon"></i>
+
+  <input
+     type="text"
+     placeholder="Enter Work ID / Contract ID"
+     [(ngModel)]="tenderNumber"
+     (input)="onSearchChange()" />
+</div>
+
+    </div>
+    
+
+
+    
+
+   <label for="divisionId">Division</label>
+
+<p-dropdown
+  id="divisionId"
+  [options]="divisionList"
+  optionLabel="divisionName"
+  optionValue="division"
+  [(ngModel)]="divisionid"
+  (onChange)="onDivisionChange($event)"
+  placeholder="Select Division"
+  [filter]="true"
+  [showClear]="true"
+  styleClass="w-full"
+>
+</p-dropdown>
+
+
+<label for="districtId">District</label>
+
+<p-dropdown
+  id="districtId"
+  [options]="districtList"
+  optionLabel="districtName"
+  optionValue="district"
+  [(ngModel)]="districtid"
+  (onChange)="onDistrictChange($event)"
+  placeholder="Select District"
+  [filter]="true"
+  [showClear]="true"
+  styleClass="w-full"
+>
+</p-dropdown>
+
+ <label for="category">Work Type</label>
+        <p-dropdown
+          id="category"
+          [options]="WorkCategoryList"
+          optionLabel="mainCategory"
+          optionValue="mainCategory"
+          [(ngModel)]="category"
+          (onChange)="onWorkcategoryChange($event)"
+          placeholder="Select Work Type"
+          [filter]="true"
+          [showClear]="true"
+        >
+        </p-dropdown>
+  <label for="subcategory">Sub Work Type</label>
+        <p-dropdown
+          id="subcategory"
+          [options]="subCategoryList"
+          optionLabel="subcategory"
+          optionValue="subcategory"
+          [(ngModel)]="subcategory"
+          (onChange)="onSubCategoryChange($event)"
+          placeholder="Select Sub Work Type"
+          [filter]="true"
+          [showClear]="true"
+        >
+        </p-dropdown>
+ <label for="workStatus">Work Status</label>
+        <p-dropdown
+          id="workStatus"
+          [options]="workStatusList"
+          optionLabel="workStatus"
+          optionValue="workStatus"
+          [(ngModel)]="workStatus"
+          (onChange)="onWorkStatusChange($event)"
+          placeholder="Select Work Status"
+          [filter]="true"
+          [showClear]="true"
+        >
+        </p-dropdown>
+  <label for="tenderNumber">Tender Number</label>
+        <p-dropdown
+          id="tenderNumber"
+          [options]="TenderNumberList"
+          optionLabel="tenderNumber"
+          optionValue="tenderNumber"
+          [(ngModel)]="tenderNumber"
+          (onChange)="onTenderChange($event)"
+          placeholder="Select Tender Number"
+          [filter]="true"
+          [showClear]="true"
+        >
+        </p-dropdown>
+  </div>
+</div> -->
+
+
+
+</div>
+

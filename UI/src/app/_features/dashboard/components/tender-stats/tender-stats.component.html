@@ -1,0 +1,156 @@
+<div class="col-12 lg:col-2 xl:col-2" (click)="gotoreports()">
+  <div class="box">
+    <div
+      class="card mb-0"
+      style="
+        justify-content: center;
+        min-height: 160px;
+        background-image: linear-gradient(to right, #8d8f91, #cfd3d8);
+        padding: 1rem 2rem;
+      "
+    >
+      <div class="mb-2">
+        <span class="block font-medium"
+          >Total No.of Works({{
+            recordCount && recordCount.total_Project
+          }})</span
+        >
+
+        <span class="block font-medium"
+          >Camera Installed({{
+            cameraInstalledCount && cameraInstalledCount.total
+          }})</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 lg:col-2 xl:col-2" (click)="Notstarted()">
+  <div class="box">
+    <div
+      class="card mb-0"
+      style="
+        justify-content: center;
+        min-height: 160px;
+        background-image: linear-gradient(to right, #f14943, #f7b0ab);
+        padding: 1rem 2rem;
+      "
+    >
+      <div class="mb-2">
+        <span class="block font-medium"
+          >Not Started ({{ recordCount && recordCount.project_Upcoming }})</span
+        >
+        <span class="block font-medium"
+          >Camera Installed({{
+            cameraInstalledCount && cameraInstalledCount.notStarted
+          }})</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 lg:col-2 xl:col-2" (click)="Inprogress()">
+  <div class="box">
+    <div
+      class="card mb-0"
+      style="
+        justify-content: center;
+        min-height: 160px;
+        background-image: linear-gradient(to right, #50ee28, #d4eecd);
+        padding: 1rem 2rem;
+      "
+    >
+      <div class="mb-2">
+        <span class="block font-medium"
+          >In Progress ({{ recordCount && recordCount.project_OnGoing }})</span
+        >
+        <span class="block font-medium"
+          >Camera Installed({{
+            cameraInstalledCount && cameraInstalledCount.inProgress
+          }})</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 lg:col-2 xl:col-2" (click)="slowprogress()">
+  <div class="box">
+    <div
+      class="card mb-0"
+      style="
+        justify-content: center;
+        min-height: 160px;
+        background-image: linear-gradient(to right, #fa801d, #fdbc7b);
+        padding: 1rem 2rem;
+      "
+    >
+      <div class="mb-2">
+        <span class="block font-medium"
+          >Slow Progress ({{
+            recordCount && recordCount.project_Slowprogress
+          }})</span
+        >
+        <span class="block font-medium"
+          >Camera Installed({{
+            cameraInstalledCount && cameraInstalledCount.slowProgress
+          }})</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 lg:col-2 xl:col-2" (click)="onHold()">
+  <div class="box">
+    <div
+      class="card mb-0"
+      style="
+        justify-content: center;
+        min-height: 160px;
+        background-image: linear-gradient(to right, #be6767, #e6afaf);
+        padding: 1rem 2rem;
+      "
+    >
+      <div class="mb-2">
+        <span class="block font-medium"
+          >Started but Stilled ({{
+            recordCount && recordCount.project_OnHold
+          }})</span
+        >
+        <span class="block font-medium"
+          >Camera Installed({{
+            cameraInstalledCount && cameraInstalledCount.startedButStilled
+          }})</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 lg:col-2 xl:col-2" (click)="Completed()">
+  <div class="box">
+    <div
+      class="card mb-0"
+      style="
+        justify-content: center;
+        min-height: 160px;
+        background-image: linear-gradient(to right, #348538, #99e09d);
+        padding: 1rem 2rem;
+      "
+    >
+      <div class="mb-2">
+        <span class="block font-medium"
+          >Completed ({{ recordCount && recordCount.project_Finished }})</span
+        >
+        <span class="block font-medium"
+          >Camera Installed({{
+            cameraInstalledCount && cameraInstalledCount.completed
+          }})</span
+        >
+      </div>
+    </div>
+  </div>
+</div>

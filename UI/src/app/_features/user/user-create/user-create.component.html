@@ -1,0 +1,116 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="">
+            <p-button icon="pi pi-arrow-left" (onClick)="back()"></p-button>
+        </div>
+    </div>
+    <form [formGroup]="userForm" (ngSubmit)="submit()" class="col-12">
+
+        <div class=" p-fluid">
+            <div class="flex grid formgrid">
+                <div class="field  col-12  md:col-6  lg:col-4">
+                    <label htmlFor="category">First Name</label>
+                    <input pInputText formControlName="firstName" type="text" />
+                    <app-error-msg [control]="userForm.get('firstName')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-4">
+                    <label htmlFor="category">Last Name</label>
+                    <input pInputText formControlName="lastName" type="text" />
+                    <app-error-msg [control]="userForm.get('lastName')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-4">
+                    <label htmlFor="category">Email</label>
+                    <input pInputText formControlName="email" type="text" />
+                    <app-error-msg [control]="userForm.get('email')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-4">
+                    <label htmlFor="category">Password</label>
+                    <p-password formControlName="password" [toggleMask]="true" />
+                    <app-error-msg [control]="userForm.get('password')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-4">
+                    <label htmlFor="category">Role</label>
+                    <p-dropdown [options]="roleList" optionLabel="roleName" optionValue="id" placeholder="Select a Role"
+                        formControlName="roleId" [showClear]="
+                                true"></p-dropdown>
+                    <app-error-msg [control]="userForm.get('roleId')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-4">
+                    <label htmlFor="category">Department</label>
+
+                    <p-multiSelect [options]="departmentList" formControlName="departmentIdList"
+                        placeholder="Select a Department" optionLabel="text" optionValue="value"
+                        class="multiselect-custom" ngClass="dd" [ngStyle]="{'width': '100%', 'margin':'0px 20px'}">
+                        <ng-template let-roles pTemplate="item">
+                            <div class="flex align-items-center">
+                                <span class="ml-2">{{roles.text}}</span>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                    <app-error-msg [control]="userForm.get('departmentIdList')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-4">
+                    <label htmlFor="category">Division</label>
+                    <!-- <p-dropdown [options]="divisionList" optionLabel="text" optionValue="value"
+                        placeholder="Select a Division" formControlName="divisionIdList" [showClear]="
+                                true"></p-dropdown> -->
+                    <p-multiSelect [options]="divisionList" formControlName="divisionIdList"
+                        placeholder="Select a Division" optionLabel="text" optionValue="value"
+                        class="multiselect-custom" ngClass="dd" [ngStyle]="{'width': '100%', 'margin':'0px 20px'}">
+                        <ng-template let-roles pTemplate="item">
+                            <div class="flex align-items-center">
+                                <span class="ml-2">{{roles.text}}</span>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                    <app-error-msg [control]="userForm.get('divisionIdList')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-4">
+                    <label htmlFor="category">User Group</label>
+                    <p-dropdown [options]="userGroupList" optionLabel="text" optionValue="value"
+                        placeholder="Select a User Group" formControlName="userGroup" [showClear]="
+                                true"></p-dropdown>
+                    <app-error-msg [control]="userForm.get('userGroup')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-4">
+                    <label htmlFor="category">D.O.B</label>
+                    <p-calendar [defaultDate]="defaultDate" [showIcon]="true" formControlName="dOB"
+                        inputId="icon"></p-calendar>
+                    <app-error-msg [control]="userForm.get('dOB')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-4">
+                    <label htmlFor="districtIdList">District</label>
+                    <p-multiSelect [options]="districtList" optionLabel="text" optionValue="value"
+                        placeholder="Select a District" formControlName="districtIdList" [showClear]="
+                                true"></p-multiSelect>
+                    <app-error-msg [control]="userForm.get('districtIdList')"></app-error-msg>
+                </div>
+                <div class="field  col-12  md:col-6  lg:col-4">
+                    <label htmlFor="category">Mobile</label>
+                    <input pInputText formControlName="mobile" type="text" [maxlength]="10" [minlength]="10" />
+                    <app-error-msg [control]="userForm.get('mobile')"></app-error-msg>
+                </div>
+                <div class="col-12 " style="
+                display: flex;
+                justify-content: end;">
+                    <div class="  flex  gap-3 justify-content-center">
+
+                        <button pButton type="button" [disabled]="!isNewForm" (click)="sendRegistration()"
+                            *ngxPermissionsOnly="[privleges.USER_CREATE,privleges.USER_UPDATE ]"
+                            [disabled]="!userForm.valid" label="Send Email" [ngClass]="'wisthspan'"></button>
+                        <button pButton type="submit"
+                            *ngxPermissionsOnly="[privleges.USER_CREATE,privleges.USER_UPDATE ]"
+                            [disabled]="!userForm.valid" label="Submit"></button>
+                        <button pButton type="button" class="p-button-secondary" label="Cancel"
+                            (click)="resetForm()"></button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

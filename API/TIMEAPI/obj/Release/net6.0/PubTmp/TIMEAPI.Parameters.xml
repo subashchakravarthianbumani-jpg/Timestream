@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="sripathi-001-subsite7" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\ranji\\Downloads\\New\ Time\.Live\\TIME_API\ SRC-Main-Code\(23-07-2025\)\\TIME_API\\TIMEAPI\\obj\\Release\\net6\.0\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>

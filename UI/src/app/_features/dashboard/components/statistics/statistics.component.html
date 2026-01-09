@@ -1,0 +1,68 @@
+<div class="row flex justify-content-between">
+    <div class="">
+        <h5>Statistics</h5>
+    </div>
+    <div class="">
+        <p-selectButton [options]="paymentOptions" [multiple]="true" class="selectbtn-dash" optionLabel="name"
+            optionValue="value"></p-selectButton>
+
+    </div>
+</div>
+<div class="grid">
+    <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card-dash mb-0" style="background-color: #c2ffb3;min-height: 160px;">
+            <div class="flex justify-content-between">
+                <div>
+                    <span class="block font-medium clo" style="color: black;">Finished Projects</span>
+                    <span class="text font-medium" style="color: #01b61d;font-size: 12px;">Worth of 10Cr </span>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                    [ngStyle]="{width: '3.5rem', height: '3.5rem'}" style="font-size: 20px;">
+                    <span class=" font-medium" style="color: #01b61d">25</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card-dash mb-0" style="background-color: #fff09e;min-height: 160px;">
+            <div class="flex justify-content-between">
+                <div>
+                    <span class="block font-medium">Ongoing Projects</span>
+                    <span class="text font-medium" style="color:#c0a201;font-size: 12px;">Spent 10Cr </span>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                    [ngStyle]="{width: '3.5rem', height: '3.5rem'}" style="font-size: 20px;">
+                    <span class="text font-medium" style="color:#c0a201">25</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card-dash mb-0" style="background-color: #ffadaf;min-height: 160px;">
+            <div class="flex justify-content-between">
+                <div>
+                    <span class="block font-medium">Projects On Hold</span>
+                    <span class="text font-medium" style="color:#f64c4f;font-size: 12px;">Spent 10Cr </span>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                    [ngStyle]="{width: '3.5rem', height: '3.5rem'}" style="font-size: 20px;">
+                    <span class="text font-medium" style="color:#f64c4f">25</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card-dash mb-0" style="background-color: #bebeff;min-height: 160px;">
+            <div class="flex justify-content-between">
+                <div>
+                    <span class="block font-medium">Projects Upcoming</span>
+                    <span class="text font-medium" style="color:#5353ec;font-size: 12px;">Worth of 10Cr </span>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                    [ngStyle]="{width: '3.5rem', height: '3.5rem'}" style="font-size: 20px;">
+                    <span class="text font-medium" style="color:#5353ec">25</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

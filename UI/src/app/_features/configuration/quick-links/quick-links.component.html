@@ -1,0 +1,76 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}
+            </h4>
+        </div>
+        <div class="">
+        </div>
+    </div>
+    <div class="grid formgrid mb-3 ">
+        <form [formGroup]="quickLinkForm" (ngSubmit)="submit()" class="col-12">
+            <div class="card p-fluid" style="padding-bottom: 10px;">
+                <div class="p-formgrid grid ">
+                    <div class="col-12 flex md:col-12  lg:col-10" style="flex-wrap: wrap;">
+                        <div class="field col-12  md:col-6  lg:col-6">
+                            <label htmlFor="name">Name</label>
+                            <input pInputText formControlName="name" type="text" />
+                            <app-error-msg [control]="quickLinkForm.get('name')"></app-error-msg>
+                        </div>
+                        <div class="field col-12  md:col-6  lg:col-6">
+                            <label htmlFor="userGroupIdList">User Group </label>
+                            <p-multiSelect [options]="userGroups" formControlName="userGroupIdList"
+                                placeholder="Select a User Group" optionLabel="text" optionValue="value"
+                                class="multiselect-custom" ngClass="dd"
+                                [ngStyle]="{'width': '100%', 'margin':'0px 20px'}">
+                                <ng-template let-roles pTemplate="item">
+                                    <div class="flex align-items-center">
+                                        <span class="ml-2">{{roles.text}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                            <app-error-msg [control]="quickLinkForm.get('userGroupIdList')"></app-error-msg>
+                        </div>
+                        <div class="field col-12  md:col-10  lg:col-10">
+                            <label htmlFor="link">Link</label>
+                            <input pInputText formControlName="link" type="text" />
+                            <app-error-msg [control]="quickLinkForm.get('link')"></app-error-msg>
+                        </div>
+                        <div class="field col-12  md:col-2  lg:col-2">
+                            <label htmlFor="fileType">File Type</label>
+                            <input pInputText readonly formControlName="fileType" type="text" />
+                            <app-error-msg [control]="quickLinkForm.get('fileType')"></app-error-msg>
+                        </div>
+                    </div>
+                    <div class="col-12  md:col-12  lg:col-2"
+                        style="display: flex;justify-content: center;align-items: center;">
+                        <div class="col">
+                            <button pButton type="submit"
+                                *ngxPermissionsOnly="[privleges.QL_CREATE, privleges.QL_UPDATE]"
+                                [disabled]="!quickLinkForm.valid" label="Submit"></button>
+                        </div>
+                        <div class="col">
+                            <button pButton type="button" class="p-button-secondary" label="Reset"
+                                (click)="resetForm()"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 flex ">
+            <h4>{{this.title}} List </h4><span style="font-size: small;font-weight: 600;margin-left: 5px;"
+                [ngStyle]="{'color': currentStatus ? '#0abb0a' : '#fd7878'}">
+                {{currentStatus?'(Active)':'(In-Active)'}}</span>
+        </div>
+    </div>
+    <app-datatable [records]="configurationList" [defaultSortField]="defaultSortField"
+        [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Configuration'" [rows]="10"
+        [total]="configurationList ? configurationList.length : 0" [actions]="actions"
+        (invokeAction)="actioInvoked($event)" [searchableColumns]="searchableColumns" [defaultstatus]="!currentStatus"
+        (changeStatus)="changeStatus($event)" [hasActiveInactive]="true">
+    </app-datatable>
+</div>
+<p-toast></p-toast>

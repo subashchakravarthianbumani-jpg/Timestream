@@ -1,0 +1,135 @@
+<div class="camera-page">
+  <div
+    class="custom-topbar w-full flex justify-between items-center px-6 py-4 bg-[#0B1220] shadow-lg"
+  >
+    <div class="live-indicator">
+      <span class="live-dot"></span>
+      Live
+    </div>
+    <div class="header-title">
+      {{ headerTitle }}
+    </div>
+    <div
+      class="right-controls flex items-center gap-2 ml-auto"
+      *ngIf="showToggle"
+    >
+      <span style="margin-right: 5px">Report</span>
+      <p-inputSwitch
+        [(ngModel)]="chartType"
+        (ngModelChange)="changetype()"
+      ></p-inputSwitch>
+      <span style="margin-left: 5px">Camera</span>
+    </div>
+  </div>
+
+  <!-- updated by Sivasankar K on 04/12/2025  for slide view  -->
+  <div *ngIf="chartType">
+    <div class="camera-grid">
+      <div class="grid-3x3">
+        <ng-container *ngIf="selectedAlerts?.toLowerCase() !== 'alerts'">
+          <ng-container *ngFor="let item of visibleCameras; let i = index">
+            <div class="camera-card" (click)="openLiveStream(i)">
+              <div class="tender-number" style="padding: 8px">
+                {{ item.tenderNumber }}
+              </div>
+
+              <div class="camera-header">
+                <span>Division: {{ item.divisionName }}</span>
+                <span>District: {{ item.districtName }}</span>
+                <span
+                  class="workStatus"
+                  [ngClass]="getStatusClass(item.workStatus)"
+                >
+                  {{ item.workStatus }}
+                </span>
+              </div>
+
+              <div class="video-wrapper">
+                <iframe
+                  [src]="item.liveUrl"
+                  allow="autoplay; encrypted-media"
+                  allowfullscreen
+                >
+                </iframe>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="selectedAlerts?.toLowerCase() === 'alerts'">
+          <ng-container *ngFor="let item of visibleCameras">
+            <div class="camera-card alert-card">
+              <div class="tender-number" style="padding: 8px">
+                {{ item.tenderNumber }}
+              </div>
+
+              <div class="camera-header">
+                <span>Division: {{ item.divisionName }}</span>
+                <span>District: {{ item.districtName }}</span>
+                <span class="workStatus status-notstarted">
+                  {{ item.workStatus }}
+                </span>
+              </div>
+
+              <div class="alert-screen">
+                <div class="alert-text">
+                  {{ item.error || "Camera unavailable" }}
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <div class="pagination-footer">
+        <div class="pagination-info">
+          Showing {{ startRecord }} – {{ endRecord }} of {{ total }} Cameras
+        </div>
+
+        <div class="pagination-controls">
+          <button
+            class="page-btn"
+            (click)="prevPage()"
+            [disabled]="currentIndex === 0"
+          >
+            «
+          </button>
+
+          <!-- <button
+            class="page-btn"
+            (click)="nextPage()"
+            [disabled]="currentIndex + pageSize >= totalCameras"
+          >
+            »
+          </button> -->
+          <button
+  class="page-btn"
+  (click)="nextPage()"
+  [disabled]="currentIndex + pageSize >= total"
+>
+  »
+</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!chartType">
+    <app-datatable-pagination
+      [records]="configurationList"
+      [cols]="cols"
+      [fileName]="'Camera'"
+      [rows]="rows"
+      [total]="total"
+      [actions]="actions"
+      [defaultSortField]="defaultSortField"
+      [hasActiveInactive]="false"
+      [filterModel]="tableFilterModel"
+      (changefilter)="changefilter($event)"
+      (iconAction)="handleIconAction($event)"
+      [canShowAction]="false"
+    >
+    </app-datatable-pagination>
+  </div>
+</div>

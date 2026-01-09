@@ -1,0 +1,1100 @@
+<div class="card">
+  <div
+    class="grid formgrid"
+    style="justify-content: space-between; margin-bottom: 10px"
+  >
+    <div class="col">
+      <h4>Work Details</h4>
+     
+    </div>
+    <div class="col">
+      <button
+        pButton
+        pRipple
+        label="Back"
+        class="p-button-secondary"
+        [style]="{ float: 'right' }"
+        icon="pi pi-arrow-left"
+        (click)="back()"
+      ></button>
+    </div>
+  </div>
+  <div
+    class="card p-fluid"
+    style="padding: 20px 20px 20px 20px; background-color: #e6e7ff"
+  >
+    <div class="p-formgrid grid">
+      <div class="col-11">
+        <h5>Government Order</h5>
+        <div class="col-12 row">
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Number: </span>
+            {{ tender && tender.goNumber ? tender.goNumber : "" }}
+          </div>
+          <!-- <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>T.I.M.E GO Number: </span>{{tender && tender.localGONumber ? tender.localGONumber:
+                        ''}}
+                    </div> -->
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Department: </span
+            >{{ tender && tender.goDepartment ? tender.goDepartment : "" }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Date: </span
+            >{{ tender && tender.goDate ? dc(tender.goDate) : "" }}
+          </div>
+          <!-- <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>GO Name: </span>{{tender && tender.goName ? tender.goName: ''}}
+                    </div> -->
+
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Actual GO value: </span
+            >{{
+              tender && tender.goRevisedAmount
+                ? tender.goRevisedAmount
+                : tender && tender.goTotalAmount
+                ? tender.goTotalAmount
+                : ""
+            }}
+            {{
+              tender && tender.goRevisedAmount
+                ? " (" + convertoWordsIND(tender.goRevisedAmount) + ")"
+                : tender && tender.goTotalAmount
+                ? " (" + convertoWordsIND(tender.goTotalAmount) + ")"
+                : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>GO value: </span
+            >{{ tender && tender.goTotalAmount ? tender.goTotalAmount : "" }}
+            {{
+              tender && tender.goTotalAmount
+                ? " (" + convertoWordsIND(tender.goTotalAmount) + ")"
+                : ""
+            }}
+          </div>
+          <!-- modified by Indu on 3/12/2025 -->
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Scheme Name: </span
+            >{{ tender && tender.schemeName ? tender.schemeName : "" }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Work Serial No: </span
+            >{{
+              tender && tender.workSerialNumber ? tender.workSerialNumber : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Tender Opened Date: </span
+            >{{
+              tender && tender.tenderOpenedDate
+                ? dc(tender.tenderOpenedDate)
+                : ""
+            }}
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-1"
+        style="display: flex; justify-content: center"
+        *ngIf="tender && tender.tenderStatus != 'Completed'"
+      >
+        <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-pencil"
+          pTooltip="Click to enter tender value"
+          *ngxPermissionsOnly="[privlegess.TENDER_AMOUNT_REVISION]"
+          (click)="updateamount()"
+          class="p-button-text mr-2"
+          title="Edit"
+          styleClass="p-button-text"
+        ></button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="card p-fluid"
+    style="padding: 20px 20px 20px 20px; background-color: #e6e7ff"
+    *ngIf="tender && tender.id != ''"
+  >
+    <div class="p-formgrid grid">
+      <div class="col-11">
+        <!-- modified by Indu on 4/1/2025 for renaming  Work View should be renamed as Work Details Tender should be named as Tender History.-->
+        <h5>Tender History</h5>
+        <div class="col-12 row">
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Work Number: </span
+            >{{ tender && tender.tenderNumber ? tender.tenderNumber : "" }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Division: </span
+            >{{ tender && tender.divisionName ? tender.divisionName : "" }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>District: </span
+            >{{ tender && tender.districtName ? tender.districtName : "" }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Notification Date: </span
+            >{{ tender && tender.startDate ? dc(tender.startDate) : "" }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Awarded Date: </span
+            >{{ tender && tender.endDate ? dc(tender.endDate) : "" }}
+          </div>
+          <!-- modified by Indu on 3/12/2025 -->
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Work Commencement Date: </span>
+            {{
+              tender.workCommencementDate ? dc(tender.workCommencementDate) : ""
+            }}
+          </div>
+
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Work Completion Date: </span
+            >{{
+              tender.workCompletionDate ? dc(tender.workCompletionDate) : ""
+            }}
+          </div>
+
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Class: </span>{{ tender && tender.class ? tender.class : "" }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Category: </span
+            >{{ tender && tender.category ? tender.category : "" }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Main Category: </span
+            >{{ tender && tender.mainCategory ? tender.mainCategory : "" }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Name of the work: </span
+            >{{ tender && tender.subcategory ? tender.subcategory : "" }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Service Type: </span
+            >{{
+              tender && tender.service_type_main ? tender.service_type_main : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Category Type: </span
+            >{{
+              tender && tender.category_type_main
+                ? tender.category_type_main
+                : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Bid Type: </span
+            >{{ tender && tender.bidType ? tender.bidType : "" }}
+          </div>
+
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Contractor Name: </span
+            >{{ tender && tender.contractorName ? tender.contractorName : "" }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Division: </span
+            >{{
+              tender && tender.contractorDivision
+                ? tender.contractorDivision
+                : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>District: </span
+            >{{
+              tender && tender.contractorDistrict
+                ? tender.contractorDistrict
+                : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Contractor Category: </span
+            >{{
+              tender && tender.contractorCategory
+                ? tender.contractorCategory
+                : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Tender Value: </span
+            >{{
+              tender && tender.tenderFinalAmount
+                ? tender.tenderFinalAmount
+                : tender && tender.workValue
+                ? tender.workValue
+                : ""
+            }}{{
+              tender && tender.tenderFinalAmount
+                ? " (" + convertoWordsIND(tender.tenderFinalAmount) + ")"
+                : tender && tender.workValue
+                ? " (" + convertoWordsIND(tender.workValue) + ")"
+                : ""
+            }}
+          </div>
+
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Awarded Value: </span
+            >{{ tender && tender.workValue ? tender.workValue : ""
+            }}{{
+              tender && tender.workValue
+                ? " (" + convertoWordsIND(tender.workValue) + ")"
+                : ""
+            }}
+          </div>
+          <!-- <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>WorkDifference Value: </span>{{tender && tender.workValueIncreasedAmount ?
+                        tender.workValueIncreasedAmount: ''}}
+                    </div> -->
+        </div>
+      </div>
+      <div
+        class="col-1"
+        style="display: flex; justify-content: center"
+        *ngIf="tender && tender.tenderStatus != 'Completed'"
+      >
+        <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-pencil"
+          pTooltip="Click to edit work documents"
+          (click)="redirecttofileupdate()"
+          *ngxPermissionsOnly="[privlegess.TENDER_EDIT]"
+          class="p-button-text mr-2"
+          title="Edit"
+          styleClass="p-button-text"
+          on
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card p-fluid" style="padding: 20px; background-color: #e6e7ff">
+  <h5>Uploaded Documents</h5>
+  <div class="row">
+    <!-- Agreement Copy -->
+    <div class="col-4">
+      <h5>Agreement Copy</h5>
+      <div class="d-flex align-items-center">
+        <button
+          pButton
+          pRipple
+          icon="pi pi-arrow-down"
+          pTooltip="Uploaded documents from Time portal"
+          *ngIf="tender?.agreementCopyId"
+          (click)="download(tender.agreementCopyId, 'AgreementCopy')"
+          class="ml-2"
+        ></button>
+
+        <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-eye"
+          pTooltip="View"
+          *ngIf="tender?.agreementCopyId"
+          (click)="showDocPdf(tender.agreementCopyId, 'AgreementCopy')"
+          class="p-button-text"
+          title="View File"
+        ></button> 
+
+        <div *ngIf="tender?.negotiation_signed_doc?.toLowerCase() !== 'not upload'">
+          <a [href]="tender.negotiation_signed_doc" target="_blank">
+            <button
+              pButton
+              type="button"
+              class="p-button-success ml-2"
+              pTooltip="Uploaded documents from Tender portal"
+              icon="pi pi-eye"
+              iconPos="right"
+            ></button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter of Acceptance -->
+    <div class="col-4">
+      <h5>Letter of Acceptance</h5>
+      <div class="d-flex align-items-center">
+        <button
+          pButton
+          pRipple
+          icon="pi pi-arrow-down"
+          pTooltip="Uploaded documents from Time portal"
+          *ngIf="tender?.letterOfAcceptanceId"
+          (click)="download(tender.letterOfAcceptanceId, 'LetterOfAcceptance')"
+          class="ml-2"
+        ></button>
+
+        <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-eye"
+          pTooltip="View"
+          *ngIf="tender?.letterOfAcceptanceId"
+          (click)="showDocPdf(tender.letterOfAcceptanceId, 'LetterOfAcceptance')"
+          class="p-button-text"
+          title="View File"
+        ></button>
+
+        <div *ngIf="tender?.workorder?.toLowerCase() !== 'not upload'">
+          <a [href]="tender.workorder" target="_blank">
+            <button
+              pButton
+              type="button"
+              class="p-button-success ml-2"
+              pTooltip="Uploaded documents from Tender portal"
+              icon="pi pi-eye"
+              iconPos="right"
+            ></button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other Files -->
+    <div class="col-4">
+      <h5>Other Files</h5>
+      <div class="d-flex align-items-center">
+        <button
+          pButton
+          pRipple
+          icon="pi pi-arrow-down"
+          pTooltip="Uploaded documents from Time portal"
+          *ngIf="tender?.otherFileId"
+          (click)="download(tender.otherFileId, 'Other')"
+          class="ml-2"
+        ></button>
+
+       <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-eye"
+          pTooltip="View"
+          *ngIf="tender?.otherFileId"
+          (click)="showDocPdf(tender.otherFileId, 'Other')"
+          class="p-button-text"
+          title="View File"
+        ></button> 
+
+        <div *ngIf="tender?.others_doc?.toLowerCase() !== 'not upload'">
+          <a [href]="tender.others_doc" target="_blank">
+            <button
+              pButton
+              type="button"
+              class="p-button-success ml-2"
+              pTooltip="Uploaded documents from Tender portal"
+              icon="pi pi-eye"
+              iconPos="right"
+            ></button>
+          </a>
+        </div>
+      </div>
+    </div>
+ <!-- File Preview Dialog -->
+<p-dialog 
+  [(visible)]="showViewer" 
+  [modal]="true" 
+  [dismissableMask]="true"
+  [style]="{width: '95vw', height: '90vh'}"  
+  styleClass="milestone-popup"
+>
+  <ng-template pTemplate="header">
+    <div class="header-container">
+      <span class="header-title center">Files</span>
+      <div class="header-actions">
+        <button type="button"
+          pButton
+          icon="pi pi-arrow-down"
+          (click)="downloadMilestoneFiles(currentFileId, currentFileName)"
+          class="icon-download-btn"
+          pTooltip="Download">
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="viewer-container">
+    <ng-container *ngIf="fileType === 'pdf'">
+      <iframe [src]="pdfSrc" class="viewer-full" frameborder="0"></iframe>
+    </ng-container>
+
+    <ng-container *ngIf="fileType === 'image'">
+      <img [src]="imgSrc" class="viewer-full" alt="Preview">
+    </ng-container>
+
+    <ng-container *ngIf="fileType === 'video'">
+      <video [src]="videoSrc" class="viewer-full" controls></video>
+    </ng-container>
+  </div>
+</p-dialog>
+
+  </div>
+</div>
+
+
+
+
+  <div
+    class="card p-fluid"
+    style="padding: 20px 20px 20px 20px; background-color: #e6e7ff"
+    *ngIf="templateWithMilestone && templateWithMilestone.milestones"
+  >
+    <div class="p-formgrid grid">
+      <div class="col-11">
+        <h5>Template</h5>
+        <div class="col-12 row">
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Work Template Name: </span
+            >{{
+              templateWithMilestone && templateWithMilestone.workTemplateName
+                ? templateWithMilestone.workTemplateName
+                : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Work Type: </span
+            >{{
+              templateWithMilestone && templateWithMilestone.workType
+                ? templateWithMilestone.workType
+                : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Sub Work Type: </span
+            >{{
+              templateWithMilestone && templateWithMilestone.subWorkType
+                ? templateWithMilestone.subWorkType
+                : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Service Type: </span
+            >{{
+              templateWithMilestone && templateWithMilestone.serviceType
+                ? templateWithMilestone.serviceType
+                : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Category Type: </span
+            >{{
+              templateWithMilestone && templateWithMilestone.categoryType
+                ? templateWithMilestone.categoryType
+                : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Strength: </span
+            >{{
+              templateWithMilestone && templateWithMilestone.strength
+                ? templateWithMilestone.strength
+                : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Template Code: </span
+            >{{
+              templateWithMilestone && templateWithMilestone.templateCode
+                ? templateWithMilestone.templateCode
+                : ""
+            }}
+          </div>
+          <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+            <span>Duration in Days: </span
+            >{{
+              templateWithMilestone && templateWithMilestone.workDurationInDays
+                ? templateWithMilestone.workDurationInDays
+                : ""
+            }}
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-1"
+        style="display: flex; justify-content: center"
+        *ngIf="tender && tender.tenderStatus != 'Completed'"
+      >
+        <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-pencil"
+          pTooltip="Click to edit milestone"
+          *ngxPermissionsOnly="[privlegess.TENDER_MILESTONE_EDIT]"
+          (click)="redirecttoTemplateupdate()"
+          class="p-button-text mr-2"
+          title="Edit"
+          styleClass="p-button-text"
+        ></button>
+      </div>
+    </div>
+  </div>
+  <div
+    style="padding: 20px; margin-bottom: 10px"
+    class="stablediv"
+    *ngIf="templateWithMilestone && templateWithMilestone.milestones"
+  >
+    <!-- modified by Indu on 3/12/2025 -->
+    <h5>Stage of work</h5>
+    <table class="table sssdt">
+      <thead>
+        <tr>
+          <th>S. No</th>
+          <!-- <th> Health</th> -->
+          <th>Review</th>
+          <th>Milestone Name</th>
+          <th>Milestone Code</th>
+          <th>Start Date</th>
+          <th>Days</th>
+          <th>End Date</th>
+          <th>Completed Percentage</th>
+          <th>Payment Percentage</th>
+          <th>Payment Value</th>
+          <th>Payment Status</th>
+          <th>Milestone Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let milestone of templateWithMilestone.milestones; index as i"
+        >
+          <td>{{ i + 1 }}</td>
+          <!-- <td> <i class="pi pi-circle-fill" style="color: #ff8787;"></i></td> -->
+          <td>
+            <div *ngIf="tender && tender.tenderStatus != 'Completed'">
+              <button
+                type="button"
+                pButton
+                pRipple
+                icon="pi pi-envelope"
+                pTooltip="Click to add review comments"
+                class="p-button-text mr-2"
+                *ngxPermissionsOnly="[privlegess.TENDER_REVIEW_COMMENT]"
+                title="Add Review Comments"
+                (click)="opencommentModal(milestone.id, 'MILESTONE')"
+                styleClass=" p-button-text"
+              ></button>
+            </div>
+          </td>
+          <td>{{ milestone.milestoneName }}</td>
+          <td>{{ milestone.milestoneCode }}</td>
+          <td>{{ dc(milestone.startDate) }}</td>
+          <td>{{ milestone.durationInDays }}</td>
+          <td>{{ dc(milestone.endDate) }}</td>
+          <td>
+            <div class="row">
+              <div class="col-9" style="padding: 10px 0px 0px 0px">
+                <p-progressBar
+                  [value]="milestone.percentageCompleted"
+                  [showValue]="false"
+                  [color]="
+                    getcolorforProgress(
+                      milestone.percentageCompleted,
+                      'percentageCompleted'
+                    )
+                  "
+                ></p-progressBar>
+              </div>
+              <div class="col-3" style="padding: 10px 0px 0px 0px">
+                {{ milestone.percentageCompleted | round }}%
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="row">
+              <div class="col-9" style="padding: 10px 0px 0px 0px">
+                <p-progressBar
+                  aria-label="Status"
+                  [value]="milestone.paymentPercentage"
+                  [showValue]="false"
+                  [color]="
+                    getcolorforProgress(
+                      milestone.paymentPercentage,
+                      'paymentPercentage'
+                    )
+                  "
+                ></p-progressBar>
+              </div>
+              <div class="col-3" style="padding: 10px 0px 0px 0px">
+                {{ milestone.paymentPercentage | round }}%
+              </div>
+            </div>
+          </td>
+          <td>{{ milestone.milestoneAmount }}</td>
+
+          <td>
+            <p-tag
+              [severity]="getBtnSeverity(milestone.paymentStatusName)"
+              [value]="milestone.paymentStatusName"
+            ></p-tag>
+          </td>
+          <td>
+            <p-tag
+              [severity]="getBtnSeverity(milestone.milestoneStatusName)"
+              [value]="milestone.milestoneStatusName"
+            ></p-tag>
+          </td>
+          <td style="display: flex">
+            <div
+              *ngIf="
+                milestone.isSubmitted &&
+                tender &&
+                tender.tenderStatus != 'Completed'
+              "
+            >
+              <button
+                type="button"
+                pButton
+                pRipple
+                icon="pi pi-check"
+                pTooltip="Click to update percentage"
+                *ngxPermissionsOnly="[privlegess.MILESTONE_PERCENTAGE_UPDATE]"
+                (click)="
+                  updatePercentage(milestone.id, milestone.percentageCompleted)
+                "
+                class="p-button-text mr-2"
+                title="Update Percentage"
+                styleClass="p-button-text"
+              ></button>
+            </div>
+            <div
+              *ngIf="
+                milestone.isSubmitted &&
+                milestone.workTemplateMilestoneMbookId &&
+                milestone.percentageCompleted > 0 &&
+                milestone.paymentPercentage > 0
+              "
+            >
+              <button
+                type="button"
+                pButton
+                pRipple
+                icon="pi pi-fw pi-book"
+                pTooltip="Click to open M-Book"
+                *ngxPermissionsOnly="[privlegess.MBOOK_VIEW]"
+                (click)="openMbook(milestone.workTemplateMilestoneMbookId)"
+                class="p-button-text mr-2"
+                title="M-Book"
+                styleClass="p-button-text"
+              ></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="tender && tender.tenderStatus != 'Completed'">
+      <form
+        [formGroup]="AddcommentsForm"
+        (ngSubmit)="submitcomment()"
+        class="col-12"
+      >
+        <p-dialog
+          header="Header"
+          [(visible)]="commentmodalvisible"
+          [modal]="true"
+          [style]="{ width: '50vw' }"
+          [draggable]="false"
+          [resizable]="false"
+          [closable]="true"
+          (onHide)="resetCommentform()"
+        >
+          <ng-template pTemplate="header">
+            <span class="text-xl font-bold">Add Comments</span>
+          </ng-template>
+          <div class="p-fluid">
+            <div class="p-formgrid grid">
+              <div
+                class="col-12 flex md:col-12 lg:col-12"
+                style="flex-wrap: wrap"
+              >
+                <div class="field col-12 md:col-12 lg:col-12">
+                  <label htmlFor="type" style="margin-bottom: 20px">Type</label>
+                  <p-dropdown
+                    [options]="commentType"
+                    optionLabel="text"
+                    [style]="{ width: '40%' }"
+                    optionValue="value"
+                    placeholder="Select a Type"
+                    formControlName="type"
+                    [showClear]="false"
+                  ></p-dropdown>
+                </div>
+
+                <div class="field col-12 md:col-12 lg:col-12">
+                  <label htmlFor="Notes">Notes</label>
+                  <textarea
+                    rows="5"
+                    pInputTextarea
+                    formControlName="notes"
+                  ></textarea>
+                  <app-error-msg
+                    [control]="updateForm.get('notes')"
+                  ></app-error-msg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template pTemplate="footer">
+            <div class="row" style="justify-content: end">
+              <button
+                pButton
+                type="submit"
+                [disabled]="!AddcommentsForm.valid"
+                label="Submit"
+              ></button>
+              <button
+                pButton
+                type="button"
+                class="p-button-secondary"
+                label="Cancel"
+                (click)="resetCommentform()"
+              ></button>
+            </div>
+          </ng-template>
+        </p-dialog>
+      </form>
+      <form [formGroup]="updateForm" (ngSubmit)="submit()" class="col-12">
+        <p-dialog
+          header="Header"
+          [(visible)]="modalvisible"
+          [modal]="true"
+          [style]="{ width: '50vw' }"
+          [draggable]="false"
+          [resizable]="false"
+          [closable]="true"
+          (onHide)="resetform()"
+        >
+          <ng-template pTemplate="header">
+            <span class="text-xl font-bold">Update Percentage</span>
+            <span class="font-medium text-xl" style="color: blue"
+              >{{ updateForm.get("completedPercentage")?.value }} %</span
+            >
+          </ng-template>
+          <div class="p-fluid">
+            <div class="p-formgrid grid">
+              <div
+                class="col-12 flex md:col-12 lg:col-12"
+                style="flex-wrap: wrap"
+              >
+                <div class="field col-12 md:col-12 lg:col-12">
+                  <label htmlFor="Notes" style="margin-bottom: 20px"
+                    >Completion Percentage</label
+                  >
+                  <p-slider
+                    [min]="0"
+                    [max]="100"
+                    formControlName="completedPercentage"
+                  ></p-slider>
+                </div>
+                <div class="field col-12 md:col-12 lg:col-12">
+                  <label htmlFor="Notes" style="margin-bottom: 20px"
+                    >File(s)</label
+                  >
+                  <p-fileUpload
+                    chooseLabel="Choose"
+                    [ngStyle]="{ width: '80%' }"
+                    tooltipPosition="left"
+                    pTooltip="Milestone Documents"
+                    [customUpload]="true"
+                    [files]="Otherfiles"
+                    (onSelect)="onselectfiles($event)"
+                    [showCancelButton]="true"
+                    (onRemove)="onRemovefile($event)"
+                    [showUploadButton]="false"
+                    accept="image/*, .doc,.docx,.xml,application/msword, .pdf, .xls, .xlsx"
+                    [multiple]="true"
+                    [maxFileSize]="2000000"
+                  ></p-fileUpload>
+                  <div *ngIf="fileerror" class="control-error-msg">
+                    <div>Please choose any file</div>
+                  </div>
+                </div>
+                <div class="field col-12 md:col-12 lg:col-12">
+                  <label htmlFor="Notes">Notes</label>
+                  <textarea
+                    rows="5"
+                    pInputTextarea
+                    formControlName="notes"
+                  ></textarea>
+                  <app-error-msg
+                    [control]="updateForm.get('notes')"
+                  ></app-error-msg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: right; margin-bottom: 20px">
+            <button
+              pButton
+              type="submit"
+              *ngxPermissionsOnly="[privlegess.MILESTONE_PERCENTAGE_UPDATE]"
+              [disabled]="!updateForm.valid"
+              label="Submit"
+            ></button>
+            &nbsp;
+            <button
+              pButton
+              type="button"
+              class="p-button-secondary"
+              label="Cancel"
+              (click)="resetform()"
+            ></button>
+          </div>
+          <div
+            style="
+              padding: 20px;
+              margin-bottom: 10px;
+              margin-top: 10px;
+              text-align: left;
+            "
+            class="stablediv"
+          >
+            <h5>Milestone Files</h5>
+            <table class="table sssdt">
+              <thead>
+                <tr>
+                  <th>S. No</th>
+                  <th>Name</th>
+                  <th>Saved by</th>
+                  <th>Saved date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let file of filesList; index as i">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ file.originalFileName }}</td>
+                  <td>{{ file.createdByUserName }}</td>
+                  <td>{{ dcwt(file.createdDate) }}</td>
+                  <td>
+                    <button
+                      type="button"
+                      pButton
+                      pRipple
+                      icon="pi pi-arrow-down"
+                      pTooltip="Download"
+                      (click)="
+                        downloadMilestoneFiles(file.id, file.originalFileName)
+                      "
+                      class="p-button-text mr-2"
+                      title="Download File"
+                      styleClass="p-button-text"
+                    ></button>
+                    <button
+                      type="button"
+                      pButton
+                      pRipple
+                      icon="pi pi-times"
+                      pTooltip="Delete"
+                      (click)="DeleteMilestoneFile(file.typeId, file.id)"
+                      class="p-button-text mr-2"
+                      title="Delete File"
+                      styleClass="p-button-text"
+                    ></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </p-dialog>
+      </form>
+      <form
+        [formGroup]="amountupdateForm"
+        (ngSubmit)="amountUpdateSubmit()"
+        class="col-12"
+      >
+        <p-dialog
+          header="Header"
+          [(visible)]="amountmodalvisible"
+          [modal]="true"
+          [style]="{ width: '50vw' }"
+          [draggable]="false"
+          [resizable]="false"
+          [closable]="true"
+          (onHide)="resetform()"
+        >
+          <ng-template pTemplate="header">
+            <span class="text-xl font-bold">Update Work Difference Value</span>
+          </ng-template>
+          <div class="p-fluid">
+            <div class="p-formgrid grid">
+              <div
+                class="col-12 flex md:col-12 lg:col-12"
+                style="flex-wrap: wrap"
+              >
+                <div class="field col-12 md:col-12 lg:col-12">
+                  <label htmlFor="type" style="margin-bottom: 20px"
+                    >Difference Value</label
+                  >
+                  <input
+                    pInputText
+                    [maxlength]="250"
+                    formControlName="increasedAmount"
+                    type="text"
+                  />
+                  <app-error-msg
+                    [control]="amountupdateForm.get('increasedAmount')"
+                  ></app-error-msg>
+                </div>
+
+                <div class="field col-12 md:col-12 lg:col-12">
+                  <label htmlFor="Notes">Reason for Revision</label>
+                  <textarea
+                    rows="5"
+                    pInputTextarea
+                    formControlName="updatedNote"
+                  ></textarea>
+                  <app-error-msg
+                    [control]="amountupdateForm.get('updatedNote')"
+                  ></app-error-msg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template pTemplate="footer">
+            <div class="row" style="justify-content: end">
+              <button
+                pButton
+                type="submit"
+                *ngxPermissionsOnly="[privlegess.TENDER_AMOUNT_REVISION]"
+                [disabled]="!amountupdateForm.valid"
+                label="Submit"
+              ></button>
+              <button
+                pButton
+                type="button"
+                class="p-button-secondary"
+                label="Cancel"
+                (click)="resetform()"
+              ></button>
+            </div>
+          </ng-template>
+        </p-dialog>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div
+      class="lg:col-6 md:col-6"
+      *ngIf="activitiesevents && activitiesevents.length > 0"
+    >
+      <div
+        class="card p-fluid"
+        style="
+          padding: 20px 20px 20px 20px;
+          background-color: #e6e7ff;
+          min-height: 100%;
+        "
+      >
+        <h5>Activity Log</h5>
+
+        <ng-scrollbar class="scroll-event sddd" thumbClass="white-scrollbars">
+          <p-timeline [value]="activitiesevents" styleClass="customized-timeline ">
+            <ng-template pTemplate="content" let-event>
+              <small class="p-text-secondary">{{
+                dcwt(event.createdDate)
+              }}</small>
+            </ng-template>
+            <ng-template pTemplate="opposite" let-event>
+              {{ event.activityMessage }}
+            </ng-template>
+          </p-timeline>
+        </ng-scrollbar>
+      </div>
+    </div>
+    <div class="lg:col-6 md:col-6" *ngIf="events && events.length > 0">
+      <div
+        class="card p-fluid"
+        style="padding: 20px 20px 20px 20px; background-color: #e6e7ff"
+      >
+        <div class="flex">
+          <div class="col-10">
+            <h5>Comments</h5>
+          </div>
+          <div
+            class="col-2"
+            *ngIf="tender && tender.tenderStatus != 'Completed'"
+          >
+            <button
+              type="button"
+              pTooltip="Click to add comments"
+              *ngxPermissionsOnly="[privlegess.TENDER_ADD_COMMENT]"
+              pButton
+              pRipple
+              icon="pi pi-envelope"
+              class="p-button-text mr-2"
+              title="Add Comments"
+              (click)="opencommentModal('', 'TENDER')"
+              styleClass=" p-button-text"
+            ></button>
+          </div>
+        </div>
+        <ng-scrollbar class="scroll-event sddd" thumbClass="white-scrollbars">
+          <p-timeline
+            [value]="events"
+            align="alternate"
+            styleClass="customized-timeline "
+          >
+            <ng-template pTemplate="marker" let-event>
+              <span
+                class="custom-marker shadow-2 iconstyling"
+                [style.backgroundColor]="event.color"
+              >
+                <i class="pi pi-check"></i>
+              </span>
+            </ng-template>
+            <ng-template pTemplate="content" let-event>
+              <p-card
+                [header]="event.subjectText"
+                [subheader]="dcwt(event.commentDate)"
+              >
+                <p>
+                  {{ event.commentsText }}
+                </p>
+              </p-card>
+            </ng-template>
+            <!-- <p-timeline [value]="activitiesevents" align="alternate" styleClass="customized-timeline ">
+                        <ng-template pTemplate="content" let-event>
+                            <span class="custom-marker shadow-2 iconstyling" [style.backgroundColor]="event.color">
+                                <i class="pi pi-check"></i>
+                            </span> 
+                        </ng-template>
+                        <ng-template pTemplate="opposite" let-event>
+                            <p-card [header]="event.activitySubject" [subheader]=" dcwt(event.commentDate)">
+                                <p>
+                                    {{event.activityMessage}}
+                                </p>
+                               
+                            </p-card>
+                        </ng-template>  -->
+            <!-- <p-timeline [value]="activitiesevents" styleClass="">
+                            <ng-template pTemplate="content" let-event>
+                                <span class="custom-marker shadow-2 iconstyling" [style.backgroundColor]="event.color">
+                                    <i class="pi pi-check"></i>
+                                </span>
+                                <small class="p-text-secondary">{{ dcwt(event.createdDate )}}</small>
+                            </ng-template>
+                            <ng-template pTemplate="opposite" let-event>
+                                {{ event.activityMessage }}
+                            </ng-template>
+                        </p-timeline> -->
+          </p-timeline>
+        </ng-scrollbar>
+      </div>
+    </div>
+  </div>
+</div>
+
+

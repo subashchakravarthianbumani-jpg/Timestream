@@ -1,0 +1,83 @@
+<div class="card">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}
+            </h4>
+        </div>
+        <div class="col-6 lg:col-2 md:col-2 " style="text-align: end;">
+            <h4>Dependent </h4>
+        </div>
+        <div class=" col-6 lg:col-1 md:col-1 "><p-inputSwitch (onChange)="changeEvent($event)"
+                [(ngModel)]="isDependent"></p-inputSwitch>
+        </div>
+    </div>
+    <div class="grid formgrid mb-3">
+        <form [formGroup]="configurationForm" (ngSubmit)="submit()" class="col-12">
+            <div class="card p-fluid" style="padding-bottom: 10px;">
+                <div class="p-formgrid grid ">
+                    <div class="col-12 flex md:col-12  lg:col-10" style="flex-wrap: wrap;">
+                        <div class="field col-12  md:col-4  lg:col-4">
+                            <label htmlFor="category">Department</label>
+                            <p-dropdown [options]="departments" optionLabel="text" optionValue="value"
+                                placeholder="Select a Department" formControlName="department" [showClear]="
+                            true"></p-dropdown>
+                            <app-error-msg [control]="configurationForm.get('department')"></app-error-msg>
+                        </div>
+                        <div class="field col-12  md:col-4  lg:col-4">
+                            <label htmlFor="category">Category</label>
+                            <p-dropdown [options]="catgories" optionLabel="category" optionValue="id"
+                                placeholder="Select a Category" formControlName="category" [showClear]="
+                                    true"></p-dropdown>
+                            <app-error-msg [control]="configurationForm.get('category')"></app-error-msg>
+                        </div>
+                        <div class="field col-12  md:col-4  lg:col-4" *ngIf="isDependent && this.canShowAction">
+                            <label htmlFor="id">Configuration <span style="
+                                color: blue;
+                                font-weight: 600;">{{parentconfigtext}}</span></label><p-dropdown
+                                [options]="configurations" optionLabel="value" optionValue="id"
+                                placeholder="Select a Configuration" formControlName="configuration" [showClear]="
+                                true"></p-dropdown>
+                            <app-error-msg [control]="configurationForm.get('configuration')"></app-error-msg>
+                        </div>
+                        <div class="field col-12  md:col-4  lg:col-4" *ngIf=" this.canShowAction">
+                            <label htmlFor="value">Value</label>
+                            <input pInputText formControlName="value" type="text" />
+                            <app-error-msg [control]="configurationForm.get('value')"></app-error-msg>
+                        </div>
+                        <div class="field col-12  md:col-4  lg:col-4" *ngIf="hasCode && this.canShowAction">
+                            <label htmlFor="code">Code</label>
+                            <input pInputText formControlName="code" type="text" />
+                            <app-error-msg [control]="configurationForm.get('code')"></app-error-msg>
+                        </div>
+                    </div>
+                    <div class="col-12  md:col-12  lg:col-2"
+                        style="display: flex;justify-content: center;align-items: center;">
+                        <div class="col" *ngIf=" this.canShowAction">
+                            <p-button type="submit"
+                                *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                                [disabled]="!configurationForm.valid" label="Submit"></p-button>
+                        </div>
+                        <div class="col">
+                            <button pButton type="button" class="p-button-secondary" label="Reset"
+                                (click)="resetForm()"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 flex ">
+            <h4>{{this.title}} List </h4><span style="font-size: small;font-weight: 600;margin-left: 5px;"
+                [ngStyle]="{'color': currentStatus ? '#0abb0a' : '#fd7878'}">
+                {{currentStatus?'(Active)':'(In-Active)'}}</span>
+        </div>
+    </div>
+    <app-datatable [records]="configurationList" [defaultSortField]="defaultSortField"
+        [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Configuration'" [rows]="10"
+        [total]="configurationList ? configurationList.length : 0" [actions]="actions"
+        (invokeAction)="actioInvoked($event)" [defaultstatus]="!currentStatus" (changeStatus)="changeStatus($event)"
+        [searchableColumns]="searchableColumns" [hasActiveInactive]="true" [canShowAction]="canShowAction">
+    </app-datatable>
+</div>
+<p-toast></p-toast>

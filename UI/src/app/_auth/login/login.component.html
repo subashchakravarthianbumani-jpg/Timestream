@@ -1,0 +1,121 @@
+<div class="header" style="padding: 0px 0px;margin-bottom:0px;">
+    <div class="logo-div">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-2" style="display:flex; justify-content: center;">
+                    <img src="assets/LogoImages/logo_tn_govt.png" class="img-responsive">
+                </div>
+                <div class="logo_txt col-sm-12 col-md-8">
+                    <div style="text-align: center;">
+                        <h2>Tamil Nadu Adi Dravidar Housing & Development Corporation Ltd</h2>
+                        <h1>ENGINEERING WING</h1>
+                        <h2 style="margin: 1rem 0 1rem 0;">Tender Integrated Monitoring and Evaluation</h2>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-2" style="display:flex; justify-content: center;">
+                    <img src="assets/LogoImages/logo_tahdco.png" class="img-responsive">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="login-white-bg">
+  <div class="login-center">
+
+    <p-toast key="tst" position="top-center"></p-toast>
+
+    <div class="surface-card login-card" style="    background: radial-gradient(
+    circle at center,
+    #ffffff 0%,
+    #e4e6f7 38%,
+    #c3c7ea 68%,
+    #9ca0d9 100%
+  );">
+
+      <div class="text-center mb-4">
+        <img src="assets/LogoImages/High/Dark with White patch/Logo.png" class="login-logo">
+        <div class="login-title">Login</div>
+        <span class="p-error" *ngIf="isError">{{ ErrorMessage }}</span>
+      </div>
+
+<!-- Updated by Sivasankar.K On 05/12/2025 for login page UI update  -->
+ 
+      <div class="form-body" style="color: black;">
+        <label>Username</label>
+        <input type="text"
+          pInputText
+          [(ngModel)]="username"
+          (change)="clearErrormessage($event)"
+          placeholder="Email address"
+          class="form-input" />
+
+        <label class="mt-3">Password</label>
+
+       
+
+<p-password
+    [(ngModel)]="password"
+    class="password-wrap"
+     (change)="clearErrormessage($event)"
+    inputStyleClass="login-input"
+    [toggleMask]="true"
+    placeholder="Password">
+</p-password>
+
+        <a class="forgot" routerLink="/auth/forgetPassword/">
+          Forgot password?
+        </a>
+
+        <button
+          pButton
+          pRipple
+          class="login-btn"
+          label="Sign In"
+          (click)="onSubmit()">
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<footer class="bg-light py-3 mt-auto" style="background: linear-gradient(to top, #dfe9f3 0%, white 100%); font-family: Arial, sans-serif; font-size: 14px;">
+  <div class="container-fluid px-4">
+    <div class="row text-dark align-items-center">
+
+      <!-- Left Section -->
+      <div class="col-md-4 text-md-start text-center mb-3 mb-md-0">
+        <p class="mb-1">
+          <strong>Copyright © 2025</strong>
+          <span class="text-danger"> Pixous Technologies</span>
+        </p>
+        <p class="mb-0">
+          <a href="mailto:info@pixoustech.com" class="text-dark fw-semibold text-decoration-none">tahdcoheadoffice&#64;gmail.com</a> |
+          <span class="fw-semibold">+91 70940 47000</span>
+        </p>
+      </div>
+
+      <!-- Middle Section -->
+      <div class="col-md-4 text-center mb-3 mb-md-0">
+        <p class="mb-1 fw-semibold">
+          382, Lakshmanan Nagar, Gandhipuram, Coimbatore – 641 012
+        </p>
+        <p class="mb-0 fw-semibold">
+          Pixous Technologies.<br />All rights reserved.
+        </p>
+      </div>
+
+      <!-- Right Section -->
+      <div class="col-md-4 text-md-end text-center">
+        <p class="mb-0 fw-semibold">
+          Developed by <a href="https://pixoustech.com/"> <span class="text-danger">Pixous Technologies</span></a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>

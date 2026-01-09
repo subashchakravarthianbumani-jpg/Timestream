@@ -1,0 +1,70 @@
+<div class="card">
+    <div class="flex align-items-center justify-content-between mb-4">
+        <h5>Alerts</h5>
+    </div>
+
+    <span class="block text-600 font-medium mb-3">HIGH</span>
+    <ul class="p-0 mx-0 mt-0 mb-4 list-none" *ngFor="let itemrow of highAlerts;">
+        <li class="flex align-items-center py-2 border-bottom-1 surface-border" style="background-color: #ffbbbb;
+        border-radius: 10pc;">
+            <div style="margin-left: 7px;"
+                class="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0">
+                <i class="pi pi-exclamation-triangle text-xl text-blue-500"></i>
+            </div>
+            <span class="text-900 line-height-3" style="
+            font-size: medium;
+            font-weight: 600;">{{itemrow.type}}
+                <span class="text-700"> {{itemrow.message}} <span class="text-blue-500" style="cursor: pointer;"
+                        (click)="resolve(itemrow.id,$event)">Resolve</span></span>
+            </span>
+        </li>
+    </ul>
+
+    <span class="block text-600 font-medium mb-3">MODERATE</span>
+    <ul class="p-0 m-0 list-none" *ngFor="let itemrow of moderateAlerts;">
+        <li class="flex align-items-center py-2 border-bottom-1 surface-border" style="
+        background-color: #f9f996;
+        border-radius: 10pc;">
+            <div style="margin-left: 7px;"
+                class="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0">
+                <i class="pi pi-exclamation-triangle text-xl text-blue-500"></i>
+            </div>
+            <span class="text-900 line-height-3" style="
+            font-size: medium;
+            font-weight: 600;">{{itemrow.type}}
+                <span class="text-700"> {{itemrow.message}} <span class="text-blue-500" style="cursor: pointer;"
+                        (click)="resolve(itemrow.id, $event)">Resolve</span></span>
+            </span>
+        </li>
+    </ul>
+</div>
+<p-confirmPopup key="confirm2"></p-confirmPopup>
+
+<form [formGroup]="amountupdateForm" (ngSubmit)="amountUpdateSubmit()" class="col-12">
+    <p-dialog header="Header" [(visible)]="amountmodalvisible" [modal]="true" [style]="{ width: '50vw' }"
+        [draggable]="false" [resizable]="false" [closable]="true" (onHide)="resetform()">
+
+        <ng-template pTemplate="header">
+            <span class="text-xl font-bold">Resolve</span>
+        </ng-template>
+        <div class="p-fluid">
+            <div class="p-formgrid grid ">
+                <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+                    <div class="field col-12 md:col-12  lg:col-12">
+                        <label htmlFor="type" style="margin-bottom: 20px;">Reason</label>
+                        <textarea rows="2" pInputTextarea formControlName="updatedNote"></textarea>
+                        <app-error-msg [control]="amountupdateForm.get('updatedNote')"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template pTemplate="footer">
+            <div class="row" style="
+                    justify-content: end;">
+                <button pButton type="submit" [disabled]="!amountupdateForm.valid" label="Submit"></button>
+                <button pButton type="button" class="p-button-secondary" label="Cancel" (click)="resetform()"></button>
+            </div>
+        </ng-template>
+
+    </p-dialog>
+</form>

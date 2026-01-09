@@ -1,0 +1,49 @@
+
+::ng-deep .hedsr{
+    button{
+        margin-right: 20px;
+    }
+}
+.boldlabel > span{    
+    font-weight: 700;
+}
+.boldlabelinsiderow> span{
+    
+    font-weight: 700;
+}
+.tableheadererrormsg{
+    font-weight: 400;
+    color: #ff0052;
+}
+.camera-input-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 0;
+  flex-wrap: wrap;
+}
+
+.camera-input {
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+}
+
+.camera-input label {
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.camera-input input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f0f6ff;
+  transition: border-color 0.2s ease;
+}
+
+.camera-input input:focus {
+  border-color: #1a73e8;
+  outline: none;
+}

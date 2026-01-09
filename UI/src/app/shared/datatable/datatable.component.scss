@@ -1,0 +1,18 @@
+.wd {
+
+        .dttable,
+        .p-datatable {
+                padding: 5px 1rem !important;
+        }
+
+        ::ng-deep .p-datatable-header {
+                padding: 5px 1rem !important;
+        }
+        .extradttable{
+                padding: 15px 1rem !important;
+
+        }
+}
+::ng-deep .p-datatable-header{
+    display: flex;
+}

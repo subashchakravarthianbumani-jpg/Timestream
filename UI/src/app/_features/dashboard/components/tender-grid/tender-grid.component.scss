@@ -1,0 +1,25 @@
+.dfd{
+    height: 100%;
+}
+
+::ng-deep .filtertab > p-dropdown{
+    span{
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
+}
+::ng-deep .filtertab > p-dropdown > div > p-overlay{
+     span{
+        font-size: revert;
+        font-weight: revert;
+    }
+}
+
+// ::ng-deep .clickable-td {
+//     cursor: pointer;
+//   }
+::ng-deep .clickable-td {
+    cursor: pointer;
+    color: blue;
+  text-decoration: underline;
+  }

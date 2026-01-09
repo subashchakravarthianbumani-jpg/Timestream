@@ -1,0 +1,231 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D8E92FBD-B488-4228-AD29-66EEB47721AC}|BAL\\BAL.csproj|c:\\pixousprojects\\pixousgit-time\\time-web\\api\\bal\\workbal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8E92FBD-B488-4228-AD29-66EEB47721AC}|BAL\\BAL.csproj|solutionrelative:bal\\workbal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D78860F1-19C8-4553-90C1-29C47FDE5EB2}|TIMEAPI\\TIMEAPI.csproj|c:\\pixousprojects\\pixousgit-time\\time-web\\api\\timeapi\\controllers\\workcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D78860F1-19C8-4553-90C1-29C47FDE5EB2}|TIMEAPI\\TIMEAPI.csproj|solutionrelative:timeapi\\controllers\\workcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D78860F1-19C8-4553-90C1-29C47FDE5EB2}|TIMEAPI\\TIMEAPI.csproj|c:\\pixousprojects\\pixousgit-time\\time-web\\api\\timeapi\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D78860F1-19C8-4553-90C1-29C47FDE5EB2}|TIMEAPI\\TIMEAPI.csproj|solutionrelative:timeapi\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D78860F1-19C8-4553-90C1-29C47FDE5EB2}|TIMEAPI\\TIMEAPI.csproj|c:\\pixousprojects\\pixousgit-time\\time-web\\api\\timeapi\\appsettings.dev.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D78860F1-19C8-4553-90C1-29C47FDE5EB2}|TIMEAPI\\TIMEAPI.csproj|solutionrelative:timeapi\\appsettings.dev.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DB9EA01-72F3-4D80-A1ED-6BE10DEA4AD7}|DAL\\DAL.csproj|c:\\pixousprojects\\pixousgit-time\\time-web\\api\\dal\\workdal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DB9EA01-72F3-4D80-A1ED-6BE10DEA4AD7}|DAL\\DAL.csproj|solutionrelative:dal\\workdal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED8447B5-CF93-4CF4-8BC0-AD9DD08F5F74}|Model\\Model.csproj|c:\\pixousprojects\\pixousgit-time\\time-web\\api\\model\\domainmodel\\tendermastermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED8447B5-CF93-4CF4-8BC0-AD9DD08F5F74}|Model\\Model.csproj|solutionrelative:model\\domainmodel\\tendermastermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED8447B5-CF93-4CF4-8BC0-AD9DD08F5F74}|Model\\Model.csproj|c:\\pixousprojects\\pixousgit-time\\time-web\\api\\model\\viewmodel\\tablefiltermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED8447B5-CF93-4CF4-8BC0-AD9DD08F5F74}|Model\\Model.csproj|solutionrelative:model\\viewmodel\\tablefiltermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED8447B5-CF93-4CF4-8BC0-AD9DD08F5F74}|Model\\Model.csproj|c:\\pixousprojects\\pixousgit-time\\time-web\\api\\model\\domainmodel\\mailsmslog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED8447B5-CF93-4CF4-8BC0-AD9DD08F5F74}|Model\\Model.csproj|solutionrelative:model\\domainmodel\\mailsmslog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8E92FBD-B488-4228-AD29-66EEB47721AC}|BAL\\BAL.csproj|c:\\pixousprojects\\pixousgit-time\\time-web\\api\\bal\\interface\\igeneralbal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8E92FBD-B488-4228-AD29-66EEB47721AC}|BAL\\BAL.csproj|solutionrelative:bal\\interface\\igeneralbal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8E92FBD-B488-4228-AD29-66EEB47721AC}|BAL\\BAL.csproj|c:\\pixousprojects\\pixousgit-time\\time-web\\api\\bal\\interface\\iworkbal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8E92FBD-B488-4228-AD29-66EEB47721AC}|BAL\\BAL.csproj|solutionrelative:bal\\interface\\iworkbal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D78860F1-19C8-4553-90C1-29C47FDE5EB2}|TIMEAPI\\TIMEAPI.csproj|c:\\pixousprojects\\pixousgit-time\\time-web\\api\\timeapi\\controllers\\commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D78860F1-19C8-4553-90C1-29C47FDE5EB2}|TIMEAPI\\TIMEAPI.csproj|solutionrelative:timeapi\\controllers\\commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D78860F1-19C8-4553-90C1-29C47FDE5EB2}|TIMEAPI\\TIMEAPI.csproj|c:\\pixousprojects\\pixousgit-time\\time-web\\api\\timeapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D78860F1-19C8-4553-90C1-29C47FDE5EB2}|TIMEAPI\\TIMEAPI.csproj|solutionrelative:timeapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TenderMasterModel.cs",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\Model\\DomainModel\\TenderMasterModel.cs",
+              "RelativeDocumentMoniker": "Model\\DomainModel\\TenderMasterModel.cs",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\Model\\DomainModel\\TenderMasterModel.cs",
+              "RelativeToolTip": "Model\\DomainModel\\TenderMasterModel.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAwwBUAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-19T04:18:58.675Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "WorkController.cs",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\TIMEAPI\\Controllers\\WorkController.cs",
+              "RelativeDocumentMoniker": "TIMEAPI\\Controllers\\WorkController.cs",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\TIMEAPI\\Controllers\\WorkController.cs",
+              "RelativeToolTip": "TIMEAPI\\Controllers\\WorkController.cs",
+              "ViewState": "AgIAAJ0IAAAAAAAAAAD4v4YIAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-19T03:37:53.633Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WorkBAL.cs",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\BAL\\WorkBAL.cs",
+              "RelativeDocumentMoniker": "BAL\\WorkBAL.cs",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\BAL\\WorkBAL.cs",
+              "RelativeToolTip": "BAL\\WorkBAL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOUEAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T06:11:23.375Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TableFilterModel.cs",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\Model\\ViewModel\\TableFilterModel.cs",
+              "RelativeDocumentMoniker": "Model\\ViewModel\\TableFilterModel.cs",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\Model\\ViewModel\\TableFilterModel.cs",
+              "RelativeToolTip": "Model\\ViewModel\\TableFilterModel.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAEwGkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T05:31:25.805Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "WorkDAL.cs",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\DAL\\WorkDAL.cs",
+              "RelativeDocumentMoniker": "DAL\\WorkDAL.cs",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\DAL\\WorkDAL.cs",
+              "RelativeToolTip": "DAL\\WorkDAL.cs",
+              "ViewState": "AgIAAP8DAAAAAAAAAAAAAAgEAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T04:10:32.811Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ReportController.cs",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\TIMEAPI\\Controllers\\ReportController.cs",
+              "RelativeDocumentMoniker": "TIMEAPI\\Controllers\\ReportController.cs",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\TIMEAPI\\Controllers\\ReportController.cs",
+              "RelativeToolTip": "TIMEAPI\\Controllers\\ReportController.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAwDsAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T03:32:29.029Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.DEV.json",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\TIMEAPI\\appsettings.DEV.json",
+              "RelativeDocumentMoniker": "TIMEAPI\\appsettings.DEV.json",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\TIMEAPI\\appsettings.DEV.json",
+              "RelativeToolTip": "TIMEAPI\\appsettings.DEV.json",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAABoAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-27T09:54:00.533Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IGeneralBAL.cs",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\BAL\\Interface\\IGeneralBAL.cs",
+              "RelativeDocumentMoniker": "BAL\\Interface\\IGeneralBAL.cs",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\BAL\\Interface\\IGeneralBAL.cs",
+              "RelativeToolTip": "BAL\\Interface\\IGeneralBAL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T08:40:47.673Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MailSMSLog.cs",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\Model\\DomainModel\\MailSMSLog.cs",
+              "RelativeDocumentMoniker": "Model\\DomainModel\\MailSMSLog.cs",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\Model\\DomainModel\\MailSMSLog.cs",
+              "RelativeToolTip": "Model\\DomainModel\\MailSMSLog.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T08:44:44.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IWorkBAL.cs",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\BAL\\Interface\\IWorkBAL.cs",
+              "RelativeDocumentMoniker": "BAL\\Interface\\IWorkBAL.cs",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\BAL\\Interface\\IWorkBAL.cs",
+              "RelativeToolTip": "BAL\\Interface\\IWorkBAL.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAlwFAAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T10:17:57.49Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\.gitignore",
+              "RelativeDocumentMoniker": "..\\.gitignore",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\.gitignore",
+              "RelativeToolTip": "..\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-10-22T10:40:04.837Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CommonController.cs",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\TIMEAPI\\Controllers\\CommonController.cs",
+              "RelativeDocumentMoniker": "TIMEAPI\\Controllers\\CommonController.cs",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\TIMEAPI\\Controllers\\CommonController.cs",
+              "RelativeToolTip": "TIMEAPI\\Controllers\\CommonController.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAIwPQBAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T08:19:57.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\TIMEAPI\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "TIMEAPI\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\PixousProjects\\PixousGit-TIME\\TIME-WEB\\API\\TIMEAPI\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "TIMEAPI\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAjwDMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T08:05:52.373Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

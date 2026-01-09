@@ -1,0 +1,58 @@
+
+::ng-deep .wisthspan>span{
+    width: 150px;
+}
+/* LABEL COLOR */
+label {
+  color: #e6e6e6 !important;
+  font-weight: 500;
+}
+
+/* INPUT TEXT COLOR */
+input.p-inputtext,
+.p-inputtext {
+  background: #1f2735 !important;
+  color: #ffffff !important;
+  border: 1px solid #3b465a !important;
+}
+
+/* PLACEHOLDER COLOR */
+input::placeholder,
+.p-inputtext::placeholder {
+  color: #b5b5b5 !important;
+}
+
+/* MULTISELECT + DROPDOWN */
+.p-dropdown,
+.p-multiselect {
+  background: #1f2735 !important;
+  color: #ffffff !important;
+  border: 1px solid #3b465a !important;
+}
+
+/* MULTISELECT TEXT */
+.p-multiselect-label {
+  color: #ffffff !important;
+}
+
+/* PASSWORD COMPONENT */
+.p-password input {
+  background: #1f2735 !important;
+  color: #ffffff !important;
+}
+
+/* CALENDAR */
+.p-inputtext {
+  background: #1f2735 !important;
+  color: #ffffff !important;
+}
+
+.p-calendar .p-inputtext {
+  background: #1f2735 !important;
+}
+
+/* BUTTONS */
+.p-button {
+  font-weight: 500;
+}
+

@@ -1,0 +1,183 @@
+<div class="card">
+  <div
+    class="grid formgrid"
+    style="
+      justify-content: space-between;
+      padding: 0rem 1rem;
+      margin-bottom: 10px;
+    "
+  >
+    <div class="">
+      <h4>{{ title }}</h4>
+    </div>
+    <div class=""></div>
+  </div>
+  <div class="grid formgrid mb-3" *ngIf="currentStatus">
+    <form [formGroup]="templateForm" (ngSubmit)="submit()" class="col-12">
+      <div class="card p-fluid" style="padding-bottom: 10px">
+        <div class="p-formgrid grid">
+          <div class="col-12 flex md:col-12 lg:col-10" style="flex-wrap: wrap">
+            <div class="field col-12 md:col-4 lg:col-4">
+              <label htmlFor="departmentId">Department</label>
+              <p-dropdown
+                [options]="departments"
+                optionLabel="text"
+                optionValue="value"
+                placeholder="Select a Department"
+                formControlName="departmentId"
+                [showClear]="true"
+              ></p-dropdown>
+              <app-error-msg
+                [control]="templateForm.get('departmentId')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-3 lg:col-3">
+              <label htmlFor="name">Name</label>
+              <input pInputText formControlName="name" type="text" />
+              <app-error-msg
+                [control]="templateForm.get('name')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-3 lg:col-3">
+              <label htmlFor="strength">Strength</label>
+              <input pInputText formControlName="strength" type="text" />
+              <app-error-msg
+                [control]="templateForm.get('strength')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-2 lg:col-2">
+              <label htmlFor="templateCode">Code</label>
+              <input pInputText formControlName="templateCode" type="text" />
+              <app-error-msg
+                [control]="templateForm.get('templateCode')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-4 lg:col-4">
+              <label htmlFor="durationInDays">Duration in Days</label>
+              <span class="p-float-label">
+                <p-inputNumber
+                  inputId="inputnumber"
+                  formControlName="durationInDays"
+                ></p-inputNumber>
+              </span>
+              <app-error-msg
+                [control]="templateForm.get('durationInDays')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-4 lg:col-4">
+              <label htmlFor="workTypeId">Work Type</label>
+              <p-dropdown
+                [options]="workTypes"
+                optionLabel="text"
+                optionValue="value"
+                placeholder="Select a Work Type"
+                formControlName="workTypeId"
+                [showClear]="true"
+              ></p-dropdown>
+              <app-error-msg
+                [control]="templateForm.get('workTypeId')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-4 lg:col-4">
+              <label htmlFor="subWorkTypeId">Sub Work Type</label>
+              <p-dropdown
+                [options]="subWorkTypes"
+                optionLabel="value"
+                optionValue="id"
+                placeholder="Select a Sub work Type"
+                formControlName="subWorkTypeId"
+                [showClear]="true"
+              ></p-dropdown>
+              <app-error-msg
+                [control]="templateForm.get('subWorkTypeId')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-4 lg:col-4">
+              <label htmlFor="servicetypeId">Service Type</label>
+              <p-dropdown
+                [options]="serviceTypes"
+                optionLabel="text"
+                optionValue="value"
+                placeholder="Select a Service Type"
+                formControlName="servicetypeId"
+                [showClear]="true"
+              ></p-dropdown>
+              <app-error-msg
+                [control]="templateForm.get('servicetypeId')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-4 lg:col-4">
+              <label htmlFor="categorytypeId">Category Type</label>
+              <p-dropdown
+                [options]="categoryTypes"
+                optionLabel="text"
+                optionValue="value"
+                placeholder="Select a Category Type"
+                formControlName="categorytypeId"
+                [showClear]="true"
+              ></p-dropdown>
+              <app-error-msg
+                [control]="templateForm.get('categorytypeId')"
+              ></app-error-msg>
+            </div>
+          </div>
+          <div
+            class="col-12 md:col-12 lg:col-2"
+            style="display: flex; justify-content: center; align-items: center"
+          >
+            <div class="col">
+              <button
+                pButton
+                type="submit"
+                *ngxPermissionsOnly="[
+                  privleges.TEMPLATE_CREATE,
+                  privleges.TEMPLATE_UPDATE
+                ]"
+                [disabled]="!templateForm.valid"
+                label="Submit"
+              ></button>
+            </div>
+            <div class="col">
+              <button
+                pButton
+                type="button"
+                class="p-button-secondary"
+                label="Reset"
+                (click)="resetForm()"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="grid formgrid">
+    <div class="col-12 lg:col-9 md:col-9 flex">
+      <h4>{{ this.title }} List</h4>
+      <span
+        style="font-size: small; font-weight: 600; margin-left: 5px"
+        [ngStyle]="{ color: currentStatus ? '#0abb0a' : '#fd7878' }"
+      >
+        {{ currentStatus ? "(Active)" : "(In-Active)" }}</span
+      >
+    </div>
+  </div>
+  <app-datatable
+    [records]="configurationList"
+    [defaultSortField]="defaultSortField"
+    [defaultSortOrder]="defaultSortOrder"
+    [cols]="cols"
+    [fileName]="'Configuration'"
+    [rows]="10"
+    [total]="configurationList ? configurationList.length : 0"
+    [actions]="actions"
+    (invokeAction)="actioInvoked($event)"
+    [searchableColumns]="searchableColumns"
+    [defaultstatus]="!currentStatus"
+    (changeStatus)="changeStatus($event)"
+    [hasActiveInactive]="true"
+  >
+  </app-datatable>
+</div>
+<p-toast></p-toast>

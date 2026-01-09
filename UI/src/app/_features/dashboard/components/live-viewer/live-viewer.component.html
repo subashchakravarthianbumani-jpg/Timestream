@@ -1,0 +1,109 @@
+<!-- updated by Sivasankar K on 04/12/2025  for slide view  -->
+ 
+<div class="live-popup">
+
+  <!--  HEADER INFO BAR -->
+  <div class="top-info-bar">
+    <span>Division:</span>
+    <span>District:</span>
+    <span>Work ID:</span>
+    <span>Status:</span>
+  </div>
+
+  <!--  MAIN HEADER -->
+  <header class="cam-header">
+    <button class="close-btn" (click)="goBack()">Back</button>
+
+    <h2>Camera Stream</h2>
+
+    <div class="header-right">
+      <span class="live-dot"></span> Live
+
+      <!-- Layout selector (Currently only 1×1 enabled) -->
+      <!-- <select id="layoutSelect">
+        <option value="1">1×1</option>
+    
+      </select> -->
+
+      <!-- QUALITY BUTTONS -->
+      <button class="res-btn" data-stream="third">SD (480p)</button>
+      <button class="res-btn" data-stream="sub">HD (720p)</button>
+      <button class="res-btn" data-stream="main">High (1080p)</button>
+
+      <!-- Playback button -->
+      <button class="icon-btn" id="pbBtn">PlayBack</button>
+    </div>
+  </header>
+
+  <!-- CAMERA AREA -->
+  <div class="camera-area">
+
+    <!-- SLIDER BUTTONS -->
+    <button id="slidePrev" class="slide-arrow left" *ngIf="!isSingleCamera">❮</button>
+
+    <!-- CAMERA GRID -->
+    <div id="cameraGrid" class="grid">
+
+      <!-- Camera 1 -->
+      <div class="cam-box">
+        <img id="cam01" />
+          <video id="cam01Video"
+         controls style="display:none;width:100%;height:100%">
+  </video>
+      </div>
+
+      <!-- Camera 2 -->
+      <div class="cam-box">
+        <img id="cam02" />
+        <video id="cam02Video"
+         controls style="display:none;width:100%;height:100%">
+  </video>
+      </div>
+
+      <!-- Camera 3 -->
+      <div class="cam-box">
+        <img id="cam03" />
+          <video id="cam03Video"
+         controls style="display:none;width:100%;height:100%">
+  </video>
+      </div>
+
+      <!-- Camera 4 -->
+      <div class="cam-box">
+        <img id="cam04" />
+          <video id="cam04Video"
+        controls style="display:none;width:100%;height:100%">
+  </video>
+      </div>
+
+    </div>
+
+    <!-- NEXT SLIDE BUTTON -->
+    <button id="slideNext" class="slide-arrow right" *ngIf="!isSingleCamera">❯</button>
+
+  </div>
+
+  <!-- PLAYBACK POPUP -->
+  <div id="playbackPopup" class="pb-modal hide">
+
+    <div class="pb-container" style="background-color: rgb(239, 230, 219);">
+      <h3>Playback</h3>
+
+      <label>Date</label>
+      <input type="date" id="pbDate" style="color: black">
+
+      <label>From (IST)</label>
+      <input type="time" id="pbFrom" style="color: black">
+
+      <label>To (IST)</label>
+      <input type="time" id="pbTo" style="color: black">
+
+      <div class="pb-actions">
+        <button id="pbCancel" class="btn-cancel">Cancel</button>
+        <button id="pbOk" class="btn-ok">OK</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

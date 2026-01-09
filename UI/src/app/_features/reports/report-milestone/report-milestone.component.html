@@ -1,0 +1,1102 @@
+<div class="wd" style="margin-top: 20px">
+  <p-table
+    #dt
+    [columns]="cols"
+    [value]="records"
+    [exportFilename]="fileName + '_Report'"
+    [customSort]="true"
+    [paginator]="false"
+    [rows]="10"
+    [lazy]="true"
+    (onLazyLoad)="lazyload($event)"
+    [totalRecords]="total"
+    [loading]="false"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    responsiveLayout="scroll"
+  >
+    <ng-template
+      pTemplate="caption"
+      style="display: flex"
+      [ngStyle]="{ display: 'flex' }"
+    >
+      <div class="col-6" style="padding: 0px">
+        <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-file"
+          (click)="dt.exportCSV()"
+          class="mr-2"
+          pTooltip="CSV"
+          tooltipPosition="bottom"
+        ></button>
+        <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-file-excel"
+          (click)="exportExcel()"
+          class="p-button-success mr-2"
+          pTooltip="XLS"
+          tooltipPosition="bottom"
+        ></button>
+        <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-file-pdf"
+          (click)="exportPdf()"
+          class="p-button-warning mr-2"
+          pTooltip="PDF"
+          tooltipPosition="bottom"
+        ></button>
+        <!-- <button type="button" pButton pRipple icon="pi pi-filter"
+                    (click)="dt.exportCSV({ selectionOnly: true })" class=" mr-2 p-button-info ml-auto"
+                    pTooltip="Selection Only" tooltipPosition="bottom"></button> -->
+      </div>
+      <div class="col-6" style="padding: 0px">
+        <input
+          class="p-inputtext p-component p-element w-full"
+          [(ngModel)]="tenderSearchString"
+          (ngModelChange)="onGlobalFilter($event)"
+          placeholder="Search Keyword and Click Enter"
+        />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngIf="canShowAction">Action</th>
+        <th
+          *ngFor="let col of columns"
+          [pSortableColumn]="col.sortablefield"
+          style="text-wrap: nowrap"
+        >
+          {{ col.header | titlecase }}
+          <p-sortIcon
+            *ngIf="col.sortablefield"
+            [field]="col.sortablefield"
+          ></p-sortIcon>
+        </th>
+      </tr>
+      <!-- <tr>
+                <th *ngIf="canShowAction"></th>
+                <th *ngFor="let col of columns">
+                    <div
+                        *ngIf="col.field==='lastUpdatedDate'||col.field ==='createdDate'||col.field ==='startDate'||col.field ==='endDate';else columsfwwiletr">
+
+                    </div>
+                    <ng-template #columsfwwiletr>
+                        <div *ngIf="col.field==='startDate'||col.field==='endDate' ; else columfiletr">
+
+                            <p-columnFilter [field]="col.sortablefield" matchMode="equals" [showMenu]="false">
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-calendar [showIcon]="true" view="month" dateFormat="yy/mm"
+                                        (onSelect)="filter($event)" inputId="icon"></p-calendar>
+                                </ng-template></p-columnFilter>
+                        </div>
+                    </ng-template>
+                    <ng-template #columfiletr>
+                        <p-columnFilter type="text" matchMode="in" [showMenu]="false"
+                            [field]="col.sortablefield"></p-columnFilter>
+                    </ng-template>
+                </th>
+            </tr> -->
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td class="dttable" *ngIf="canShowAction" style="display: flex">
+          <ng-container *ngFor="let action of actions">
+            <div *ngIf="action.isIcon; else buttn">
+              <button
+                type="button"
+                style="background-color: aliceblue"
+                *ngIf="
+                  action.visibilityCheckFeild
+                    ? rowData[action.visibilityCheckFeild]
+                    : true
+                "
+                pButton
+                pRipple
+                [icon]="action.icon"
+                (click)="makeAction(action.type, rowData, $event)"
+                class="mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                [title]="action.title"
+              ></button>
+            </div>
+            <ng-template #buttn>
+              <button
+                pButton
+                pRipple
+                type="button"
+                *ngIf="
+                  action.visibilityCheckFeild
+                    ? rowData[action.visibilityCheckFeild]
+                    : true
+                "
+                (click)="makeAction(action.type, rowData, $event)"
+                [label]="action.title"
+                class="mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+              ></button>
+            </ng-template>
+          </ng-container>
+        </td>
+        <td *ngFor="let col of columns" class="dttable">
+          <ng-container *ngIf="col.field === 'dateDifference'; else normalCell">
+            <ng-container
+              *ngIf="rowData[col.field] !== null && rowData[col.field] !== ''"
+            >
+              <span
+                [ngStyle]="{
+                  'background-color':
+                    rowData[col.field] > 1 ? '#ff4d4f' : '#52c41a',
+                  color: 'white',
+                  'border-radius': '12px',
+                  padding: '2px 10px',
+                  'font-size': '12px',
+                  'font-weight': 'bold',
+                  display: 'inline-block'
+                }"
+              >
+                <ng-container *ngIf="rowData[col.field] > 1">
+                  {{ rowData[col.field] }} days delay
+                </ng-container>
+                <ng-container
+                  *ngIf="rowData[col.field] < 1 && rowData[col.field] !== 0"
+                >
+                  {{ getAbs(rowData[col.field]) }} days ahead
+                </ng-container>
+              </span>
+            </ng-container>
+          </ng-container>
+
+          <ng-template #normalCell>
+            <div *ngIf="col.isProgress; else noprog">
+              <p-progressBar
+                [value]="rowData[col.field]"
+                [color]="getcolorforProgress(rowData[col.field], col.field)"
+              ></p-progressBar>
+            </div>
+            <ng-template #noprog>
+              <div
+                *ngIf="
+                  col.field === 'lastUpdatedDate' ||
+                    col.field === 'createdDate' ||
+                    col.field === 'startDate' ||
+                    col.field === 'endDate' ||
+                    col.field === 'workCommencementDate' ||
+                    col.field === 'workCompletionDate' ||
+                    col.field === 'tenderOpenedDate';
+                  else elspe
+                "
+              >
+                {{ dc(rowData[col.field], col.field) }}
+              </div>
+              <ng-template #elspe>
+                <div *ngIf="col.isLink; else link">
+                  <a
+                    target="_blank"
+                    [title]="rowData[col.field]"
+                    [href]="rowData[col.field]"
+                  >
+                    Link
+                  </a>
+                </div>
+                <ng-template #link>
+                  <div *ngIf="col.isBadge; else nobadge">
+                    <p-tag
+                      [ngClass]="getBtnSeverity(rowData[col.field])"
+                      [value]="rowData[col.field]"
+                    ></p-tag>
+                  </div>
+                  <!-- <div *ngIf="col.field=='dateDifference' ">
+                                    <p-tag [ngClass]="getBtnSeverity(rowData[col.field])"
+                                        [value]="rowData[col.field]"></p-tag>
+                                </div> -->
+                  <ng-template #nobadge>
+                    <div *ngIf="col.isAnchortagforFilter; else nogen">
+                      <p-button
+                        [label]="rowData[col.field]"
+                        (click)="maketableFilter(col, rowData)"
+                        styleClass="p-button-link"
+                      >
+                      </p-button>
+                    </div>
+                    <ng-template #nogen>
+                      <div *ngIf="col.isPopup; else popp">
+                        <p-button
+                          [label]="rowData[col.field]"
+                          (click)="showPopup(col.popupType, rowData)"
+                          styleClass="p-button-link text-decoration-underline"
+                        >
+                        </p-button>
+                      </div>
+
+                      <ng-template #popp>
+                        <div
+                          *ngIf="
+                            col.isDownloadable &&
+                              rowData[col.field] &&
+                              rowData[col.field] != '';
+                            else nodown
+                          "
+                        >
+                          <p
+                            *ngIf="!isImage(rowData[col.field])"
+                            style="
+                              color: rgb(135, 135, 250);
+                              text-decoration: underline;
+                              cursor: pointer;
+                            "
+                            (click)="downloadFile(col.field, rowData)"
+                          >
+                            {{ rowData[col.field] }}
+                          </p>
+                          <img
+                            *ngIf="isImage(rowData[col.field])"
+                            width="50"
+                            height="50"
+                            [src]="geturl(col.field, rowData)"
+                            style="cursor: pointer"
+                            (click)="showimg(col.field, rowData)"
+                            alt="image"
+                          />
+                        </div>
+                        <ng-template #nodown>
+                          {{ rowData[col.field] }}
+                        </ng-template>
+                      </ng-template>
+                    </ng-template>
+                  </ng-template>
+                </ng-template>
+              </ng-template>
+            </ng-template>
+          </ng-template>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="cols.length + 1">No Records Found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [showCurrentPageReport]="true"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="total"
+    [rowsPerPageOptions]="rowsPerPageOptions"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  ></p-paginator>
+
+  <p-confirmPopup key="confirm2"></p-confirmPopup>
+
+  <p-dialog
+    header="View Work"
+    [(visible)]="tenderVisible"
+    [modal]="true"
+    [style]="{ width: '80vw' }"
+    [draggable]="false"
+    [resizable]="false"
+    [closable]="true"
+    (onHide)="resetform()"
+  >
+    <div class="">
+      <ng-template pTemplate="header">
+        <span class="text-xl font-bold">View Work</span>
+      </ng-template>
+      <div
+        class="card p-fluid"
+        style="padding: 20px 20px 20px 20px; background-color: #e6e7ff"
+      >
+        <div class="p-formgrid grid">
+          <div class="col-12">
+            <h5>Government Order</h5>
+            <div class="col-12 row">
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Number: </span>
+                {{ tender && tender.goNumber ? tender.goNumber : "" }}
+              </div>
+              <!-- <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                            <span>T.I.M.E GO Number: </span>{{tender && tender.localGONumber ? tender.localGONumber:
+                            ''}}
+                        </div> -->
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Department: </span
+                >{{ tender && tender.goDepartment ? tender.goDepartment : "" }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Date: </span
+                >{{ tender && tender.goDate ? dc(tender.goDate) : "" }}
+              </div>
+              <!-- <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                    <span>GO Name: </span>{{tender && tender.goName ? tender.goName: ''}}
+                </div> -->
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Actual GO value: </span
+                >{{
+                  tender && tender.goRevisedAmount
+                    ? tender.goRevisedAmount
+                    : tender && tender.goTotalAmount
+                    ? tender.goTotalAmount
+                    : ""
+                }}
+                {{
+                  tender && tender.goRevisedAmount
+                    ? " (" + convertoWordsIND(tender.goRevisedAmount) + ")"
+                    : tender && tender.goTotalAmount
+                    ? " (" + convertoWordsIND(tender.goTotalAmount) + ")"
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>GO value: </span
+                >{{
+                  tender && tender.goTotalAmount ? tender.goTotalAmount : ""
+                }}
+                {{
+                  tender && tender.goTotalAmount
+                    ? " (" + convertoWordsIND(tender.goTotalAmount) + ")"
+                    : ""
+                }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card p-fluid"
+        style="padding: 20px 20px 20px 20px; background-color: #e6e7ff"
+      >
+        <div class="p-formgrid grid">
+          <div class="col-12">
+            <h5>Tender</h5>
+            <div class="col-12 row">
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Work Number: </span
+                >{{ tender && tender.tenderNumber ? tender.tenderNumber : "" }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Division: </span
+                >{{ tender && tender.divisionName ? tender.divisionName : "" }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>District: </span
+                >{{ tender && tender.districtName ? tender.districtName : "" }}
+              </div>
+
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Work Published Date: </span
+                >{{ tender && tender.startDate ? dc(tender.startDate) : "" }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Awarded Date: </span
+                >{{ tender && tender.endDate ? dc(tender.endDate) : "" }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Work Commencement Date: </span>
+                {{
+                  tender && tender.workCommencementDate
+                    ? dc(tender.workCommencementDate)
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Work Completion Date: </span
+                >{{
+                  tender && tender.workCompletionDate
+                    ? dc(tender.workCompletionDate)
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Tender Opened Date: </span>
+                {{
+                  tender && tender.tenderOpenedDate
+                    ? dc(tender.tenderOpenedDate)
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Class: </span
+                >{{ tender && tender.class ? tender.class : "" }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Category: </span
+                >{{ tender && tender.category ? tender.category : "" }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Main Category: </span
+                >{{ tender && tender.mainCategory ? tender.mainCategory : "" }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Name of the work: </span
+                >{{ tender && tender.subcategory ? tender.subcategory : "" }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Service Type: </span
+                >{{
+                  tender && tender.service_type_main
+                    ? tender.service_type_main
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Category Type: </span
+                >{{
+                  tender && tender.category_type_main
+                    ? tender.category_type_main
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Bid Type: </span
+                >{{ tender && tender.bidType ? tender.bidType : "" }}
+              </div>
+
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Contractor Name: </span
+                >{{
+                  tender && tender.contractorName ? tender.contractorName : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Division: </span
+                >{{
+                  tender && tender.contractorDivision
+                    ? tender.contractorDivision
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>District: </span
+                >{{
+                  tender && tender.contractorDistrict
+                    ? tender.contractorDistrict
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Contractor Category: </span
+                >{{
+                  tender && tender.contractorCategory
+                    ? tender.contractorCategory
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Tender Value: </span
+                >{{
+                  tender && tender.tenderFinalAmount
+                    ? tender.tenderFinalAmount
+                    : tender && tender.workValue
+                    ? tender.workValue
+                    : ""
+                }}{{
+                  tender && tender.tenderFinalAmount
+                    ? " (" + convertoWordsIND(tender.tenderFinalAmount) + ")"
+                    : tender && tender.workValue
+                    ? " (" + convertoWordsIND(tender.workValue) + ")"
+                    : ""
+                }}
+              </div>
+
+              <!-- modified by Indu on 3/12/2025 -->
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Awarded Value: </span
+                >{{ tender && tender.workValue ? tender.workValue : ""
+                }}{{
+                  tender && tender.workValue
+                    ? " (" + convertoWordsIND(tender.workValue) + ")"
+                    : ""
+                }}
+              </div>
+              <!-- <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                    <span>WorkDifference Value: </span>{{tender && tender.workValueIncreasedAmount ?
+                    tender.workValueIncreasedAmount: ''}}
+                </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card p-fluid"
+        *ngIf="templateWithMilestone && templateWithMilestone.milestones"
+        style="padding: 20px 20px 20px 20px; background-color: #e6e7ff"
+      >
+        <div class="p-formgrid grid">
+          <div class="col-12">
+            <h5>Template</h5>
+            <div class="col-12 row">
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Work Template Name: </span
+                >{{
+                  templateWithMilestone &&
+                  templateWithMilestone.workTemplateName
+                    ? templateWithMilestone.workTemplateName
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Work Type: </span
+                >{{
+                  templateWithMilestone && templateWithMilestone.workType
+                    ? templateWithMilestone.workType
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Sub Work Type: </span
+                >{{
+                  templateWithMilestone && templateWithMilestone.subWorkType
+                    ? templateWithMilestone.subWorkType
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Service Type: </span
+                >{{
+                  templateWithMilestone && templateWithMilestone.serviceType
+                    ? templateWithMilestone.serviceType
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Category Type: </span
+                >{{
+                  templateWithMilestone && templateWithMilestone.categoryType
+                    ? templateWithMilestone.categoryType
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Strength: </span
+                >{{
+                  templateWithMilestone && templateWithMilestone.strength
+                    ? templateWithMilestone.strength
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Template Code: </span
+                >{{
+                  templateWithMilestone && templateWithMilestone.templateCode
+                    ? templateWithMilestone.templateCode
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Duration in Days: </span
+                >{{
+                  templateWithMilestone &&
+                  templateWithMilestone.workDurationInDays
+                    ? templateWithMilestone.workDurationInDays
+                    : ""
+                }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card p-fluid"
+        *ngIf="templateWithMilestone && templateWithMilestone.milestones"
+        style="padding: 20px 20px 20px 20px; background-color: #e6e7ff"
+      >
+        <div class="p-formgrid grid">
+          <div class="col-12">
+            <!-- modified by Indu on 3/12/2025 -->
+            <h5>Stage of work</h5>
+            <div class="col-12 row">
+              <table class="table sssdt">
+                <thead>
+                  <tr>
+                    <th>S. No</th>
+                    <th>Milestone Name</th>
+                    <th>Milestone Code</th>
+                    <th>Start Date</th>
+                    <th>Days</th>
+                    <th>End Date</th>
+                    <th>Completed Percentage</th>
+                    <th>Payment Percentage</th>
+                    <th>Payment Value</th>
+                    <th>Payment Status</th>
+                    <th>Milestone Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let milestone of templateWithMilestone.milestones;
+                      index as i
+                    "
+                  >
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ milestone.milestoneName }}</td>
+                    <td>{{ milestone.milestoneCode }}</td>
+                    <td>{{ dc(milestone.startDate) }}</td>
+                    <td>{{ milestone.durationInDays }}</td>
+                    <td>{{ dc(milestone.endDate) }}</td>
+                    <td>
+                      <div class="row">
+                        <div class="col-9" style="padding: 10px 0px 0px 0px">
+                          <p-progressBar
+                            [value]="milestone.percentageCompleted"
+                            [showValue]="false"
+                            [color]="
+                              getcolorforProgress(
+                                milestone.percentageCompleted,
+                                'percentageCompleted'
+                              )
+                            "
+                          ></p-progressBar>
+                        </div>
+                        <div class="col-3" style="padding: 10px 0px 0px 0px">
+                          {{ milestone.percentageCompleted | round }}%
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="row">
+                        <div class="col-9" style="padding: 10px 0px 0px 0px">
+                          <p-progressBar
+                            aria-label="Status"
+                            [value]="milestone.paymentPercentage"
+                            [showValue]="false"
+                            [color]="
+                              getcolorforProgress(
+                                milestone.paymentPercentage,
+                                'paymentPercentage'
+                              )
+                            "
+                          ></p-progressBar>
+                        </div>
+                        <div class="col-3" style="padding: 10px 0px 0px 0px">
+                          {{ milestone.paymentPercentage | round }}%
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{ milestone.milestoneAmount }}</td>
+
+                    <td>
+                      <p-tag
+                        [severity]="getBtnSeverity(milestone.paymentStatusName)"
+                        [value]="milestone.paymentStatusName"
+                      ></p-tag>
+                    </td>
+                    <td>
+                      <p-tag
+                        [severity]="
+                          getBtnSeverity(milestone.milestoneStatusName)
+                        "
+                        [value]="milestone.milestoneStatusName"
+                      ></p-tag>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div
+          class="lg:col-6 md:col-6"
+          *ngIf="activitiesevents && activitiesevents.length > 0"
+        >
+          <div
+            class="card p-fluid"
+            style="
+              padding: 20px 20px 20px 20px;
+              background-color: #e6e7ff;
+              min-height: 100%;
+            "
+          >
+            <h5>Activity Log</h5>
+
+            <ng-scrollbar
+              class="scroll-event sddd"
+              thumbClass="white-scrollbars"
+            >
+              <p-timeline [value]="activitiesevents" styleClass="">
+                <ng-template pTemplate="content" let-event>
+                  <small class="p-text-secondary">{{
+                    dcwt(event.createdDate)
+                  }}</small>
+                </ng-template>
+                <ng-template pTemplate="opposite" let-event>
+                  {{ event.activityMessage }}
+                </ng-template>
+              </p-timeline>
+            </ng-scrollbar>
+          </div>
+        </div>
+        <div class="lg:col-6 md:col-6" *ngIf="events && events.length > 0">
+          <div
+            class="card p-fluid"
+            style="padding: 20px 20px 20px 20px; background-color: #e6e7ff"
+          >
+            <div class="flex">
+              <div class="col-10">
+                <h5>Comments</h5>
+              </div>
+            </div>
+            <ng-scrollbar
+              class="scroll-event sddd"
+              thumbClass="white-scrollbars"
+            >
+              <p-timeline
+                [value]="events"
+                align="alternate"
+                styleClass="customized-timeline "
+              >
+                <ng-template pTemplate="marker" let-event>
+                  <span
+                    class="custom-marker shadow-2 iconstyling"
+                    [style.backgroundColor]="event.color"
+                  >
+                    <i class="pi pi-check"></i>
+                  </span>
+                </ng-template>
+                <ng-template pTemplate="content" let-event>
+                  <p-card
+                    [header]="event.subjectText"
+                    [subheader]="dcwt(event.commentDate)"
+                  >
+                    <p>
+                      {{ event.commentsText }}
+                    </p>
+                  </p-card>
+                </ng-template>
+              </p-timeline>
+            </ng-scrollbar>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+
+  <p-dialog
+    header="View M-Book"
+    [(visible)]="bookVisible"
+    [modal]="true"
+    [style]="{ width: '80vw' }"
+    [draggable]="false"
+    [resizable]="false"
+    [closable]="true"
+    (onHide)="resetform()"
+  >
+    <div class="">
+      <ng-template pTemplate="header">
+        <span class="text-xl font-bold">View M-Book</span>
+      </ng-template>
+
+      <div
+        class="card p-fluid"
+        style="padding: 20px 20px 20px 20px; background-color: #e6e7ff"
+      >
+        <div class="p-formgrid grid">
+          <div class="col-11">
+            <div class="col-12 row">
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>M-Book Number: </span
+                >{{
+                  mBookDetails && mBookDetails.mBookNumber
+                    ? mBookDetails.mBookNumber
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Work Number: </span
+                >{{
+                  mBookDetails && mBookDetails.tenderNumber
+                    ? mBookDetails.tenderNumber
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Work Type: </span
+                >{{
+                  mBookDetails && mBookDetails.workType
+                    ? mBookDetails.workType
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Sub Work Type: </span
+                >{{
+                  mBookDetails && mBookDetails.subWorkType
+                    ? mBookDetails.subWorkType
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Strength: </span
+                >{{
+                  mBookDetails && mBookDetails.strength
+                    ? mBookDetails.strength
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Code: </span
+                >{{
+                  mBookDetails && mBookDetails.milestoneCode
+                    ? mBookDetails.milestoneCode
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Milestone Name: </span
+                >{{
+                  mBookDetails && mBookDetails.milestoneName
+                    ? mBookDetails.milestoneName
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>District: </span
+                >{{
+                  mBookDetails && mBookDetails.districtName
+                    ? mBookDetails.districtName
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Division: </span
+                >{{
+                  mBookDetails && mBookDetails.divisionName
+                    ? mBookDetails.divisionName
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Start Date: </span
+                >{{
+                  mBookDetails && mBookDetails.startDate
+                    ? dc(mBookDetails.startDate)
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>End Date: </span
+                >{{
+                  mBookDetails && mBookDetails.endDate
+                    ? dc(mBookDetails.endDate)
+                    : ""
+                }}
+              </div>
+              <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                <span>Planned Value: </span
+                >{{
+                  mBookDetails && mBookDetails.milestoneAmount
+                    ? mBookDetails.milestoneAmount
+                    : ""
+                }}
+                {{
+                  mBookDetails && mBookDetails.milestoneAmount
+                    ? " (" +
+                      convertoWordsIND(mBookDetails.milestoneAmount) +
+                      ")"
+                    : ""
+                }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style="
+          padding: 20px;
+          margin-bottom: 10px;
+          margin-top: 10px;
+          text-align: left;
+        "
+        class="stablediv"
+      >
+        <h5>Milestone Files</h5>
+        <table class="table sssdt">
+          <thead>
+            <tr>
+              <th>S. No</th>
+              <th>Name</th>
+              <th>Saved by</th>
+              <th>Saved date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let file of filesList; index as i">
+              <td>{{ i + 1 }}</td>
+              <td>{{ file.originalFileName }}</td>
+              <td>{{ file.createdByUserName }}</td>
+              <td>{{ dcwt(file.createdDate) }}</td>
+              <td>
+                <button
+                  type="button"
+                  pButton
+                  pRipple
+                  icon="pi pi-arrow-down"
+                  pTooltip="Download"
+                  (click)="
+                    downloadMilestoneFiles(file.id, file.originalFileName)
+                  "
+                  class="p-button-text mr-2"
+                  title="Download File"
+                  styleClass="p-button-text"
+                ></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <form [formGroup]="mBookForm">
+        <fieldset [disabled]="true">
+          <div class="p-fluid">
+            <div class="flex grid formgrid">
+              <div class="field sm:col-12 md:col-6 lg:col-6">
+                <label htmlFor="category">Date</label>
+                <p-calendar
+                  [showIcon]="true"
+                  formControlName="date"
+                  inputId="icon"
+                ></p-calendar>
+                <app-error-msg
+                  [control]="mBookForm.get('date')"
+                ></app-error-msg>
+              </div>
+              <div class="field sm:col-12 md:col-6 lg:col-6">
+                <label htmlFor="category">Actuals</label>
+                <input
+                  pInputText
+                  [maxlength]="10"
+                  formControlName="actuals"
+                  type="text"
+                />
+                <app-error-msg
+                  [control]="mBookForm.get('actuals')"
+                ></app-error-msg>
+              </div>
+              <div class="field sm:col-12 md:col-12 lg:col-12">
+                <label htmlFor="category">Notes</label>
+                <textarea
+                  rows="2"
+                  pInputTextarea
+                  formControlName="notes"
+                ></textarea>
+                <app-error-msg
+                  [control]="mBookForm.get('notes')"
+                ></app-error-msg>
+              </div>
+            </div>
+          </div>
+          <div class="row flex">
+            <div class="col">
+              <h5>Document</h5>
+            </div>
+          </div>
+          <p-confirmPopup key="confirm2"></p-confirmPopup>
+        </fieldset>
+        <div class="formgrid mb-3">
+          <div class="card p-fluid" style="padding-bottom: 10px">
+            <div class="p-formgrid grid">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>File Type</th>
+                    <th>Uploaded Document Name</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let itemrow of mBookDetails?.files;
+                      let i = index;
+                      let l = last
+                    "
+                  >
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ itemrow.fileType }}</td>
+                    <td>{{ itemrow.savedFileName }}</td>
+                    <td style="display: flex">
+                      <button
+                        type="button"
+                        pButton
+                        pRipple
+                        *ngIf="itemrow.originalFileName"
+                        icon="pi pi-arrow-down"
+                        (click)="download(itemrow.id, itemrow.originalFileName)"
+                        class="ml-2"
+                      ></button>
+                    </td>
+                  </tr>
+                  <tr *ngIf="!mBookDetails?.files">
+                    <td [colSpan]="5">No Records Found.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </form>
+      <h5
+        *ngIf="
+          mBookDetails?.approvalHistory &&
+          (mBookDetails?.approvalHistory?.length ?? 0 > 0)
+        "
+      >
+        Approval History
+      </h5>
+      <div
+        class="formgrid mb-3"
+        *ngIf="
+          mBookDetails?.approvalHistory &&
+          (mBookDetails?.approvalHistory?.length ?? 0 > 0)
+        "
+      >
+        <div class="card p-fluid" style="padding-bottom: 10px">
+          <div class="p-formgrid">
+            <app-view-mbook-history
+              [history]="mBookDetails?.approvalHistory"
+            ></app-view-mbook-history>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+
+  <p-dialog
+    header="View Image"
+    [(visible)]="imgVisible"
+    *ngIf="imgDetails"
+    [modal]="true"
+    [style]="{ width: '80vw' }"
+    [draggable]="false"
+    [resizable]="false"
+    [closable]="true"
+    (onHide)="resetimg()"
+  >
+    <ng-template pTemplate="header">
+      <span class="text-xl font-bold">{{ imgDetails.name }}</span>
+      <button
+        type="button"
+        pButton
+        (click)="download(imgDetails.fileId, imgDetails.name)"
+      >
+        Download
+      </button>
+    </ng-template>
+    <div
+      class="card p-fluid"
+      style="padding: 20px 20px 20px 20px; background-color: #e6e7ff"
+    >
+      <img [src]="imgDetails.url" alt="image" />
+    </div>
+  </p-dialog>
+</div>

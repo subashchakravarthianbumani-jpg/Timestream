@@ -1,0 +1,6 @@
+UI/node_modules/
+UI/.angular/
+*.db
+/API/.vs/TIMEAPI/CopilotIndices/17.14.786.1071
+/API/.vs/TIMEAPI/CopilotIndices
+/API/.vs/TIMEAPI/FileContentIndex

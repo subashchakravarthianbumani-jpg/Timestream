@@ -1,0 +1,97 @@
+.numbercontenct{
+    
+    padding: 10px;
+    margin-bottom: 0px;
+    margin-right: 20px;
+    margin-top: 30px;
+    background-color: #feddc7;
+    border-radius: 10px;
+   
+}
+
+// .icon{
+//     margin-top: 30px;
+// }
+.box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background-image: linear-gradient(to right, #8d8f91, #cfd3d8);
+    border-radius: 15px;
+}
+.numbercontenct:hover{
+    background-color: #c7eefe;
+}
+// @media (max-width: 768px) {
+//     .numbercontenct {
+//       font-size: 1rem !important;
+//       color: red !important;
+//     }
+//   }
+
+  @media (min-width: 1280px) {
+    .card {
+      font-size: 1rem !important;
+    }
+  
+    .numbercontenct {
+      font-size: 2rem !important;
+    }
+  }
+
+
+
+  /* 🔷 Round Dark Card Style Fix */
+.card {
+  border-radius: 22px !important;
+   background: var(--card-bg);
+  border: 1px solid #3c3d46 !important;
+  min-height: 140px !important;
+  color: var(--text);
+  text-align: center !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+
+// .card {
+//   border-radius: 22px !important;
+//   border: 1px solid var(--border);
+//   text-align: center !important;
+//   cursor: pointer;
+//   transition: 0.25s ease;
+//   color: var(--text);
+//   background: var(--card-bg);
+// }
+
+/* 🔹 Hover Effect (Glow Border) */
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #7b7cff !important;
+  box-shadow: 0px 3px 12px rgba(123, 124, 255, 0.25);
+}
+
+/* Remove gradient backgrounds you have inline */
+.card[style] {
+  background-image: none !important;
+  padding: 1rem 1.5rem !important;
+}
+
+/* Text Font Fix */
+.card span,
+.card div {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+}
+
+/* Responsive Layout */
+@media (max-width: 900px) {
+  .col-12 { min-width: 45%; }
+}
+
+@media (max-width: 600px) {
+  .col-12 { min-width: 90%; }
+}
+

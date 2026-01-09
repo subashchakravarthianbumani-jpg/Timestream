@@ -1,0 +1,90 @@
+C:\PixousProjects\TIME\TIME_API\DAL\bin\Debug\net6.0\DAL.deps.json
+C:\PixousProjects\TIME\TIME_API\DAL\bin\Debug\net6.0\DAL.dll
+C:\PixousProjects\TIME\TIME_API\DAL\bin\Debug\net6.0\DAL.pdb
+C:\PixousProjects\TIME\TIME_API\DAL\bin\Debug\net6.0\Model.dll
+C:\PixousProjects\TIME\TIME_API\DAL\bin\Debug\net6.0\Utils.dll
+C:\PixousProjects\TIME\TIME_API\DAL\bin\Debug\net6.0\Model.pdb
+C:\PixousProjects\TIME\TIME_API\DAL\bin\Debug\net6.0\Utils.pdb
+C:\PixousProjects\TIME\TIME_API\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+C:\PixousProjects\TIME\TIME_API\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\PixousProjects\TIME\TIME_API\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+C:\PixousProjects\TIME\TIME_API\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+C:\PixousProjects\TIME\TIME_API\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache
+C:\PixousProjects\TIME\TIME_API\DAL\obj\Debug\net6.0\DAL.sourcelink.json
+C:\PixousProjects\TIME\TIME_API\DAL\obj\Debug\net6.0\DAL.csproj.Up2Date
+C:\PixousProjects\TIME\TIME_API\DAL\obj\Debug\net6.0\DAL.dll
+C:\PixousProjects\TIME\TIME_API\DAL\obj\Debug\net6.0\refint\DAL.dll
+C:\PixousProjects\TIME\TIME_API\DAL\obj\Debug\net6.0\DAL.pdb
+C:\PixousProjects\TIME\TIME_API\DAL\obj\Debug\net6.0\ref\DAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\DAL.deps.json
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\DAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\DAL.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\Model.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\Utils.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\Model.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\Utils.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.sourcelink.json
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.csproj.Up2Date
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\refint\DAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\ref\DAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\DAL.deps.json
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\DAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\DAL.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\Model.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\Utils.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\Model.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\Utils.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.sourcelink.json
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.csproj.Up2Date
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\refint\DAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\ref\DAL.dll
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\DAL.deps.json
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\DAL.dll
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\DAL.pdb
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\Model.dll
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\Utils.dll
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\Model.pdb
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\bin\Debug\net6.0\Utils.pdb
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.sourcelink.json
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.csproj.Up2Date
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.dll
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\refint\DAL.dll
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\DAL.pdb
+E:\TIME_API SRC-Main-Code(11-09-25)\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\DAL\obj\Debug\net6.0\ref\DAL.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\bin\Debug\net6.0\DAL.deps.json
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\bin\Debug\net6.0\DAL.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\bin\Debug\net6.0\DAL.pdb
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\bin\Debug\net6.0\Model.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\bin\Debug\net6.0\Utils.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\bin\Debug\net6.0\Model.pdb
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\bin\Debug\net6.0\Utils.pdb
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\obj\Debug\net6.0\DAL.sourcelink.json
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\obj\Debug\net6.0\DAL.csproj.Up2Date
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\obj\Debug\net6.0\DAL.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\obj\Debug\net6.0\refint\DAL.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\obj\Debug\net6.0\DAL.pdb
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\DAL\obj\Debug\net6.0\ref\DAL.dll

@@ -1,0 +1,145 @@
+/* TOPBAR WRAPPER */
+.custom-topbar {
+  // background: var(--bg-2);
+  background: var(--surface-card) !important; 
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 2px solid var(--border);
+  color: var(--text);
+}
+
+/* LOGOS */
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-img {
+  height: 46px;
+}
+.logo-text {
+  height: 58px;
+}
+
+/* CENTER BUTTONS */
+.topbar-center {
+  display: flex;
+  gap: 15px;
+}
+.top-btn {
+  padding: 8px 20px !important;
+   background-color: var(--card-bg);
+  border-radius: 11px !important;
+  color: var(--text);
+  border: 1px solid #4c4d73 !important;
+  font-size: 14px !important;
+}
+
+/* RIGHT ICONS + PROFILE */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.profile-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  cursor: pointer;
+}
+.layout-topbar-button i {
+  font-size: 20px;
+  color: var(--text);
+  
+}
+
+/* Responsive for TV / Tablet */
+@media screen and (max-width: 1080px) {
+  .topbar-center {
+    flex-wrap: wrap;
+  }
+}
+.settings-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.settings-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: white;
+  border-radius: 4px;
+  padding: 8px 0;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+  min-width: 150px;
+   color: #000;
+}
+
+.dropdown-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-item:hover {
+  background: #f1f1f1;
+}
+
+
+.topbar-bell {
+  position: relative;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.topbar-bell:hover {
+  background: rgba(100, 116, 139, 0.15);
+}
+
+.topbar-bell i {
+  font-size: 20px;
+  color: var(--text);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+
+  background: #ef4444;            
+  color: #ffffff;                 
+
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+
+  border-radius: 999px;
+  border: 2px solid var(--surface-card); 
+
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+}
+
+body.light-theme .notification-badge {
+  border-color: #ffffff;
+}
+
+body.dark-theme .notification-badge {
+  border-color: #0f172a;
+}
+

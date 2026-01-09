@@ -1,0 +1,80 @@
+C:\PixousProjects\TIME\TIME_API\BAL\bin\Release\net6.0\BAL.deps.json
+C:\PixousProjects\TIME\TIME_API\BAL\bin\Release\net6.0\BAL.dll
+C:\PixousProjects\TIME\TIME_API\BAL\bin\Release\net6.0\BAL.pdb
+C:\PixousProjects\TIME\TIME_API\BAL\bin\Release\net6.0\DAL.dll
+C:\PixousProjects\TIME\TIME_API\BAL\bin\Release\net6.0\Model.dll
+C:\PixousProjects\TIME\TIME_API\BAL\bin\Release\net6.0\Utils.dll
+C:\PixousProjects\TIME\TIME_API\BAL\bin\Release\net6.0\DAL.pdb
+C:\PixousProjects\TIME\TIME_API\BAL\bin\Release\net6.0\Model.pdb
+C:\PixousProjects\TIME\TIME_API\BAL\bin\Release\net6.0\Utils.pdb
+C:\PixousProjects\TIME\TIME_API\BAL\obj\Release\net6.0\BAL.csproj.AssemblyReference.cache
+C:\PixousProjects\TIME\TIME_API\BAL\obj\Release\net6.0\BAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\PixousProjects\TIME\TIME_API\BAL\obj\Release\net6.0\BAL.AssemblyInfoInputs.cache
+C:\PixousProjects\TIME\TIME_API\BAL\obj\Release\net6.0\BAL.AssemblyInfo.cs
+C:\PixousProjects\TIME\TIME_API\BAL\obj\Release\net6.0\BAL.csproj.CoreCompileInputs.cache
+C:\PixousProjects\TIME\TIME_API\BAL\obj\Release\net6.0\BAL.sourcelink.json
+C:\PixousProjects\TIME\TIME_API\BAL\obj\Release\net6.0\BAL.csproj.Up2Date
+C:\PixousProjects\TIME\TIME_API\BAL\obj\Release\net6.0\BAL.dll
+C:\PixousProjects\TIME\TIME_API\BAL\obj\Release\net6.0\refint\BAL.dll
+C:\PixousProjects\TIME\TIME_API\BAL\obj\Release\net6.0\BAL.pdb
+C:\PixousProjects\TIME\TIME_API\BAL\obj\Release\net6.0\ref\BAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\BAL.deps.json
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\BAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\BAL.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\DAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\Model.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\Utils.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\DAL.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\Model.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\Utils.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.csproj.AssemblyReference.cache
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.AssemblyInfoInputs.cache
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.AssemblyInfo.cs
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.csproj.CoreCompileInputs.cache
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.sourcelink.json
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.csproj.Up2Date
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\refint\BAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\ref\BAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\BAL.deps.json
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\BAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\BAL.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\DAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\Model.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\Utils.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\DAL.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\Model.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\bin\Release\net6.0\Utils.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.csproj.AssemblyReference.cache
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.AssemblyInfoInputs.cache
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.AssemblyInfo.cs
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.csproj.CoreCompileInputs.cache
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.sourcelink.json
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.csproj.Up2Date
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\refint\BAL.dll
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\BAL.pdb
+C:\Users\ranji\Downloads\New Time.Live\TIME_API SRC-Main-Code(23-07-2025)\TIME_API\BAL\obj\Release\net6.0\ref\BAL.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\bin\Release\net6.0\BAL.deps.json
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\bin\Release\net6.0\BAL.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\bin\Release\net6.0\BAL.pdb
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\bin\Release\net6.0\DAL.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\bin\Release\net6.0\Model.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\bin\Release\net6.0\Utils.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\bin\Release\net6.0\DAL.pdb
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\bin\Release\net6.0\Model.pdb
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\bin\Release\net6.0\Utils.pdb
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\obj\Release\net6.0\BAL.csproj.AssemblyReference.cache
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\obj\Release\net6.0\BAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\obj\Release\net6.0\BAL.AssemblyInfoInputs.cache
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\obj\Release\net6.0\BAL.AssemblyInfo.cs
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\obj\Release\net6.0\BAL.csproj.CoreCompileInputs.cache
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\obj\Release\net6.0\BAL.sourcelink.json
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\obj\Release\net6.0\BAL.csproj.Up2Date
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\obj\Release\net6.0\BAL.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\obj\Release\net6.0\refint\BAL.dll
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\obj\Release\net6.0\BAL.pdb
+C:\PixousProjects\PixousGit-TIME\TIME-WEB\API\BAL\obj\Release\net6.0\ref\BAL.dll

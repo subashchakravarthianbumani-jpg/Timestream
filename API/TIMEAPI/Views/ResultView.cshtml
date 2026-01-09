@@ -1,0 +1,26 @@
+﻿@using Model.ViewModel;
+@model ResponseViewModel
+@{
+    Layout = null;
+}
+
+<style>
+    body{
+        background-color: red;
+    }
+</style>
+
+<html>
+<head>
+    <title>Test Data</title>
+</head>
+<body>
+    <ul>
+        <li>Status: @Model.Status</li>
+        <li>ErrorCode: @Model.ErrorCode</li>
+        <li>Message: @Model.Message</li>
+        <li>TotalRecordCount: @Model.TotalRecordCount</li>
+        <li>Data: @Model.Data</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,362 @@
+
+<!-- modified by Indu on 4/1/2025 for mbook dropdowns  -->
+<div [ngClass]="getmbookStyleClass()">
+    <div class="card" style="height: 100%;">
+        <div class="row">
+
+            <div class="col filtertab" style="padding-top: 0px;margin-top: -10px;">
+                <p-dropdown [options]="types" optionLabel="Name" [style]="{'border': 'none', 'width': 'fit-content'}"
+                    optionValue="id" placeholder="Select a Role" (onChange)="changeType($event)" [showClear]="false"
+                    [(ngModel)]="selectedtype"></p-dropdown>
+            </div>
+            <div class="col" style="padding-top: 0px;margin-top: -10px;">
+                <input class="p-inputtext p-component p-element w-full" [(ngModel)]="SearchString"
+                    (change)="onGlobalFilter($event)" placeholder="Search Keyword and Click Enter" />
+            </div>
+            <div class="col" style="padding-top: 0px;display: contents;">
+                <span *ngIf="isMimimized"><i class="pi pi-window-maximize text-purple-500 text-xl"
+                        (click)="togglembookStable()"></i></span>
+                <span *ngIf="!isMimimized"><i (click)="togglembookStable()"
+                        class="pi pi-window-minimize text-purple-500 text-xl"></i></span>
+            </div>
+   
+
+        </div>
+                 <div *ngIf= !isMimimized  class="d-flex justify-content-end align-items-center"
+  style="
+    gap: 0.35rem;
+    margin-top: -8px;
+    margin-bottom: 4px;
+    padding: 0;
+  ">
+ <button
+    type="button"
+    pButton
+    pRipple
+    icon="pi pi-file"
+    (click)="exportToFile('csv')"
+    class="mr-2"
+    pTooltip="CSV"
+    tooltipPosition="bottom"
+  ></button>
+  <button
+    type="button"
+    pButton
+    pRipple
+    icon="pi pi-file-excel"
+    (click)="exportToFile('excel')"
+    class="p-button-success mr-2"
+    pTooltip="XLS"
+    tooltipPosition="bottom"
+  ></button>
+  <button
+    type="button"
+    pButton
+    pRipple
+    icon="pi pi-file-pdf"
+    (click)="exportToFile('pdf')"
+    class="p-button-warning mr-2"
+    pTooltip="PDF"
+    tooltipPosition="bottom"
+  ></button>
+</div>
+        <div *ngIf="selectedtype == 'WORK_TYPE' || selectedtype == 'DIVISION'">
+        <p-table [value]="mbooks" [customSort]="true" [paginator]="false" [lazy]="true" (onLazyLoad)="lazyload($event);"
+            [totalRecords]="total" [loading]="false" ngClass="dfd" [rows]="rows" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+
+                    <th>S. No</th>
+                    <th pSortableColumn="workType" *ngIf="!isMimimized|| selectedtype!='DIVISION'">Work Type <p-sortIcon
+                            field="workType"></p-sortIcon></th>
+                    <th pSortableColumn="divisionName" *ngIf="!isMimimized|| selectedtype=='DIVISION'">Division
+                        <p-sortIcon field="divisionName"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="mBookNumber" *ngIf="!isMimimized">District
+                        <p-sortIcon field="mBookNumber"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="districtName" *ngIf="!isMimimized">M-Book Number
+                        <p-sortIcon field="districtName"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="milestoneName" *ngIf="!isMimimized">Milestone Name <p-sortIcon
+                            field="milestoneName"></p-sortIcon></th>
+
+                    <th pSortableColumn="milestoneCode" *ngIf="!isMimimized">Milestone Code <p-sortIcon
+                            field="milestoneCode"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="goNumber" *ngIf="!isMimimized">GO <p-sortIcon field="goNumber"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="tenderNumber">Work Id <p-sortIcon field="tenderNumber"></p-sortIcon></th>
+                    <th pSortableColumn="statusName">Status <p-sortIcon field="statusName"></p-sortIcon></th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+                <tr>
+                    <td>{{first+rowIndex+1}}</td>
+                    <td *ngIf="!isMimimized || selectedtype!='DIVISION'">{{product.workType}}</td>
+                    <td *ngIf="!isMimimized || selectedtype=='DIVISION'">{{product.divisionName}}</td>
+                    <td *ngIf="!isMimimized">{{product.districtName}}</td>
+                    <td *ngIf="!isMimimized">{{product.mBookNumber}}</td>
+                    <td *ngIf="!isMimimized">{{product.milestoneName}}</td>
+
+                    <td *ngIf="!isMimimized">{{product.milestoneCode}}</td>
+                    <td *ngIf="!isMimimized">{{product.goNumber}}</td>
+                    <td>{{product.tenderNumber}}</td>
+                    <td> <p-tag [ngClass]="getBtnSeverity(product.statusName)" [value]="product.statusName"></p-tag>
+                    </td>
+                    <td>
+                        <ng-template [ngxPermissionsOnly]="privlegess.MBOOK_VIEW">
+                            <button type="button" pButton pRipple icon="pi pi-info" (click)="actioInvoked(product)"
+                                class="p-button-outlined  mr-2" title="Info" styleClass="p-button"></button>
+                        </ng-template>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p-paginator (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true" [first]="first" [rows]="rows"
+            [totalRecords]="total" [rowsPerPageOptions]="[5, 10, 25, 50,total]"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+
+    </div>
+  
+
+ <div
+      *ngIf="selectedtype == 'SUMMARY_BY_DIVISION' ||
+        selectedtype == 'SUMMARY_BY_DIVISION/DISTRICT' ||
+        selectedtype == 'SUMMARY_BY_SCHEME'
+       
+      "
+    >
+      <p-table
+        [value]="divisionCount"
+        [customSort]="false"
+        [paginator]="selectedtype == 'SUMMARY_BY_DIVISION/DISTRICT' ||
+        selectedtype == 'SUMMARY_BY_DIVISION'"
+        [lazy]="false"
+        [sortOrder]="1"
+        (onLazyLoad)="lazyload($event)"
+        ngClass="dfd"
+        [totalRecords]="total"
+        [loading]="false"
+        [rows]="rows"
+        [rowsPerPageOptions]="[5, 10, 25, 50, 100]"
+        responsiveLayout="scroll"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>S. No</th>
+            <th
+              pSortableColumn="divisionName"
+           
+            >
+              Division
+              <p-sortIcon field="divisionName"></p-sortIcon>
+            </th>
+            <th *ngIf="this.selectedtype == 'SUMMARY_BY_DIVISION/DISTRICT'"
+              pSortableColumn="districtName"
+            
+            >
+              District
+              <p-sortIcon field="districtName"></p-sortIcon>
+            </th>
+            
+            <th pSortableColumn="totalDivisionCount">
+              Total Mbooks <p-sortIcon field="totalDivisionCount"></p-sortIcon>
+            </th>
+
+            <th pSortableColumn="mbookAmount">
+              Total Mbook value <p-sortIcon field="mbookAmount"></p-sortIcon>
+            </th>
+            <th pSortableColumn="mbookNotUploaded" *ngIf="!isMimimized">
+              Mbook Not Uploaded <p-sortIcon field="mbookNotUploaded"></p-sortIcon>
+            </th>
+
+            <th pSortableColumn="mbookUploaded" *ngIf="!isMimimized">
+              Mbook Uploaded <p-sortIcon field="mbookUploaded"></p-sortIcon>
+            </th>
+            <th pSortableColumn="noActionTaken" *ngIf="!isMimimized">
+              No Action Taken <p-sortIcon field="noActionTaken"></p-sortIcon>
+            </th>
+            <th pSortableColumn="paymentPending" *ngIf="!isMimimized">
+              Payment pending <p-sortIcon field="paymentPending"></p-sortIcon>
+            </th>
+           
+            
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+          <tr>
+            <td>{{ first + rowIndex + 1 }}</td>
+            <td>{{ product.divisionName }}</td>
+          
+            <td *ngIf="this.selectedtype == 'SUMMARY_BY_DIVISION/DISTRICT'">
+              {{ product.districtName }}
+            </td>
+            <td
+            *ngIf="this.selectedtype == 'SUMMARY_BY_DIVISION'"
+              
+              (click)="totalworks(product.division)"
+              class="clickable-td"
+            >
+              {{ product.totalDivisionCount }}
+            </td>
+             <td
+            *ngIf="this.selectedtype == 'SUMMARY_BY_DIVISION/DISTRICT'"
+              
+              (click)="districttotal(product.district)"
+              class="clickable-td"
+            >
+              {{ product.totalDivisionCount }}
+            </td>
+
+        
+            <td>
+              {{ product.mbookAmount / 10000000 | number : "1.2-2" }} Cr
+            </td>
+
+            <td
+              *ngIf="
+                !isMimimized && selectedtype == 'SUMMARY_BY_DIVISION'"
+              (click)="
+                goToReports(
+                  product.division,
+                  Saved
+                )
+              "
+              class="clickable-td"
+            >
+              {{ product.mbookNotUploaded}}
+            </td>
+            <td
+              *ngIf="
+                !isMimimized && selectedtype == 'SUMMARY_BY_DIVISION/DISTRICT'"
+              (click)="
+                districtreport(
+                  product.district,
+                  Saved
+                )
+              "
+              class="clickable-td"
+            >
+              {{ product.mbookNotUploaded }}
+            </td>
+
+
+
+ <td
+              *ngIf="
+                !isMimimized && selectedtype == 'SUMMARY_BY_DIVISION'"
+              (click)="
+                goToReports(
+                  product.division,
+                  Upload
+                )
+              "
+              class="clickable-td"
+            >
+              {{ product.mbookUploaded}}
+            </td>
+            <td
+              *ngIf="
+                !isMimimized && selectedtype == 'SUMMARY_BY_DIVISION/DISTRICT'"
+              (click)="
+                districtreport(
+                  product.district,
+                  Upload
+                )
+              "
+              class="clickable-td"
+            >
+              {{ product.mbookUploaded }}
+            </td>
+
+
+
+
+            
+ <td
+            *ngIf="
+                !isMimimized && selectedtype == 'SUMMARY_BY_DIVISION'"
+              (click)="
+                goToReports(
+                  product.division,
+                  noActiontaken
+                )
+              "
+              class="clickable-td"
+            >
+              {{ product.noActionTaken}}
+            </td>
+            <td
+              *ngIf="
+                !isMimimized && selectedtype == 'SUMMARY_BY_DIVISION/DISTRICT'"
+              (click)="
+                districtreport(
+                  product.district,
+                  noActiontaken
+                )
+              "
+              class="clickable-td"
+            >
+              {{ product.noActionTaken }}
+            </td>
+
+
+ <td
+             *ngIf="
+                !isMimimized && selectedtype == 'SUMMARY_BY_DIVISION'"
+              (click)="
+                goToReports(
+                  product.division,
+                  Paymentpendin
+                )
+              "
+              class="clickable-td"
+            >
+              {{ product.paymentPending}}
+            </td>
+            <td
+              *ngIf="
+                !isMimimized && selectedtype == 'SUMMARY_BY_DIVISION/DISTRICT'"
+              (click)="
+                districtreport(
+                  product.district,
+                  Paymentpendin
+                )
+              "
+              class="clickable-td"
+            >
+              {{ product.paymentPending }}
+            </td>
+
+
+
+
+          
+        </ng-template>
+
+      
+      </p-table>
+    </div>
+  </div>
+
+</div>
+
+<div [ngClass]="getmbookStyleClass()">
+    <div class="card" style="height: 100%;">
+        <div class="row">
+
+            <div class="col" style="padding-top: 0px;">
+                <h5>{{selectedLabel}}</h5>
+            </div>
+            <div class="col" style="padding-top: 0px;display: contents;">
+
+                <span style="margin-right: 5px;">Count</span>
+                <p-inputSwitch [(ngModel)]="chartType" (ngModelChange)="changetype()"></p-inputSwitch>
+                <span style="margin-left: 5px;">Cost</span>
+            </div>
+        </div>
+        <p-chart type="bar" [data]="chartData" [responsive]="true" [options]="chartOptions"></p-chart>
+    </div>
+</div>

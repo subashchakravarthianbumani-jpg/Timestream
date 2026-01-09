@@ -1,0 +1,803 @@
+/* ===== GLOBALS ===== */
+.cam-header, .pb-container, .cam-footer {
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ✅ FIX: Hide extra cam boxes in 1x1 */
+#cameraGrid {
+  display: flex;
+  justify-content: center;
+}
+
+#cameraGrid .cam-box:not(:first-child) {
+  display: none;
+}
+
+
+/* ===== Playback Modal Overlay ===== */
+.pb-modal {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--card-bg);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+  animation: fadeIn 0.3s ease;
+}
+
+.pb-modal.hide { display: none; }
+
+@keyframes fadeIn {
+  from { opacity:0; }
+  to   { opacity:1; }
+}
+
+/* ===== Modal Container ===== */
+.pb-container {
+ background: var(--card-bg);
+  width: 480px;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0px 12px 30px rgba(0,0,0,0.25);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to   { transform: translateY(0);  opacity: 1; }
+}
+
+.pb-container h3 {
+  margin: 0 0 20px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pb-container h3::before {
+  content: "⏪";
+  font-size: 22px;
+  color: #1976d2;
+}
+
+/* ===== Field Labels & Inputs ===== */
+.pb-container label {
+  display: block;
+  margin: 12px 0 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #555;
+}
+
+.pb-container input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  background: #f9f9f9;
+  transition: 0.2s;
+}
+
+.pb-container input:focus {
+ background: var(--card-bg);
+  border-color: #1976d2;
+  box-shadow: 0 0 3px #1976d2;
+  outline: none;
+}
+
+/* ===== Modal Buttons ===== */
+.pb-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.pb-actions button {
+  padding: 10px 24px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-cancel {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.btn-cancel:hover {
+  background: #d6d6d6;
+}
+
+.btn-ok {
+  background: #1976d2;
+  color: #fff;
+}
+
+.btn-ok:hover {
+  background: #0f63b3;
+}
+
+/* ===== Header Bar ===== */
+.cam-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 25px;
+  background: var(--card-bg);
+  border-bottom: 1px solid #eee;
+  gap: 12px;
+}
+
+.cam-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ===== Close Button ===== */
+.close-btn {
+  background: #777;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  position: relative;
+  z-index: 10;
+}
+
+.close-btn:hover {
+  background: #444;
+}
+
+/* ===== Header Right Section ===== */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  background: #e11;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%   { opacity: 1;   transform: scale(1); }
+  50%  { opacity: 0.4; transform: scale(1.25); }
+  100% { opacity: 1;   transform: scale(1); }
+}
+
+/* ===== Resolution Buttons & Icons ===== */
+.res-btn, .icon-btn {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #111827;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.res-btn.active {
+  background: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* ===== Camera Layout Area ===== */
+.camera-area {
+  width: 100%;
+  height: calc(100vh - 140px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ background: var(--card-bg);
+  padding: 18px 0;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+#cameraGrid {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.cam-box {
+  width: 78%;
+  max-width: 1400px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  flex-shrink: 0;
+}
+
+.cam-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 🔑 MJPEG SAFE */
+  background: #000;
+}
+
+/* ===== Slider buttons ===== */
+.slide-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.slide-arrow.left  { left: 16px; }
+.slide-arrow.right { right: 16px; }
+
+/* ===== Info bar ===== */
+.top-info-bar {
+  background: #0c111b;
+  color: #fff;
+  padding: 8px 15px;
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  flex-wrap: wrap;
+}
+
+.top-info-bar span {
+  white-space: nowrap;
+  opacity: 0.92;
+}
+
+/* ===== Footer ===== */
+.cam-footer {
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  background: #fff;
+  border-top: 1px solid #eee;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .cam-header { padding: 10px; }
+  #cameraGrid { width: 98%; }
+}
+
+/* ===============================
+   🌙 DARK THEME BUTTON FIX ONLY
+   ✅ NO OTHER STYLES CHANGED
+   =============================== */
+
+body.theme-dark .res-btn,
+body.theme-dark .icon-btn {
+  background: #1f2a3a;
+  color: #e5e7eb;
+  border-color: #3a4a5e;
+}
+
+body.theme-dark .res-btn:hover,
+body.theme-dark .icon-btn:hover {
+  background: #2b3b55;
+}
+
+body.theme-dark .res-btn.active {
+  background: #1a73e8;
+  border-color: #1a73e8;
+  color: #ffffff;
+}
+
+body.theme-dark .close-btn {
+  background: #1f2a3a;
+  color: #fff;
+}
+
+body.theme-dark .close-btn:hover {
+  background: #33445f;
+}
+
+/* ===============================
+   ☀️ LIGHT THEME BUTTON FIX ONLY
+   ✅ NO OTHER STYLES CHANGED
+   =============================== */
+
+body.theme-light .res-btn,
+body.theme-light .icon-btn {
+  background: #ffffff;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+body.theme-light .res-btn:hover,
+body.theme-light .icon-btn:hover {
+  background: #f3f4f6;
+}
+
+body.theme-light .res-btn.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+body.theme-light .close-btn {
+  background: #6b7280;
+  color: #ffffff;
+}
+
+body.theme-light .close-btn:hover {
+  background: #4b5563;
+}
+
+
+/* =====================================================
+   ✅ DARK MODE BACKGROUND FIX (NO SIDE EFFECTS)
+   ===================================================== */
+
+body.theme-dark .cam-header {
+  background: #0e1522 !important;
+  border-bottom: 1px solid #1e2a38 !important;
+  color: #ffffff !important;
+}
+
+body.theme-dark .top-info-bar {
+  background: #0c111b !important;
+  color: #ffffff !important;
+  border-bottom-color: rgba(255,255,255,0.12);
+}
+
+body.theme-dark .camera-area {
+  background: #000000 !important;
+}
+
+body.theme-dark .cam-footer {
+  background: #0e1522 !important;
+  border-top: 1px solid #1e2a38 !important;
+  color: #a8b3bf !important;
+}
+
+/* Remove bright side margins around the camera */
+body.theme-dark #cameraGrid {
+  background: #000000 !important;
+}
+
+/* Ensure slider arrows match dark layout */
+body.theme-dark .slide-arrow {
+  background: rgba(15, 23, 42, 0.85) !important;
+}
+
+/* Ensure select + buttons don't appear washed out */
+body.theme-dark select,
+body.theme-dark .res-btn,
+body.theme-dark .icon-btn {
+  background: #1f2a3a !important;
+  color: #e5e7eb !important;
+  border-color: #3a4a5e !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// /* ===== GLOBALS ===== */
+// .cam-header, .pb-container, .cam-footer {
+//   font-family: "Segoe UI", sans-serif;
+// }
+
+// /* ===== Playback Modal Overlay ===== */
+// .pb-modal {
+//   position: fixed;
+//   inset: 0;
+//   width: 100%; height: 100%;
+//   background: rgba(0,0,0,0.7);
+//   backdrop-filter: blur(4px);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   z-index: 5000;
+//   animation: fadeIn 0.3s ease;
+// }
+
+// .pb-modal.hide { display: none; }
+
+// @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+// /* ===== Modal Container ===== */
+// .pb-container {
+//   background: #fff;
+//   width: 480px;
+//   padding: 30px;
+//   border-radius: 18px;
+//   box-shadow: 0px 12px 30px rgba(0,0,0,0.25);
+//   animation: slideUp 0.3s ease;
+// }
+
+// @keyframes slideUp {
+//   from { transform: translateY(40px); opacity: 0; }
+//   to { transform: translateY(0); opacity: 1; }
+// }
+
+// .pb-container h3 {
+//   margin: 0 0 20px 0;
+//   font-size: 22px; font-weight: 700; color: #333;
+//   display: flex; align-items: center; gap: 8px;
+// }
+
+// .pb-container h3::before {
+//   content: "⏪";
+//   font-size: 22px;
+//   color: #1976d2;
+// }
+
+// /* ===== Field Labels & Inputs ===== */
+// .pb-container label {
+//   display: block;
+//   margin-top: 12px;
+//   margin-bottom: 4px;
+//   font-size: 15px;
+//   font-weight: 500;
+//   color: #555;
+// }
+
+// .pb-container input {
+//   width: 100%; padding: 10px 12px;
+//   border-radius: 10px; border: 1px solid #ccc;
+//   font-size: 15px; background: #f9f9f9;
+//   transition: .2s;
+// }
+
+// .pb-container input:focus {
+//   background:#fff; border-color:#1976d2;
+//   box-shadow: 0 0 3px #1976d2; outline:none;
+// }
+
+// /* ===== Modal Buttons ===== */
+// .pb-actions {
+//   display: flex; justify-content: flex-end; gap: 15px;
+//   margin-top: 25px;
+// }
+
+// .pb-actions button {
+//   padding: 10px 24px;
+//   border-radius: 10px; border:none;
+//   font-size: 15px; font-weight: 600;
+//   cursor: pointer; transition: 0.2s;
+// }
+
+// .btn-cancel {
+//   background: #f0f0f0; color: #333;
+// }
+
+// .btn-cancel:hover { background: #d6d6d6; }
+
+// .btn-ok {
+//   background: #1976d2; color: #fff;
+// }
+
+// .btn-ok:hover { background:#0f63b3; }
+
+// /* ===== Header Bar ===== */
+// .cam-header {
+//   display: flex; align-items: center; justify-content: space-between;
+//   padding: 12px 25px;
+//   background: #fff; border-bottom: 1px solid #eee;
+//   gap: 12px;
+// }
+
+// .cam-header h2 { margin:0; font-size:18px; font-weight:600; }
+
+// /* ===== Close Button ===== */
+// .close-btn {
+//   background: #777; color:#fff;
+//   padding: 6px 12px;
+//   border-radius: 6px; border:none;
+//   cursor: pointer; transition:.2s;
+// }
+
+// .close-btn:hover { background:#444; }
+
+// /* ===== Header Right Section ===== */
+// .header-right { display:flex; align-items:center; gap:10px; }
+
+// .live-dot {
+//   width: 10px; height: 10px;
+//   background: #e11; border-radius: 50%;
+//   display:inline-block; margin-right:6px;
+//   animation: blink 1s infinite;
+// }
+
+// @keyframes blink {
+//   0% {opacity:1;transform:scale(1);}
+//   50% {opacity:.4;transform:scale(1.25);}
+//   100% {opacity:1;transform:scale(1);}
+// }
+
+// /* ===== Resolution Buttons & Icons ===== */
+// .res-btn, .icon-btn {
+//   padding: 6px 10px; border-radius: 6px;
+//   border: 1px solid #ccc; background:#fff;
+//   cursor:pointer; transition:.2s;
+// }
+
+// .res-btn.active { background:#007bff; color:#fff; border-color:#007bff; }
+
+// /* ===== Camera Layout Area ===== */
+// .camera-area {
+//   width:100%; height:calc(100vh - 140px);
+//   display:flex; justify-content:center;
+//   align-items:center; background:#f4f6f8;
+//   padding:18px 0; box-sizing:border-box;
+// }
+
+// #cameraGrid {
+//   width:95%; height:100%;
+//   display:grid; gap:14px; grid-auto-rows:1fr;
+// }
+
+// .cam-box {
+//   background:#000; border-radius:12px;
+//   overflow:hidden; position:relative;
+//   display:flex; align-items:center; justify-content:center;
+//   box-shadow:0 6px 18px rgba(0,0,0,0.08);
+// }
+
+// .cam-box img { width:100%; height:100%; object-fit:cover; }
+
+
+// .grid.grid-1 { grid-template-columns:1fr!important; grid-template-rows:1fr!important; }
+
+// .grid.grid-1 .cam-box:nth-child(n+2) { display:none !important; }
+
+// /* ===== Footer ===== */
+// .cam-footer {
+//   padding: 10px; text-align:center;
+//   font-size:14px; background:#fff; border-top:1px solid #eee;
+// }
+
+// /* ===== Responsive Fix ===== */
+// @media (max-width:900px) {
+//   .cam-header { padding:10px; }
+//   #cameraGrid { width:98%; gap:8px; }
+// }
+
+
+// /* ===============================
+//    🌙 DARK THEME COLOR OVERRIDES
+//    (NO LAYOUT CHANGES AT ALL)
+//    =============================== */
+
+// /* ===== Modal Container ===== */
+// .pb-container {
+//   background:#0e1522;
+//   box-shadow:0px 12px 40px rgba(0,0,0,.6);
+// }
+
+// .pb-container h3 {
+//   color:#ffffff;
+// }
+
+// .pb-container h3::before {
+//   color:#1a73e8;
+// }
+
+// /* ===== Labels & Inputs ===== */
+// .pb-container label {
+//   color:#cbd5e0;
+// }
+
+// .pb-container input {
+//   background:#1f2a3a;
+//   color:#fff;
+//   border-color:#3a4a5e;
+// }
+
+// .pb-container input:focus {
+//   background:#1f2a3a;
+//   border-color:#1a73e8;
+//   box-shadow:0 0 5px rgba(26,115,232,.8);
+// }
+
+// /* ===== Modal Buttons ===== */
+// .btn-cancel {
+//   background:#2a374a;
+//   color:#fff;
+// }
+
+// .btn-cancel:hover {
+//   background:#394b66;
+// }
+
+// .btn-ok {
+//   background:#1a73e8;
+// }
+
+// .btn-ok:hover {
+//   background:#195ac2;
+// }
+
+// /* ===== Header ===== */
+// .cam-header {
+//   background:#0e1522;
+//   border-color:#1e2a38;
+// }
+
+// .cam-header h2 {
+//   color:#ffffff;
+// }
+
+// /* ===== Close Button ===== */
+// .close-btn {
+//   background:#1f2a3a;
+//   color:#ffffff;
+// }
+
+// .close-btn:hover {
+//   background:#33445f;
+// }
+
+// /* ===== Header Right Section ===== */
+// .header-right {
+//   color:#ffffff;
+// }
+
+// /* ===== Live Indicator ===== */
+// .live-dot {
+//   background:#00ff4c;
+//   box-shadow:0 0 6px #00ff4c;
+// }
+
+// /* ===== Resolution Buttons ===== */
+// .res-btn,
+// .icon-btn {
+//   background:#1f2a3a;
+//   color:#ccd4e0;
+//   border-color:#3a4a5e;
+// }
+
+// .res-btn:hover {
+//   background:#2b3b55;
+// }
+
+// .res-btn.active {
+//   background:#1a73e8;
+//   border-color:#1a73e8;
+//   color:white;
+// }
+
+// /* ===== Camera Area ===== */
+// .camera-area {
+//   background:#000000;
+// }
+
+// .cam-box {
+//   box-shadow:0 0 18px rgba(0,0,0,0.7);
+// }
+
+// /* ===== Footer ===== */
+// .cam-footer {
+//   background:#0e1522;
+//   border-color:#1e2a38;
+//   color:#a8b3bf;
+// }
+
+
+// .top-info-bar{
+//   background:#0c111b;
+//   color:#fff;
+//   padding:8px 15px;
+//   display:flex;
+//   gap:20px;
+//   font-size:14px;
+//   border-bottom:1px solid rgba(255,255,255,.15);
+//   flex-wrap:wrap;
+// }
+
+// .top-info-bar span{
+//   white-space:nowrap;
+//   opacity:.92;
+// }
+
+// // updated by Sivasankar K on 04/12/2025  for slide view 
+// .camera-area {
+//   position: relative;
+//   background: #000;
+//   padding: 20px 0;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   overflow: hidden; 
+// }
+
+// #cameraGrid {
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+// }
+
+// .cam-box {
+//   width: 78%;             
+//   max-width: 1400px;
+//   aspect-ratio: 16/9;
+//   background: #000;
+//   border-radius: 10px;
+//   overflow: hidden;
+//   position: relative;
+//   z-index: 1;
+// }
+
+// .cam-box img {
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover;
+// }
+
+// .slide-arrow {
+//   z-index: 5; 
+// }
+
+// .close-btn {
+//   z-index: 10 !important; /* FIX Close button not working */
+//   position: relative;
+// }
+
+
+// .slide-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 40; width: 28px; height: 28px; border-radius: 4px; background: rgba(0,0,0,0.6); color: #fff; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+// .slide-arrow.left { left: 16px; }
+// .slide-arrow.right { right: 16px; }
+
+// /* Ensure header/top bar doesn't cover content area */
+// .live-popup .top-info-bar { padding: 8px 12px; font-size: 13px; color: #ddd; display:flex; gap:16px; align-items:center; }
+
+// /* Make layout grid behave when single camera shown */
+// .grid.grid-4 .cam-box { width: 50%; } /* only used if you implement 2x2 */

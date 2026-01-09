@@ -1,0 +1,327 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="">
+            <p-button icon="pi pi-arrow-left" (onClick)="back()"></p-button>
+        </div>
+    </div>
+
+    <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+        <div class="p-formgrid grid ">
+            <div class="col-11">
+                <div class="col-12 row ">
+                    <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>M-Book Number: </span>{{mBookDetails && mBookDetails.mBookNumber ?
+                        mBookDetails.mBookNumber: ''}}
+                    </div>
+                    <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>Work Number: </span>{{mBookDetails && mBookDetails.tenderNumber ?
+                        mBookDetails.tenderNumber: ''}}
+                    </div>
+                    <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>Work Type: </span>{{mBookDetails && mBookDetails.workType ? mBookDetails.workType:
+                        ''}}
+                    </div>
+                    <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>Sub Work Type: </span>{{mBookDetails && mBookDetails.subWorkType ?
+                        mBookDetails.subWorkType:
+                        ''}}
+                    </div>
+                    <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>Strength: </span>{{mBookDetails && mBookDetails.strength ? mBookDetails.strength:
+                        ''}}
+                    </div>
+                    <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>Code: </span>{{mBookDetails && mBookDetails.milestoneCode ? mBookDetails.milestoneCode:
+                        ''}}
+                    </div>
+                    <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>Milestone Name: </span>{{mBookDetails && mBookDetails.milestoneName ?
+                        mBookDetails.milestoneName:
+                        ''}}
+                    </div>
+                    <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>District: </span>{{mBookDetails && mBookDetails.districtName ? mBookDetails.districtName:
+                        ''}}
+                    </div>
+                    <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>Division: </span>{{mBookDetails && mBookDetails.divisionName ? mBookDetails.divisionName:
+                        ''}}
+                    </div>
+                    <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>Start Date: </span>{{mBookDetails && mBookDetails.startDate ? dc(mBookDetails.startDate):
+                        ''}}
+                    </div>
+                    <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>End Date: </span>{{mBookDetails && mBookDetails.endDate ? dc(mBookDetails.endDate): ''}}
+                    </div>
+                    <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                        <span>Planned Value: </span>{{mBookDetails && mBookDetails.milestoneAmount ?
+                        mBookDetails.milestoneAmount:
+                        ''}}{{mBookDetails &&
+                        mBookDetails.milestoneAmount ? ' ('+ convertoWordsIND( mBookDetails.milestoneAmount) +')' :""
+                        }}
+                    </div>
+                </div>
+            </div>
+
+            <div style="padding: 20px;margin-bottom: 10px;margin-top: 10px;text-align: left;" class="col-12">
+                <h5>Milestone Files</h5>
+                <table class="table sssdt">
+                    <thead>
+                        <tr>
+                            <th> S. No</th>
+                            <th> Name</th>
+                            <th> Saved by</th>
+                            <th> Saved date</th>
+                            <th> Download</th>
+                            <th> View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let file of filesList; index as i;">
+                            <td>{{i+1}}</td>
+                            <td>{{file.originalFileName}}</td>
+                            <td>{{file.createdByUserName}}</td>
+                            <td>{{ dcwt(file.createdDate)}}</td>
+                            <td>
+                                <button type="button" pButton pRipple icon="pi pi-arrow-down" pTooltip="Download"
+                                    (click)="downloadMilestoneFiles(file.id,file.originalFileName);"
+                                    class="p-button-text mr-2" title="Download File"
+                                    styleClass="p-button-text"></button></td>
+                            
+                            <td>  <button type="button" pButton pRipple icon="pi pi-eye" pTooltip="View"
+                              (click)="showFileInPopup(file.id, file.originalFileName)"
+                              class="p-button-text" title="View File">
+                              </button>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+<p-dialog 
+  [(visible)]="showViewer" 
+  [modal]="true" 
+  [dismissableMask]="true"
+  [style]="{width: '95vw', height: '90vh'}"  
+  styleClass="milestone-popup"
+>
+  <ng-template pTemplate="header">
+    <div class="header-container">
+      <span class="header-title center">Milestone Files</span>
+      <div class="header-actions">
+        <button type="button"
+          pButton
+          icon="pi pi-arrow-down"
+          (click)="downloadMilestoneFiles(currentFileId, currentFileName)"
+          class="icon-download-btn"
+          pTooltip="Download">
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="viewer-container">
+  <ng-container *ngIf="fileType === 'pdf'">
+    <iframe [src]="pdfSrc" class="viewer-full" frameborder="0"></iframe>
+  </ng-container>
+
+  <ng-container *ngIf="fileType === 'image'">
+    <img [src]="imgSrc" class="viewer-full" alt="Preview">
+  </ng-container>
+
+  <ng-container *ngIf="fileType === 'video'">
+    <video [src]="videoSrc" class="viewer-full" controls></video>
+  </ng-container>
+</div>
+
+</p-dialog>
+
+                
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="mBookForm" (ngSubmit)="submit()">
+        <div class=" p-fluid">
+            <div class="flex grid formgrid">
+                <div class="field sm:col-12  md:col-6 lg:col-6">
+                    <label htmlFor="category">Date</label>
+                    <p-calendar [showIcon]="true" [readonlyInput]="true" formControlName="date"
+                        inputId="icon"></p-calendar>
+                    <app-error-msg [control]="mBookForm.get('date')"></app-error-msg>
+                </div>
+                <div class="field sm:col-12  md:col-6 lg:col-6">
+                    <!--Actuals changed to Amount spent-->
+                    <label htmlFor="category">Amount spent</label>
+                    <input pInputText [maxlength]="10" formControlName="actuals" type="text" />
+                    <app-error-msg [control]="mBookForm.get('actuals')"></app-error-msg>
+                </div>
+                <div class="field  col-12">
+                    <label htmlFor="category">Notes</label>
+                    <textarea rows="2" pInputTextarea formControlName="notes"></textarea>
+                    <app-error-msg [control]="mBookForm.get('notes')"></app-error-msg>
+                </div>
+            </div>
+
+        </div>
+        <div class="row flex " style="justify-content: space-between;">
+            <div class="col">
+                <h5>Files </h5>
+                <h6>Please upload all required documents for M-Book submission.</h6>
+                <br>
+
+            </div>
+            <div class="col" style="text-align: end;">
+                <p-button type="button" icon="pi pi-plus" [ngStyle]="{'margin-right': '20px;'}"
+                    (onClick)="addnewRow($event)"></p-button>
+            </div>
+        </div>
+        <span *ngIf="validreqDocErrorMsg" class="tableheadererrormsg">{{validreqDocErrorMsg}}</span>
+        <p-confirmPopup key="confirm2"></p-confirmPopup>
+
+        <div class="formgrid mb-3" style="margin-bottom: 40px !important;">
+            <div class="card p-fluid" style="padding-bottom: 10px;">
+                <fieldset [disabled]="false">
+                    <div class="p-formgrid grid ">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th style="min-width: 300px">File Type <br>
+                                        <span *ngIf="typeErrorMsg" class="tableheadererrormsg">{{typeErrorMsg}}</span>
+                                    </th>
+                                    <th>File Type Name<br>
+                                        <span *ngIf="typeNameErrorMsg"
+                                            class="tableheadererrormsg">{{typeNameErrorMsg}}</span>
+                                    </th>
+                                    <th>Uploaded File Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody formArrayName="documents">
+                                <tr *ngFor="let itemrow of t.controls; let i=index;let l=last" [formGroupName]="i">
+                                    <td>{{i+1}}</td>
+                                    <td>
+                                        <p-dropdown [options]="filetypes" optionLabel="text" optionValue="value"
+                                            [style]="{'width': '100%'}" placeholder="Select a Type"
+                                            (onChange)="changeRole($event, i)" [showClear]="false"
+                                            formControlName="type"></p-dropdown>
+                                    </td>
+                                    <td>
+    <!-- condition: if type is 'MBookTestingDocument' -->
+    <div *ngIf="itemrow.get('type')?.value === 'MBookTestingDocument'; else normalInput">
+      <p-dropdown
+        [options]="QualityTestingFileTypes"
+        optionLabel="text"
+        optionValue="value"
+        [style]="{ width: '100%' }"
+        placeholder="Select Sub Type"
+        [ngModel]="QualityTestingFileTypes[0].value"
+        formControlName="typeName">
+        
+      </p-dropdown>
+    </div>
+
+    <ng-template #normalInput>
+      <input
+        pInputText
+        [maxlength]="250"
+        formControlName="typeName"
+        type="text" />
+    </ng-template>
+  </td>
+                                    <td> {{fileListd[i].controls['originalFileName'].value}}</td>
+                                    <td style="display: flex;">
+                                        <p-fileUpload mode="basic" chooseLabel="Add" [ngStyle]="{'width': '65%'}"
+                                            [customUpload]="true" [files]="Otherfiles" [auto]="true"
+                                            *ngIf="!fileListd[i].controls['originalFileName'].value"
+                                            [disabled]="!fileListd[i].controls['type'].value && !fileListd[i].controls['typeName'].value"
+                                            (uploadHandler)="onSend($event, i)"
+                                            accept="image/*, .doc,.docx,.xml,application/msword, .pdf, .xls, .xlsx, video/* "
+                                            [maxFileSize]="2000000"></p-fileUpload>
+                                        <button pButton pRipple type="button"
+                                            *ngIf="fileListd[i].controls['originalFileName'].value"
+                                             icon="pi pi-eye" 
+                                             pTooltip="View"
+                                           (click)="showDocPdf(fileListd[i].controls['id'].value, fileListd[i].controls['originalFileName'].value)"
+                                            class="p-button-success  ml-2"
+                                            title="View File">
+                                             </button>
+                                              <button pButton pRipple type="button"
+                                            *ngIf="fileListd[i].controls['originalFileName'].value"
+                                             icon="pi pi-arrow-down" 
+                                             pTooltip="View"
+                                           (click)="download(fileListd[i].controls['id'].value, fileListd[i].controls['originalFileName'].value)"
+                                            class="p-button-success  ml-2"
+                                            title="View File">
+                                             </button>
+
+                                        <button pButton pRipple type="button" (click)="removefiledetails(i)"
+                                            icon="pi pi-times" class="p-button-text ml-2"></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+ <p-dialog 
+  [(visible)]="showViewer" 
+  [modal]="true" 
+  [dismissableMask]="true"
+  [style]="{width: '95vw', height: '90vh'}"  
+  styleClass="milestone-popup"
+>
+  <ng-template pTemplate="header">
+    <div class="header-container">
+      <span class="header-title center">Mbook Files</span>
+      <div class="header-actions">
+        <button type="button"
+          pButton
+          icon="pi pi-arrow-down"
+          (click)="download(currentFileId, currentFileName)"
+          class="icon-download-btn"
+          pTooltip="Download">
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="viewer-container">
+    <ng-container *ngIf="fileType === 'pdf'">
+      <iframe [src]="pdfSrc" class="viewer-content"></iframe>
+    </ng-container>
+
+    <ng-container *ngIf="fileType === 'image'">
+      <img [src]="imgSrc" class="viewer-content" alt="Preview">
+    </ng-container>
+
+    <ng-container *ngIf="fileType === 'video'">
+      <video [src]="videoSrc" class="viewer-content" controls></video>
+    </ng-container>
+  </div>
+</p-dialog>
+
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="col-12  flex " *ngIf="canSubmit; else buttn"
+            style="margin-top: 25px;justify-content: end;flex-wrap: wrap;">
+            <button pButton type="button" style="margin-left: 10px;"
+                [disabled]="!mBookForm.valid || validreqDocErrorMsg" (click)="submit(false)" label="Save"></button>
+            <button pButton type="submit" style="margin-left: 10px;"
+                [disabled]="(!mBookForm.valid  || validreqDocErrorMsg) && canSubmit" label="Submit"></button>
+            <button pButton type="button" style="margin-left: 10px;" class="p-button-secondary" label="Cancel"
+                (click)="resetForm()"></button>
+        </div>
+        <ng-template #buttn>
+            <div class="col-12  flex " style="margin-top: 25px;justify-content: end;flex-wrap: wrap;">
+                <button pButton type="button" style="margin-left: 10px;"
+                    [disabled]="!mBookForm.valid || validreqDocErrorMsg" (click)="submit(false)"
+                    label="Update"></button>
+                <button pButton type="button" style="margin-left: 10px;" class="p-button-secondary" label="Cancel"
+                    (click)="resetForm()"></button>
+
+            </div>
+        </ng-template>
+    </form>
+</div>

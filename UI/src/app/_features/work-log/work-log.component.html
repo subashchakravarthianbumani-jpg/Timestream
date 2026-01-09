@@ -1,0 +1,244 @@
+<div class="card">
+  <div
+    class="grid formgrid"
+    style="
+      justify-content: space-between;
+      padding: 0rem 1rem;
+      margin-bottom: 10px;
+    "
+  >
+    <div class="col-12 md:col-6 lg:col-10">
+      <h4>{{ title }}</h4>
+    
+    </div>
+    <div class="col-12 md:col-3 lg:col-2">
+      <p-multiSelect
+        [options]="yearList"
+        [(ngModel)]="selectedYear"
+        placeholder="Select a Year"
+        class="multiselect-custom"
+        ngClass="dd"
+        [ngStyle]="{ width: '100%', margin: '0px 20px' }"
+        (ngModelChange)="changeyear($event)"
+      >
+        <ng-template let-roles pTemplate="item">
+          <div class="flex align-items-center">
+            <span class="ml-2">{{ roles }}</span>
+          </div>
+        </ng-template>
+      </p-multiSelect>
+      <div
+  class="flex justify-content-start mt-2"
+  style="gap: 0.2rem; margin-left: 20px; padding-top: 5px;"
+>
+  <button
+    type="button"
+    pButton
+    pRipple
+    icon="pi pi-file"
+    (click)="exportCSV()"
+    class="mr-2"
+    pTooltip="CSV"
+    tooltipPosition="bottom"
+  ></button>
+  <button
+    type="button"
+    pButton
+    pRipple
+    icon="pi pi-file-excel"
+    (click)="exportExcel()"
+    class="p-button-success mr-2"
+    pTooltip="XLS"
+    tooltipPosition="bottom"
+  ></button>
+  <button
+    type="button"
+    pButton
+    pRipple
+    icon="pi pi-file-pdf"
+    (click)="exportPdf()"
+    class="p-button-warning mr-2"
+    pTooltip="PDF"
+    tooltipPosition="bottom"
+  ></button>
+</div>
+
+
+      <!-- <div class="flex justify-content-end mt-4">
+  <button
+    type="button"
+    pButton
+    pRipple
+    icon="pi pi-file"
+    (click)="exportCSV()"
+    class="mr-2"
+    pTooltip="CSV"
+    tooltipPosition="bottom"
+  ></button>
+  <button
+    type="button"
+    pButton
+    pRipple
+    icon="pi pi-file-excel"
+    (click)="exportExcel()"
+    class="p-button-success mr-2"
+    pTooltip="XLS"
+    tooltipPosition="bottom"
+  ></button>
+  <button
+    type="button"
+    pButton
+    pRipple
+    icon="pi pi-file-pdf"
+    (click)="exportPdf()"
+    class="p-button-warning mr-2"
+    pTooltip="PDF"
+    tooltipPosition="bottom"
+  ></button>
+</div> -->
+
+    </div>
+  </div>
+  <div class="col-12">
+    <p-table
+      [value]="products"
+      dataKey="id"
+      [customSort]="true"
+      [paginator]="false"
+      [rows]="10"
+      [lazy]="true"
+      (onLazyLoad)="lazyload($event)"
+      [totalRecords]="total"
+      [loading]="false"
+      [expandedRowKeys]="expandedRows"
+      responsiveLayout="scroll"
+    >
+      <ng-template pTemplate="caption">
+        <button
+          pButton
+          icon="pi pi-fw {{ isExpanded ? 'pi-minus' : 'pi-plus' }}"
+          label="{{ isExpanded ? 'Collapse All' : 'Expand All' }}"
+          (click)="expandAll()"
+        ></button>
+        <div class="flex table-header"></div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem"></th>
+          <th pSortableColumn="goNumber">
+            GO Number <p-sortIcon field="goNumber"></p-sortIcon>
+          </th>
+          <th pSortableColumn="goDepartment">
+            Go Department <p-sortIcon field="goDepartment"></p-sortIcon>
+          </th>
+          <th pSortableColumn="goDate">
+            GO Date <p-sortIcon field="goDate"></p-sortIcon>
+          </th>
+          <th pSortableColumn="goTotalAmount">
+            Awarded Value <p-sortIcon field="goTotalAmount"></p-sortIcon>
+          </th>
+          <th pSortableColumn="isActive">
+            is Active <p-sortIcon field="isActive"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product let-expanded="expanded">
+        <tr>
+          <td>
+            <button
+              type="button"
+              pButton
+              pRipple
+              [pRowToggler]="product"
+              class="p-button-text p-button-rounded p-button-plain"
+              [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+            ></button>
+          </td>
+          <td style="min-width: 12rem">{{ product.goNumber }}</td>
+          <td style="min-width: 8rem">
+            {{ product.goDepartment }}
+          </td>
+          <td style="min-width: 10rem">
+            {{ product.goDate ? dc(product.goDate) : "" }}
+          </td>
+          <td style="min-width: 10rem">{{ product.goTotalAmount }}</td>
+          <td style="min-width: 10rem">
+            <p-tag
+              [ngClass]="product.isActive ? 'success' : 'warning'"
+              [value]="product.isActive ? 'Active' : 'In-Active'"
+            ></p-tag>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-product>
+        <tr>
+          <td colspan="7">
+            <div class="p-3">
+              <p-table
+                [value]="product.tenderList"
+                dataKey="id"
+                responsiveLayout="scroll"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Work Number</th>
+                    <th>Bid Type</th>
+                    <!-- <th>
+                        Local WorkNumber
+                    </th> -->
+                    <th>Main Category</th>
+                    <th>Work Published date</th>
+                    <th>Awarded Date</th>
+                    <th>WorkValue</th>
+                    <th style="width: 4rem"></th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-tender>
+                  <tr>
+                    <td>{{ tender.tenderNumber }}</td>
+                    <td>{{ tender.bidType }}</td>
+                    <!-- <td>{{ tender.localTenderNumber }}</td> -->
+                    <td>{{ tender.mainCategory }}</td>
+                    <td>{{ tender.startDate ? dc(tender.startDate) : "" }}</td>
+                    <td>{{ tender.endDate ? dc(tender.endDate) : "" }}</td>
+                    <td>{{ tender.workValue }}</td>
+                    <td>
+                      <ng-template
+                        [ngxPermissionsOnly]="privlegess.TENDER_VIEW"
+                      >
+                        <button
+                          type="button"
+                          pButton
+                          pRipple
+                          icon="pi pi-info"
+                          (click)="actioInvoked(tender)"
+                          class="p-button-outlined mr-2"
+                          title="Info"
+                          styleClass="p-button"
+                        ></button>
+                      </ng-template>
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="8">No records found.</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [showCurrentPageReport]="true"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="total"
+      [rowsPerPageOptions]="[5, 7, 50, 60, 100,300]"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    ></p-paginator>
+  </div>
+</div>

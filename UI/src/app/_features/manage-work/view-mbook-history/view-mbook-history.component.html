@@ -1,0 +1,57 @@
+
+
+<!-- modified by Indu on 4/1/2025 for mbook approval history submitted details  -->
+ <table class="table" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>S No</th>
+            <!-- <th>Approver Name</th> -->
+            <th>Approver</th>
+            <th>Decision</th>
+            <th>Date</th>
+            <th>Comments</th>
+           <!-- <th>Document Name</th>
+            <th>Download</th>-->
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of history; index as i;">
+            <td>{{i+1}}</td>
+            <td>
+                {{ item.lastUpdatedUserName }}/{{ item.fromRoleName }}
+                <ng-container *ngIf="item.fromRoleName !== 'Hq-executive Engineer' && item.fromRoleName !== 'Hq-assitant Engineer' && item.fromRoleName !== 'Hq-chief Engineer' && item.fromRoleName !== 'Hq-financial Admin '">
+                  /{{ item.division }}
+                </ng-container>
+              </td>
+              
+            <td>{{item.statusEnum}}</td>
+            <td>{{ dc(item.lastUpdatedDate)}}</td>
+            <td>{{item.comments}}</td>
+          <!--  <td>{{item.documentName}}</td>
+            <td style="display: flex;">
+                <ng-container *ngIf="item.files && item.files.length">
+                   
+                    <button *ngFor="let file of item.files" 
+                            type="button" pButton pRipple icon="pi pi-arrow-down" pTooltip="Download" 
+                             
+                            (click)="downloadMilestoneFiles(file.id,file.originalFileName)" 
+                            class="p-button-text mr-2" 
+                            title="Download File" 
+                            styleClass="p-button-text" 
+                            class="ml-2">
+                    </button>
+                </ng-container>
+    
+              //  <button type="button" pButton pRipple icon="pi pi-arrow-down" pTooltip="Download" 
+               *ngIf="item.files"
+                                (click)="downloadMilestoneFiles(item.files.id,item.originalFileName)"
+                                class="p-button-text mr-2" title="Download File" styleClass="p-button-text"
+                                class="ml-2"></button> //
+            </td>
+            -->
+        </tr>
+        <tr *ngIf="!history">
+            <td [colSpan]="7">No Records Found.</td>
+        </tr>
+    </tbody>
+</table>

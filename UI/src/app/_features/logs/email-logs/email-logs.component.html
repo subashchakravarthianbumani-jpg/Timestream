@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}
+            </h4>
+        </div>
+        <div class="">
+        </div>
+    </div>
+    <app-datatable-pagination [records]="configurationList" [cols]="cols" [fileName]="'Email_Logs'" [rows]="10"
+        [total]="total" [defaultSortField]="defaultSortField" [defaultstatus]="!currentStatus" [canShowAction]="false"
+        [hasActiveInactive]="false" [filterModel]="tableFilterModel" (changefilter)="changefilter($event)">
+    </app-datatable-pagination>
+</div>

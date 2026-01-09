@@ -1,0 +1,14 @@
+<div class="col-12 ">
+    <div class="card">
+        <div class="row">
+            <div class="col" style="padding-top: 0px;">
+                <h5>Key Contacts</h5>
+            </div>
+        </div>
+        <app-datatable [records]="contacts" [defaultSortField]="defaultSortField" [defaultSortOrder]="defaultSortOrder"
+            [cols]="cols" [fileName]="'Configuration'" [rows]="25" [total]="contacts ? contacts.length : 0"
+            [actions]="actions" [searchableColumns]="searchableColumns" [hasActiveInactive]="false"
+            [canShowAction]="false">
+        </app-datatable>
+    </div>
+</div>

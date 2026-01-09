@@ -1,0 +1,267 @@
+/* =========================================================
+   GLOBAL SAFETY
+========================================================= */
+
+html, body{
+  margin:0;
+  padding:0;
+  min-height:100%;
+  overflow-x:hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* =========================================================
+   HEADER LOGOS
+========================================================= */
+
+.logo-div {
+  padding: 13px 35px;
+  width: 100%;
+  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+}
+
+.img-responsive{
+  max-width:100%;
+  height:auto;
+}
+
+.logo_txt{
+  display:flex;
+  justify-content:center;
+}
+
+.logo_txt h1{
+  font-size:1.55rem;
+  color:#4a4848;
+  text-align:center;
+  margin:0;
+  font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+.logo_txt h2{
+  color:#800000;
+  font-size:1.2rem;
+  font-weight:bold;
+  text-align:center;
+  margin:4px 0;
+}
+
+
+.login-white-bg{
+    min-height: calc(100vh - 240px); 
+  padding: 8px 16px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+ 
+
+  background: radial-gradient(
+    circle at center,
+    #ffffff 0%,
+    #e4e6f7 38%,
+    #c3c7ea 68%,
+    #9ca0d9 100%
+  );
+}
+/* =========================================================
+   CENTER HOLDER
+========================================================= */
+
+.login-center{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* =========================================================
+   GLASS LOGIN CARD
+========================================================= */
+
+.login-card {
+    width: 100%;
+    max-width: 480px;
+
+    padding: 18px 22px;
+    min-height: 340px;  /* reduced from 520/380 */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(18px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.65);
+}
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.login-logo{
+  height:95px;
+  max-height:95px;
+  margin-bottom:16px;
+}
+
+.login-title{
+  font-size:1.25rem;
+  font-weight:600;
+  margin-bottom:10px;
+  color:#111;
+  text-align:center;
+}
+
+.form-body{
+  display:flex;
+  flex-direction:column;
+}
+
+
+.login-input{
+  margin-bottom:10px;
+}
+
+/* =========================================================
+   FORGOT PASSWORD LINK
+========================================================= */
+.form-body > * {
+    width: 100% !important;
+    display: block !important;
+}
+.forgot{
+  margin-top:14px;
+  text-decoration:none;
+  font-size:.9rem;
+  color:#5661ff;
+  font-weight:500;
+}
+
+/* =========================================================
+   SIGN IN BUTTON
+========================================================= */
+
+.login-btn{
+
+  margin-top:2rem;
+
+  background: linear-gradient(135deg,#5a63ff,#7380ff);
+
+  padding:.9rem 1.25rem;
+
+  border-radius:36px;
+  border:none;
+
+  font-size:1rem;
+  font-weight:600;
+  color:white;
+
+  cursor:pointer;
+}
+
+.login-btn:hover{
+  opacity:.92;
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+========================================================= */
+
+/* Tablets */
+@media(max-width:992px){
+
+  .logo_txt h1{
+    font-size:1.35rem;
+  }
+
+  .logo_txt h2{
+    font-size:1.05rem;
+  }
+
+}
+
+/* Phones */
+@media(max-width:768px){
+
+  .login-white-bg{
+    padding:24px 12px;
+  }
+
+  .login-card{
+    padding:28px 22px;
+    min-height:auto;
+  }
+
+  .logo_txt h1{
+    font-size:1.15rem;
+  }
+
+  .logo_txt h2{
+    font-size:.95rem;
+  }
+
+}
+
+/* Small phones */
+@media(max-width:480px){
+
+  .login-card{
+    padding:22px 16px;
+  }
+
+  .login-logo{
+    height:72px;
+  }
+
+  .login-title{
+    font-size:1.05rem;
+  }
+
+}
+
+//Updated by Sivasankar.K On 05/12/2025 for login page UI update 
+ 
+/* UNIFORM INPUT STYLE (FINAL WORKING VERSION) */
+:host ::ng-deep .form-input,
+:host ::ng-deep .p-password-input {
+    width: 100% !important;
+    height: 48px !important;
+    padding: 12px 14px !important;
+
+    background: #ffffff !important;
+    color: #000 !important;
+
+    border-radius: 10px !important;
+    border: 1px solid #dcdff7 !important;
+
+    font-size: 15px !important;
+    box-shadow: none !important;
+}
+
+/* Wrapper fix so password is same width */
+:host ::ng-deep .form-password {
+    width: 100% !important;
+    display: block !important;
+}
+/* Make both inputs identical */
+:host ::ng-deep .login-input,
+:host ::ng-deep .p-password-input {
+    width: 100% !important;
+    height: 48px !important;
+    padding: 12px 14px !important;
+
+    background: #ffffff !important;
+    color: #000 !important;
+
+    border-radius: 10px !important;
+    border: 1px solid #dcdff7 !important;
+    font-size: 15px !important;
+}
+
+/* Fix the PrimeNG wrapper width */
+:host ::ng-deep .password-wrap .p-password {
+    width: 100% !important;
+    display: block !important;
+}
