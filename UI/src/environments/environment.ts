@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   //apiUrl: '__API_URL__',
-  apiUrl: '/api'
+  apiUrl: 'https://time.tahdco.com/api'
   // apiUrl: 'http://3.110.188.52/api',
   // apiUrl: 'https://localhost:7074/api',
   // API_BASE_URL : 'http://3.108.9.185:5050',
