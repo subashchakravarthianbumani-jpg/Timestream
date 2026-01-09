@@ -2,8 +2,6 @@ export const environment = {
   production: true,
   //apiUrl: '__API_URL__',
   apiUrl: '/api'
-  apiUrl: 'http://13.201.13.151:5000/api'
-  apiUrl: 'http://13.201.13.151:5000'
   // apiUrl: 'http://3.110.188.52/api',
   // apiUrl: 'https://localhost:7074/api',
   // API_BASE_URL : 'http://3.108.9.185:5050',
