@@ -1,19 +1,17 @@
-name: CI - Build & SonarCloud
+name: Build & SonarQube
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  sonarqube:
+    name: Build and Analyze (SonarQube)
+    runs-on: ubuntu-latest   # Windows avoid pannrom (stable)
 
     steps:
-      - name: Checkout source
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -30,13 +28,13 @@ jobs:
       - name: Build API
         run: dotnet build API/TIMEAPI.sln --configuration Release --no-restore
 
-      # ---------- ANGULAR UI ----------
+      # ---------- UI (Angular) ----------
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: Install UI dependencies
+      - name: Install UI deps
         working-directory: UI
         run: npm install
 
@@ -44,8 +42,9 @@ jobs:
         working-directory: UI
         run: npm run build --if-present
 
-      # ---------- SONARCLOUD ----------
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2.1.1
+      # ---------- SONARQUBE ----------
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
